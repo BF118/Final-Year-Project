@@ -16,7 +16,8 @@ namespace bot.Modules
         [Command("Hello")]
         public async Task Hello()
         {
-            await ReplyAsync("Hello there");
+            
+                await ReplyAsync("Hello there");
         }
     }
 

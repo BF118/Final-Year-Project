@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  width: 12%;
+}
+
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.container {
+  padding: 2px 2px;
+}
+</style>
+</head>
+<body>
+
+
+<h2>Encounter1</h2>
+<div class="card">
+  <img src="Images/placeholder.jpg" alt="Placeholder" width="200px">
+  <div class="container">
+      <button onclick="Encounter1()">Send</button>
+  </div>
+
+</div>
+<h2>Encounter2</h2>
+<div class="card">
+  <img src="Images/placeholder.jpg" alt="Placeholder" width="200px">
+  <div class="container">
+  </div>
+</div>
+    <button onclick="sendMessage()">Send</button>
+<script>
+    function Encounter1() {
+      var request = new XMLHttpRequest();
+      request.open("POST", "https://discord.com/api/webhooks/922744135851601940/ThqHFVNagnqSW7QmeHdbbDHweROPvTp5jZtCAR06ndzVwLB-xv1-0DBCK3eOXySXmH2f");
+
+      request.setRequestHeader('Content-type', 'application/json');
+        var myEmbed={
+             author: {
+    name: "Captain Hook"
+  },
+  title: "My new embed",
+  description: "This is a cool-looking Discord embed, sent directly from JavaScript!",
+        }
+
+      var params = {
+        username: "My Webhook Name",
+        avatar_url: "",
+        embeds:[myEmbed]
+      }
+
+      request.send(JSON.stringify(params));
+    }
+function sendMessage() {
+      var request = new XMLHttpRequest();
+      request.open("POST", "https://discord.com/api/webhooks/922744135851601940/ThqHFVNagnqSW7QmeHdbbDHweROPvTp5jZtCAR06ndzVwLB-xv1-0DBCK3eOXySXmH2f");
+
+      request.setRequestHeader('Content-type', 'application/json');
+
+      var params = {
+        username: "My Webhook Name",
+        avatar_url: "",
+        content:"!hello"
+      }
+
+      request.send(JSON.stringify(params));
+    }
+  </script>
+</body>
+</html> 
