@@ -2,40 +2,54 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
-.card {
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-  transition: 0.3s;
-  width: 12%;
-}
+<link rel="stylesheet" href="stylesheets/styles.css" />
+    
 
-.card:hover {
-  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-}
-
-.container {
-  padding: 2px 2px;
-}
-</style>
 </head>
 <body>
-
+<form id="form"> 
+  <input type="search" id="query" name="q" placeholder="Search...">
+  <button>Search</button>
+</form>
+<div id="content">
+<a href="https://discord.gg/am8pnTXZ" target="_blank">
+    <img border="0" alt="Discord" src="Images/Discord-Logo.png" width="100" height="100">
+    </a>
+    </div>
 
 <h2>Encounter1</h2>
 <div class="card">
-  <img src="Images/placeholder.jpg" alt="Placeholder" width="200px">
+<div id="allcards">
+  <img src="Images/placeholder.jpg" alt="Placeholder" width="100px">
   <div class="container">
       <button onclick="Encounter1()">Send</button>
   </div>
-
 </div>
+    </div>
 <h2>Encounter2</h2>
 <div class="card">
-  <img src="Images/placeholder.jpg" alt="Placeholder" width="200px">
+    <div id="allcards">
+  <img src="Images/placeholder.jpg" alt="Placeholder" width="100px">
   <div class="container">
+      <button onclick="sendMessage()">Send</button>
   </div>
-</div>
-    <button onclick="sendMessage()">Send</button>
+    </div>
+    </div>
+
+<h2>Encounter3</h2>
+<div class="card">
+  <img src="Images/placeholder.jpg" alt="Placeholder" width="100px">
+  <div class="container">
+          <button onclick="sendMessage()">Send</button>
+  </div>
+    </div>
+
+
+
+    
+    
+    
+    
 <script>
     function Encounter1() {
       var request = new XMLHttpRequest();
