@@ -16,37 +16,43 @@ namespace bot.Modules
     {
         public class Commands : ModuleBase<SocketCommandContext>
         {
-            [Command("Test")]
+            [Command("Encounter1")]
             public async Task testEncounter()
             {
                 
 
-                var SMILE = new Emoji(":smile:922137680161148958");
+                var shield = new Emoji("🛡");
+                var dps = new Emoji("⚔️");
+                var healer = new Emoji("❤️");
+                var learner = new Emoji("🎓");
       
-
-                EmbedBuilder Aod = new EmbedBuilder();
-
-
-                Aod.WithTitle("Test Example");
-                Aod.AddField("Time:"," n/a");
-                Aod.AddField("Looting:"," Test");
-                Aod.AddField("Team size:"," 0/7");
-                Aod.AddField("Reactions:","Remove your signup and role");
-                Aod.AddField("<:bt:732207759122104370> 1x Base Tank:",",",true);
-                Aod.AddField("<:swh:731181630361960560> 1x Hammer:"," .",true);
-                Aod.AddField("<:mt:732207758711062538> 4x Mt", ". ", true);
-                Aod.AddField("<:learner:732207758648279051> 1x Learner:", ".", true);
-
-                Aod.WithCurrentTimestamp();
-                Aod.WithColor(Color.Purple);
-
-
-                var sent = await Context.Channel.SendMessageAsync("", false, Aod.Build());
                 
-                
-                
-                await sent.AddReactionAsync(SMILE);
+                EmbedBuilder Encounter1 = new EmbedBuilder();
 
+
+
+                Encounter1.WithTitle("Test Encounter");
+                Encounter1.AddField("Time:"," n/a");
+                Encounter1.AddField("Looting:"," test");
+                Encounter1.AddField("Team size:"," 0/7");
+                Encounter1.AddField("Reactions:","Remove your signup and role");
+                Encounter1.AddField("<:shield:927174765058326558> 1x Base Tank:", ",",true);
+                Encounter1.AddField("<:crossed_swords:927174860524896276> 4x dps:", " .",true);
+                Encounter1.AddField("<:heart:927185322050199612> 1x Healer", ". ", true);
+                Encounter1.AddField("<:mortar_board:927185690867937330> 1x Learner:", ".", true);
+
+                Encounter1.WithCurrentTimestamp();
+                Encounter1.WithColor(Color.Purple);
+
+
+                var sent = await Context.Channel.SendMessageAsync("", false, Encounter1.Build());
+
+
+
+                await sent.AddReactionAsync(shield);
+                await sent.AddReactionAsync(dps);
+                await sent.AddReactionAsync(healer);
+                await sent.AddReactionAsync(learner);
                 
             }
 
