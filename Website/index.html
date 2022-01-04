@@ -7,85 +7,138 @@
 
 </head>
 <body>
-<form id="form"> 
-  <input type="search" id="query" name="q" placeholder="Search...">
-  <button>Search</button>
-</form>
-<div id="content">
-<a href="https://discord.gg/am8pnTXZ" target="_blank">
-    <img border="0" alt="Discord" src="Images/Discord-Logo.png" width="100" height="100">
-    </a>
-    </div>
+    <header>
+            <div class="header-content">
+                <div class="container">
+                    <div class="row no-gutters">
+                        <div class="header-right col-sm-12 col-lg-8">
+                            <a href="/encounter1.html">Encounter1</a>
+                            <a href="/encounter2.html">Encounter2</a>
+                            <a href="/encounter3.html">Encounter3</a>
+                            <a href="/encounter4.html">Encounter4</a>
+                            <a href="https://discord.gg/am8pnTXZ" target="_blank">
+                                <img border="0" alt="Discord" src="Images/Discord-Logo.png" width="80" height="50">
+                                </a>
+                            <form action="">
+                                <input type="text" placeholder="Search...">
+                                <button class="searchbutton">Go</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
 
-<h2>Encounter1</h2>
-<div class="card">
-<div id="allcards">
-  <img src="Images/placeholder.jpg" alt="Placeholder" width="100px">
-  <div class="container">
-      <button onclick="Encounter1()">Send</button>
-  </div>
-</div>
-    </div>
-<h2>Encounter2</h2>
-<div class="card">
-    <div id="allcards">
-  <img src="Images/placeholder.jpg" alt="Placeholder" width="100px">
-  <div class="container">
-      <button onclick="sendMessage()">Send</button>
-  </div>
-    </div>
-    </div>
-
-<h2>Encounter3</h2>
-<div class="card">
-  <img src="Images/placeholder.jpg" alt="Placeholder" width="100px">
-  <div class="container">
-          <button onclick="sendMessage()">Send</button>
-  </div>
-    </div>
-
-
-
+<div id="outer">
+    <div class="inner"><button onclick="Encounter1()">Encounter1</button></div>
+    <div class="inner"><button onclick="Encounter2()">Encounter2</button></div>
+    <div class="inner"><button onclick="Encounter3()">Encounter3</button></div>
+    <div class="inner"><button onclick="Encounter4()">Encounter4</button></div>
+     </div>
+  
     
     
-    
-    
-<script>
+<label for="Sign up sheet"></label>
+<textarea id="Signup" name="Test Sign up sheet" rows="20" cols="100">Test Sheet</textarea>
+<div id="outer">
+    <div class="inner"><button onclick="Createsheet()">Create Signup</button></div>
+    </div>
+   
+
+<script>    
     function Encounter1() {
       var request = new XMLHttpRequest();
-      request.open("POST", "https://discord.com/api/webhooks/922744135851601940/ThqHFVNagnqSW7QmeHdbbDHweROPvTp5jZtCAR06ndzVwLB-xv1-0DBCK3eOXySXmH2f");
+      request.open("POST", "https://discord.com/api/webhooks/927916825885409300/zM6NZbJ-qitAo66WCLoZIQDtyKOQw0f-OF22Y4HcRzNE4niDJHOT5Vq02bs80c6JA1cK");
 
       request.setRequestHeader('Content-type', 'application/json');
         var myEmbed={
              author: {
-    name: "Captain Hook"
+    name: ""
   },
-  title: "My new embed",
-  description: "This is a cool-looking Discord embed, sent directly from JavaScript!",
+  title: "Encounter 1 Selected",
+  description: "To see details of the event type: !encounter1",
         }
 
       var params = {
-        username: "My Webhook Name",
+        username: "Signupsheetbot",
         avatar_url: "",
         embeds:[myEmbed]
       }
 
       request.send(JSON.stringify(params));
     }
-function sendMessage() {
+function Encounter2() {
       var request = new XMLHttpRequest();
-      request.open("POST", "https://discord.com/api/webhooks/922744135851601940/ThqHFVNagnqSW7QmeHdbbDHweROPvTp5jZtCAR06ndzVwLB-xv1-0DBCK3eOXySXmH2f");
+      request.open("POST", "https://discord.com/api/webhooks/927916825885409300/zM6NZbJ-qitAo66WCLoZIQDtyKOQw0f-OF22Y4HcRzNE4niDJHOT5Vq02bs80c6JA1cK");
 
       request.setRequestHeader('Content-type', 'application/json');
 
       var params = {
-        username: "My Webhook Name",
+        username: "Signupsheetbot",
         avatar_url: "",
         content:"!hello"
       }
 
       request.send(JSON.stringify(params));
     }
+function Encounter3() {
+      var request = new XMLHttpRequest();
+      request.open("POST", "https://discord.com/api/webhooks/927916825885409300/zM6NZbJ-qitAo66WCLoZIQDtyKOQw0f-OF22Y4HcRzNE4niDJHOT5Vq02bs80c6JA1cK");
+
+      request.setRequestHeader('Content-type', 'application/json');
+        var myEmbed={
+             author: {
+    name: ""
+  },
+  title: "Encounter 3 Selected",
+  description: "To see details of the event type: !encounter3",
+        }
+
+      var params = {
+        username: "Signupsheetbot",
+        avatar_url: "",
+        embeds:[myEmbed]
+      }
+
+      request.send(JSON.stringify(params));
+    }
+function Encounter4() {
+      var request = new XMLHttpRequest();
+      request.open("POST", "https://discord.com/api/webhooks/927916825885409300/zM6NZbJ-qitAo66WCLoZIQDtyKOQw0f-OF22Y4HcRzNE4niDJHOT5Vq02bs80c6JA1cK");
+
+      request.setRequestHeader('Content-type', 'application/json');
+        var myEmbed={
+             author: {
+    name: ""
+  },
+  title: "Encounter 4 Selected",
+  description: "To see details of the event type: !encounter4",
+        }
+
+      var params = {
+        username: "Signupsheetbot",
+        avatar_url: "",
+        embeds:[myEmbed]
+      }
+
+      request.send(JSON.stringify(params));
+    }
+function Createsheet() {
+     document.getElementById('Signup').innerHTML = "Updated";
+      var request = new XMLHttpRequest();
+      request.open("POST", "https://discord.com/api/webhooks/927916825885409300/zM6NZbJ-qitAo66WCLoZIQDtyKOQw0f-OF22Y4HcRzNE4niDJHOT5Vq02bs80c6JA1cK");
+
+      request.setRequestHeader('Content-type', 'application/json');
+
+      var params = {
+        username: "Signupsheetbot",
+        avatar_url: "",
+        content:"!sheet made"
+      }
+
+      request.send(JSON.stringify(params));
+    }
+    
   </script>
 </body>
 </html> 
