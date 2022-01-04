@@ -27,4 +27,7 @@ describe('Final Year Project', () => {
 
         cy.get('textarea').should('have.value', 'Updated')
     })
+    it('Open Discord invite', () => {
+        cy.get('[alt="Discord"]').invoke('removeAttr', 'target').click()
+    })
 })
