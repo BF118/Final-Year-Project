@@ -16,7 +16,7 @@ namespace bot.Modules
     {
         public class Commands : ModuleBase<SocketCommandContext>
         {
-            [Command("Encounter1")]
+            [Command("encounter1")]
             public async Task testEncounter()
             {
                 
@@ -27,22 +27,22 @@ namespace bot.Modules
                 var learner = new Emoji("🎓");
       
                 
-                EmbedBuilder Encounter1 = new EmbedBuilder();
+                EmbedBuilder Encounter1 = new EmbedBuilder()
 
 
 
-                Encounter1.WithTitle("Test Encounter");
-                Encounter1.AddField("Time:"," n/a");
-                Encounter1.AddField("Looting:"," test");
-                Encounter1.AddField("Team size:"," 0/7");
-                Encounter1.AddField("Reactions:","Remove your signup and role");
-                Encounter1.AddField("<:shield:927174765058326558> 1x Base Tank:", ",",true);
-                Encounter1.AddField("<:crossed_swords:927174860524896276> 4x dps:", " .",true);
-                Encounter1.AddField("<:heart:927185322050199612> 1x Healer", ". ", true);
-                Encounter1.AddField("<:mortar_board:927185690867937330> 1x Learner:", ".", true);
-
-                Encounter1.WithCurrentTimestamp();
-                Encounter1.WithColor(Color.Purple);
+                .WithTitle("Test Encounter")
+                .AddField("Time:"," n/a")
+                .AddField("Looting:"," test")
+                .AddField("Team size:"," 0/7")
+                .AddField("Reactions:","Remove your signup and role")
+                .AddField("<:shield:927174765058326558> 1x Base Tank:", ",",true)
+                .AddField("<:crossed_swords:927174860524896276> 4x dps:", " .",true)
+                .AddField("<:heart:927185322050199612> 1x Healer", ". ", true)
+                .AddField("<:mortar_board:927185690867937330> 1x Learner:", ".", true)
+                .AddField("Roles", string.Join(" ", (Context.User as SocketGuildUser).Roles.Select(x => x.Mention)))
+                .WithCurrentTimestamp()
+                .WithColor(Color.Purple);
 
 
                 var sent = await Context.Channel.SendMessageAsync("", false, Encounter1.Build());
