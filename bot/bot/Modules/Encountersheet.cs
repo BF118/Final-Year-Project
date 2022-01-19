@@ -16,6 +16,7 @@ namespace bot.Modules
     {
         public class Commands : ModuleBase<SocketCommandContext>
         {
+            public Optional<IUser> User { get; }
             [Command("encounter1")]
             public async Task testEncounter()
             {
@@ -36,7 +37,7 @@ namespace bot.Modules
                 .AddField("Looting:"," test")
                 .AddField("Team size:"," 0/7")
                 .AddField("Reactions:","Remove your signup and role")
-                .AddField("<:shield:927174765058326558> 1x Base Tank:", ",",true)
+                .AddField("<:shield:927174765058326558> 1x Base Tank:",(Context.User.Mention))
                 .AddField("<:crossed_swords:927174860524896276> 4x dps:", " .",true)
                 .AddField("<:heart:927185322050199612> 1x Healer", ". ", true)
                 .AddField("<:mortar_board:927185690867937330> 1x Learner:", ".", true)
@@ -44,7 +45,7 @@ namespace bot.Modules
                 .WithCurrentTimestamp()
                 .WithColor(Color.Purple);
 
-
+    
                 var sent = await Context.Channel.SendMessageAsync("", false, Encounter1.Build());
 
 
