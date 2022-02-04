@@ -12,14 +12,14 @@
                 <div class="container">
                     <div class="row no-gutters">
                         <div class="header-right col-sm-12 col-lg-8">
-                            <a href="/encounter1.html">Encounter1</a>
+                            <a href="/index.html">Encounter1</a>
                             <a href="/encounter2.html">Encounter2</a>
                             <a href="/encounter3.html">Encounter3</a>
                             <a href="/encounter4.html">Encounter4</a>
-                            <a href="https://discord.gg/am8pnTXZ" target="_blank">
+                            <a href="https://discord.gg/WCE5P4VNnD" target="_blank">
                                 <img border="0" alt="Discord" src="Images/Discord-Logo.png" width="80" height="50">
                                 </a>
-                            <form action="">
+                                <form action="">
                                 <input type="text" placeholder="Search...">
                                 <button class="searchbutton">Go</button>
                             </form>
@@ -34,19 +34,103 @@
     <div class="inner"><button onclick="Encounter2()">Encounter2</button></div>
     <div class="inner"><button onclick="Encounter3()">Encounter3</button></div>
     <div class="inner"><button onclick="Encounter4()">Encounter4</button></div>
-     </div>
-  
-    
-    
-<label for="Sign up sheet"></label>
-<textarea id="Signup" name="Test Sign up sheet" rows="20" cols="100">Test Sheet</textarea>
-<div id="outer">
-    <div class="inner"><button onclick="Createsheet()">Create Signup</button></div>
-    </div>
-   
+</div>
 
-<script>    
-    function Encounter1() {
+<p>Test user has been base tank: <a id="baseclicks">0 times</a></p>
+<p>Test user has been dps: <a id="dpsclicks">0 times</a></p>
+<p>Test user has been dps: <a id="healerclicks">0 times</a></p>
+  
+<form id="usernameform" onsubmit="return false;" method="get">
+<label>Username</label>
+<input type="text" id="username">
+<input type="submit" onclick="setusername();">
+</form>
+    
+    
+
+    
+    
+<!--encounter 1 signup sheet !-->
+<div id="content">
+    <label>Role Information : click icon to view</label>
+</div>  
+
+<!--Base tank !-->
+<a class="modalbutton" id="basemodal" href="#modal1"><img border="0" alt="basetank" src="Images/basetank.png" width="30" height="30"></a>
+    <div class="popup" id="modal1">
+        <a class="popup__overlay" href="#"></a>
+            <div class="popup__wrapper">
+                <a class="popup__close" href="#">Press here to Close</a>
+                    <p>I am the base</p>
+            </div>
+    </div>
+<!--DPS!-->
+<a class="modalbutton" id="dpsmodal" href="#modal2"><img border="0" alt="dps" src="Images/dps.png" width="30" height="30"></a>
+    <div class="popup" id="modal2">
+        <a class="popup__overlay" href="#"></a>
+            <div class="popup__wrapper">
+                <a class="popup__close" href="#">Press here to Close</a>
+                        <p>I am the dps</p>
+            </div>
+    </div>
+<!--healer!-->
+<a class="modalbutton" id="healermodal" href="#modal3"><img border="0" alt="healer" src="Images/healer.png" width="30" height="30"></a>
+    <div class="popup" id="modal3">
+            <a class="popup__overlay" href="#"></a>
+                <div class="popup__wrapper">
+                    <a class="popup__close" href="#">Press here to Close</a>
+                        <p>I am the healer</p>
+                        </div>
+                            </div>
+<!--learner!-->
+<a class="modalbutton" id="learnermodal" href="#modal4"><img border="0" alt="learner" src="Images/learner.png" width="30" height="30"></a>        
+    <div class="popup" id="modal4">
+            <a class="popup__overlay" href="#"></a>
+                <div class="popup__wrapper">
+                    <a class="popup__close" href="#">Press here to Close</a>
+                        <p>I am the learner</p>
+                        </div>
+                            </div>
+        
+        
+        
+        
+        
+<div id="content">  
+<label>Base Tank</label>
+<input readonly type="text" id="baseTank">
+<button onclick="signuptank(); this.onclick=null;" >Click here to sign up</button>    
+    
+<label>DPS</label>
+<input readonly type="text" id="dps">
+<button onclick="signupdps(); this.onclick=null;">Click here to sign up</button>
+
+
+
+<label>Healer</label>
+<input  readonly type="text" id="healer">
+<button onclick="signuphealer(); this.onclick=null;">Click here to sign up</button>
+
+
+<label>Learner</label>
+<input readonly type="text" id="learner">
+<button onclick="signuplearner(); this.onclick=null;">Click here to sign up</button>
+
+<div id="outer">
+    <div class="inner"><button onclick="Createsheet(); this.onclick=null;">Create Signup</button></div>
+    </div>
+    </div>
+
+
+<script>
+ var clicks = 0;
+localStorage.setItem("somevarkey", clicks);
+
+var input = document.getElementById("username").value;    
+
+
+    
+function Encounter1() {
       var request = new XMLHttpRequest();
       request.open("POST", "https://discord.com/api/webhooks/927916825885409300/zM6NZbJ-qitAo66WCLoZIQDtyKOQw0f-OF22Y4HcRzNE4niDJHOT5Vq02bs80c6JA1cK");
 
@@ -124,7 +208,6 @@ function Encounter4() {
       request.send(JSON.stringify(params));
     }
 function Createsheet() {
-     document.getElementById('Signup').innerHTML = "Updated";
       var request = new XMLHttpRequest();
       request.open("POST", "https://discord.com/api/webhooks/927916825885409300/zM6NZbJ-qitAo66WCLoZIQDtyKOQw0f-OF22Y4HcRzNE4niDJHOT5Vq02bs80c6JA1cK");
 
@@ -138,7 +221,34 @@ function Createsheet() {
 
       request.send(JSON.stringify(params));
     }
+
+
     
+function setusername(){
+    var input = document.getElementById("username").value;
+    
+}
+    
+//signup sheets
+function signuptank(){
+    document.getElementById('basetank').value = "Test user";
+    baseclicks += 1;
+    document.getElementById("baseclicks").innerHTML = baseclicks;
+    
+}
+function signupdps(){
+    document.getElementById('dps').value ="Test user";
+    dpsclicks += 1;
+    document.getElementById("dpsclicks").innerHTML = dpsclicks;
+}
+function signuphealer(){
+    document.getElementById('healer').value ="Test user";
+    healerclicks += 1;
+    document.getElementById("healerclicks").innerHTML = healerclicks;
+}
+function signuplearner(){
+    document.getElementById('learner').value ="Test user";
+}
   </script>
 </body>
 </html> 

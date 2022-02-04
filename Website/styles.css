@@ -1,43 +1,44 @@
-.container {
-  display: block;
-  width: 50%;
+/* HEADER */
+.header-content {
+    background-color: black;
+    height: 100px;
 }
-#allCards{
-  display: flex;
+.header-left img {
+    height: 100px;
 }
-
-.card {
-  border: 1px solid black;
-  float: left;
-  margin: 1px;
-  padding: 7px 1px;
-  text-align: center;
-  /*setting width for each and every card element as well as -10px for removing the margin width for 5 elements*/
-  width: calc( 100% / 5 - 10px);
+.header-right {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
 }
-
-
-/*first element*/
-
-.container .card:first-child {
-  margin-left: 0;
-    
+.header-right a {
+    text-decoration: none;
+    color: white;
+    padding: 10px 20px;
+    font-size: 18px;
 }
-/*last element of the first row*/
-
-.container .card:nth-child(5n) {
-  margin-right: 0;
+.header-right a:hover {
+    color: white;
 }
-/*first-element of the 2nd row*/
-
-.container .card:nth-child(5n+1) {
-  margin-left: 0;
+.header-right input {
+    margin-left: 20px;
+    border: none;
+    padding: 3px 8px;
 }
-
-/*last element*/
-
-.container .card:last-child {
-  margin-right: 0;
+.header-right .searchbutton {
+    float: right;
+    border: none;
+    padding: 3px 8px;
+}
+#outer
+{
+    width:100%;
+    text-align: left;
+    line-height: 3;
+}
+.inner
+{
+    display: inline-block;
 }
 
  #content {
@@ -48,3 +49,57 @@
         top: 0px;
         right: 0px;
     }
+.modalbutton {
+    display: inline-block;
+    border: 1px solid;
+    border-color: #ffffff;
+    background: #ffffff;
+    padding: 10px 16px;
+    border-radius: 4px;
+    color: #ffffff;
+}
+[id^=modal] {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+[id^=modal]:target {
+    display: block;
+}
+input[type=checkbox] {
+    position: absolute;
+    clip: rect(0 0 0 0);
+}
+.popup {
+    width: 100%;
+    height: 100%;
+    z-index: 99999;
+}
+.popup__overlay {
+    position: fixed;
+    z-index: 1;
+    display: block;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: #000000b3;
+}
+.popup__wrapper {
+    position: fixed;
+    z-index: 9;
+    width: 80%;
+    max-width: 1200px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 8px;
+    padding: 58px 32px 32px 32px;
+    background: #fff;
+}
+.popup__close {
+    position: absolute;
+    top: 16px;
+    right: 26px;
+}
