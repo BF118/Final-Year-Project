@@ -7,12 +7,13 @@ using System.Threading.Tasks;
 using System.IO;
 using Discord;
 using Discord.WebSocket;
+using Discord.Net.WebSockets;
 
 namespace bot.Modules
-{
+{   
     public class Commands : ModuleBase<SocketCommandContext>
     {
-
+        public ulong UserId { get; }
         [Command("Hello")]
         public async Task Hello()
         {
@@ -47,6 +48,47 @@ namespace bot.Modules
         public async Task purge()
         {
 
+
+        }
+        [Command("welcome")]
+        public async Task welcome(Cacheable<IUserMessage, ulong> message, ISocketMessageChannel channel, SocketReaction reaction)
+        {
+
+            
+
+            var encounter1 = new Emoji("1️⃣");
+            var encounter2 = new Emoji("2️⃣");
+            var encounter3 = new Emoji("3️⃣");
+
+
+
+            EmbedBuilder welcome = new EmbedBuilder()
+
+                .WithTitle("welcome to the server")
+                .WithThumbnailUrl(Context.Client.CurrentUser.GetAvatarUrl() ?? Context.Client.CurrentUser.GetDefaultAvatarUrl())
+                .WithColor(Color.DarkBlue);
+
+
+            var welcomemessage = await Context.Channel.SendMessageAsync("", false, welcome.Build());
+
+            await welcomemessage.AddReactionAsync(encounter1);
+            await welcomemessage.AddReactionAsync(encounter2);
+            await welcomemessage.AddReactionAsync(encounter3);
+
+
+            var user = await Context.Channel.GetUserAsync(reaction.UserId) as SocketGuildUser;
+            if (reaction.Emote.Name.Equals("1️⃣"))
+            {
+                await user.AddRoleAsync(roleId: 933000592362725396);
+
+
+            }
+
+
+
+            await user.AddRoleAsync(roleId: 933000592362725396);
+            
+            await user.RemoveRoleAsync(roleId: 933000592362725396);
 
         }
 

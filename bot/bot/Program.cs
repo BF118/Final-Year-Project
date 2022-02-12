@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 using Discord;
 using Discord.Commands;
 using Discord.WebSocket;
+using Discord.Net.WebSockets;
+using Discord.Net.Rest;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace bot
