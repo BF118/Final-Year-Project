@@ -27,8 +27,6 @@ namespace bot.Modules
                 var healer = new Emoji("❤️");
                 var learner = new Emoji("🎓");
 
-                var loading = Path.GetFileName("/GITHUB_UNI/fyp/bot/bot/Modules/assets/Loading.gif");
-
                 EmbedBuilder Encounter1 = new EmbedBuilder()
 
                 .WithTitle("Loading....")
@@ -46,12 +44,12 @@ namespace bot.Modules
 
 
                 var myid = 380426938432618496;
-                var roleencounter1 = Context.Message.Reactions;
+                var roleencounter1 = Context.Message.GetReactionUsersAsync(shield, 100, null) as SocketGuildUser;
                 var role1 = Convert.ToUInt64(roleencounter1);
                 var role2 = Convert.ToUInt64(myid);
 
 
-                
+
                 await (sent).ModifyAsync(x =>
                  {
                      EmbedBuilder encounter_edit = new EmbedBuilder()
@@ -70,7 +68,6 @@ namespace bot.Modules
                     .WithColor(Color.DarkBlue);
                      x.Embed = encounter_edit.Build();
                  });
-
                 if((roleencounter1 is null))
                 {
                     await (sent).ModifyAsync(x =>
@@ -92,6 +89,7 @@ namespace bot.Modules
                         x.Embed = encounter_edit.Build();
                     });
                 }
+
             }
             
 

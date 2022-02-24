@@ -45,12 +45,13 @@ namespace bot.Modules
             var sent = await Context.Channel.SendMessageAsync("", false, help.Build());
         }
         [Command("purge")]
-        public async Task purge(int delnumber)
+        public async Task purge()
         {
-            var channel = Context.Channel as SocketTextChannel;
-            var items = await channel.GetMessagesAsync(delnumber + 1).FlattenAsync();
-            //await channel.DeleteMessageAsync(items);
-
+            var messages = Context.Channel.GetMessagesAsync(1000).Flatten();
+            foreach (var i in await messages.ToArrayAsync())
+            {
+                await this.Context.Channel.DeleteMessageAsync(i);
+            }
         }
         [Command("welcome")]
         public async Task welcome()
