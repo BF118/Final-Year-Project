@@ -17,6 +17,7 @@ namespace bot.Modules
         public class Commands : ModuleBase<SocketCommandContext>
         {
             public Optional<IUser> User { get; }
+
           
             [Command("encounter1")]
             public async Task testEncounter()
@@ -31,8 +32,7 @@ namespace bot.Modules
                 EmbedBuilder Encounter1 = new EmbedBuilder()
 
                 .WithTitle("Loading....")
-                .AddField("Encounter 1 loading","....")
-                .WithImageUrl($"attachment://{loading}")
+                .AddField("Encounter 1 loading","Please wait")
                 .AddField("Role", MentionUtils.MentionRole(933000592362725396))
                 .WithCurrentTimestamp()
                 .WithColor(Color.Purple);
@@ -46,11 +46,12 @@ namespace bot.Modules
 
 
                 var myid = 380426938432618496;
-                var roleencounter1 = Context.Message.GetReactionUsersAsync(shield, 100, null) as SocketGuildUser;
+                var roleencounter1 = Context.Message.Reactions;
                 var role1 = Convert.ToUInt64(roleencounter1);
                 var role2 = Convert.ToUInt64(myid);
 
 
+                
                 await (sent).ModifyAsync(x =>
                  {
                      EmbedBuilder encounter_edit = new EmbedBuilder()
@@ -90,14 +91,9 @@ namespace bot.Modules
                        .WithColor(Color.DarkRed);
                         x.Embed = encounter_edit.Build();
                     });
-
-
-
-
-
-
                 }
             }
+            
 
         }
     }

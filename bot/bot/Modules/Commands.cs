@@ -14,6 +14,7 @@ namespace bot.Modules
     public class Commands : ModuleBase<SocketCommandContext>
     {
         public ulong UserId { get; }
+        
         [Command("Hello")]
         public async Task Hello()
         {
@@ -24,11 +25,10 @@ namespace bot.Modules
         {
             var builder = new ComponentBuilder()
                 .WithButton("Click for website", null, ButtonStyle.Link, url: "http://bf118.webhosting.canterbury.ac.uk/");
-
-
             await ReplyAsync("Click here to be taken to the website", components: builder.Build());
 
         }
+        
         [Command("help")]
         public async Task help()
         {
@@ -45,9 +45,11 @@ namespace bot.Modules
             var sent = await Context.Channel.SendMessageAsync("", false, help.Build());
         }
         [Command("purge")]
-        public async Task purge()
+        public async Task purge(int delnumber)
         {
-
+            var channel = Context.Channel as SocketTextChannel;
+            var items = await channel.GetMessagesAsync(delnumber + 1).FlattenAsync();
+            //await channel.DeleteMessageAsync(items);
 
         }
         [Command("welcome")]
@@ -57,9 +59,20 @@ namespace bot.Modules
             var encounter2 = new Emoji("2️⃣");
             var encounter3 = new Emoji("3️⃣");
 
+            ulong roleid1 = 933000592362725396;
+            ulong roleid2 = 944968068113772594;
+            ulong roleid3 = 944968105199796245;
+
+            var encounter1role = Context.Guild.GetRole(roleid1);
+            var encounter2role = Context.Guild.GetRole(roleid2);
+            var encounter3role = Context.Guild.GetRole(roleid3);
+
             EmbedBuilder welcome = new EmbedBuilder()
 
                 .WithTitle("welcome to the server")
+                .AddField("To get assigned a role for the encounter you want to do","!")
+                .AddField("Type !encounterrolen where n is the encounter you want","!")
+                .AddField("All avaiable encounters can be seen with the reactions on this post","!")
                 .WithThumbnailUrl(Context.Client.CurrentUser.GetAvatarUrl() ?? Context.Client.CurrentUser.GetDefaultAvatarUrl())
                 .WithColor(Color.DarkBlue);
 
@@ -70,26 +83,42 @@ namespace bot.Modules
             await welcomemessage.AddReactionAsync(encounter2);
             await welcomemessage.AddReactionAsync(encounter3);
 
-            var roleencounter1 = Context.Message.GetReactionUsersAsync(encounter1, 100, null) as SocketGuildUser;
-            var roleencounter2 = Context.Message.GetReactionUsersAsync(encounter2, 100, null)as SocketGuildUser;
-            var roleencounter3 = Context.Message.GetReactionUsersAsync(encounter3, 100, null) as SocketGuildUser;
-
-
-
-            //if(roleencounter1 = true)
-            //{
-            //    await roleencounter1.AddRoleAsync(roleId: 933000592362725396);
-
-
-            //}
-
-            
-
-
-
-
+            var roleencounter1 = Context.Message.GetReactionUsersAsync(encounter1, 100, null);
+            var roleencounter2 = Context.Message.GetReactionUsersAsync(encounter2, 100, null);
+            var roleencounter3 = Context.Message.GetReactionUsersAsync(encounter3, 100, null); 
         }
+        [Command("encounterrole1")]
+        public async Task encounterrole1()
+        {
 
+            await ((SocketGuildUser)Context.User).AddRoleAsync(933000592362725396);
+
+            var messages = Context.Channel.GetMessagesAsync(1).Flatten();
+            foreach(var i in await messages.ToArrayAsync())
+            {
+                await this.Context.Channel.DeleteMessageAsync(i);
+            }
+        }
+        [Command("encounterrole2")]
+        public async Task encounterrole2()
+        {
+            await ((SocketGuildUser)Context.User).AddRoleAsync(944968068113772594);
+            var messages = Context.Channel.GetMessagesAsync(1).Flatten();
+            foreach (var i in await messages.ToArrayAsync())
+            {
+                await this.Context.Channel.DeleteMessageAsync(i);
+            }
+        }
+        [Command("encounterrole3")]
+        public async Task encounterrole3()
+        {
+            await ((SocketGuildUser)Context.User).AddRoleAsync(944968105199796245);
+            var messages = Context.Channel.GetMessagesAsync(1).Flatten();
+            foreach (var i in await messages.ToArrayAsync())
+            {
+                await this.Context.Channel.DeleteMessageAsync(i);
+            }
+        }
     }
         
 

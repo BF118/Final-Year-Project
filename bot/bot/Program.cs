@@ -53,7 +53,12 @@ namespace bot
             Console.WriteLine(arg);
             return Task.CompletedTask;
         }
+        private Task Log(LogMessage msg)
+        {
+            Console.WriteLine(msg.ToString());
+            return Task.CompletedTask;
 
+        }
         public async Task RegisterCommandAsync()
         {
             _client.MessageReceived += HandleCommandAsync;
