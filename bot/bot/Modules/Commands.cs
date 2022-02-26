@@ -60,13 +60,13 @@ namespace bot.Modules
             var encounter2 = new Emoji("2️⃣");
             var encounter3 = new Emoji("3️⃣");
 
-            ulong roleid1 = 933000592362725396;
-            ulong roleid2 = 944968068113772594;
-            ulong roleid3 = 944968105199796245;
+            ulong encounter1RoleId = 933000592362725396;
+            ulong encounter2RoleId = 944968068113772594;
+            ulong encounter3RoleId = 944968105199796245;
 
-            var encounter1role = Context.Guild.GetRole(roleid1);
-            var encounter2role = Context.Guild.GetRole(roleid2);
-            var encounter3role = Context.Guild.GetRole(roleid3);
+            var encounter1role = Context.Guild.GetRole(encounter1RoleId);
+            var encounter2role = Context.Guild.GetRole(encounter2RoleId);
+            var encounter3role = Context.Guild.GetRole(encounter3RoleId);
 
             EmbedBuilder welcome = new EmbedBuilder()
 

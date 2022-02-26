@@ -65,6 +65,7 @@ namespace bot
             await _commands.AddModulesAsync(Assembly.GetEntryAssembly(), _services);
         }
 
+
         private async Task HandleCommandAsync(SocketMessage arg)
         {
             var message = arg as SocketUserMessage;
