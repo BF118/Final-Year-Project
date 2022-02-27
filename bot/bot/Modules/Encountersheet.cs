@@ -24,12 +24,15 @@ namespace bot.Modules
             [Command("encounter1")]
             public async Task encounter1()//string time, DateTime starttime)
             {
+                //Create Encounter 1 Emojis
                 var shieldEmoji = new Emoji("🛡");
                 var dpsEmoji = new Emoji("⚔️");
                 var heartEmoji = new Emoji("❤️");
                 var hatEmoji = new Emoji("🎓");
                 var anyEmoji = new Emoji("🎲");
 
+
+                //Loading screen Embed
                 EmbedBuilder Encounter1 = new EmbedBuilder()
 
                 .WithTitle("Loading....")
@@ -40,18 +43,20 @@ namespace bot.Modules
 
                 var sent = await Context.Channel.SendMessageAsync("", false, Encounter1.Build());
 
+                //add reaction emojis to the post
                 await sent.AddReactionAsync(shieldEmoji);
                 await sent.AddReactionAsync(dpsEmoji);
                 await sent.AddReactionAsync(heartEmoji);
                 await sent.AddReactionAsync(hatEmoji);
                 await sent.AddReactionAsync(anyEmoji);
 
-                var baseTankRole = await Context.Message.GetReactionUsersAsync(shieldEmoji, 10).FlattenAsync();
-                var damageRole = await Context.Message.GetReactionUsersAsync(dpsEmoji, 10).FlattenAsync();
-                var healerRole = await Context.Message.GetReactionUsersAsync(heartEmoji, 10).FlattenAsync();
-                var learnerRole = await Context.Message.GetReactionUsersAsync(hatEmoji, 10).FlattenAsync();
-                var anyRole = await Context.Message.GetReactionUsersAsync(anyEmoji, 10).FlattenAsync();
+                var baseTankRole = await Context.Message.GetReactionUsersAsync(shieldEmoji, 100).FlattenAsync();
+                var damageRole = await Context.Message.GetReactionUsersAsync(dpsEmoji, 100).FlattenAsync();
+                var healerRole = await Context.Message.GetReactionUsersAsync(heartEmoji, 100).FlattenAsync();
+                var learnerRole = await Context.Message.GetReactionUsersAsync(hatEmoji, 100).FlattenAsync();
+                var anyRole = await Context.Message.GetReactionUsersAsync(anyEmoji, 100).FlattenAsync();
 
+                
                 
 
                 await (sent).ModifyAsync(x =>
@@ -77,9 +82,7 @@ namespace bot.Modules
 
                 if (!(baseTankRole is null))
                 {
-
-                    var User = baseTankRole;
-
+                    
                     await (sent).ModifyAsync(x =>
                     {
                         EmbedBuilder encounter_edit = new EmbedBuilder()
@@ -89,7 +92,7 @@ namespace bot.Modules
                        .AddField("Looting:", " test")
                        .AddField("Team size:", " 0/7")
                        .AddField("Reactions:", "Remove your signup and role")
-                       .AddField("<:shield:927174765058326558> 1x Base Tank:", User)
+                       .AddField("<:shield:927174765058326558> 1x Base Tank:",baseTankRole )
                        .AddField("<:crossed_swords:927174860524896276> 4x dps:", ".", true)
                        .AddField("<:heart:927185322050199612> 1x Healer", ".", true)
                        .AddField("<:mortar_board:927185690867937330> 1x Learner:", ".", true)
@@ -101,12 +104,11 @@ namespace bot.Modules
                 }
 
             }
-
-
             //Encounter 2 embed
             [Command("encounter2")]
             public async Task encounter2()
             {
+                //Creating Encounter 2 Emojis
                 var shieldEmoji = new Emoji("🛡");
                 var dpsEmoji = new Emoji("⚔️");
                 var bombEmoji = new Emoji("💣");
@@ -160,6 +162,30 @@ namespace bot.Modules
                    .WithColor(Color.DarkOrange);
                     x.Embed = encounter_edit.Build();
                 });
+
+            }
+
+            [Command("encounter3")]
+            public async Task encounter3()
+            {
+
+
+
+
+
+
+                EmbedBuilder Encounter3 = new EmbedBuilder()
+
+                .WithTitle("Loading....")
+                .AddField("Encounter 3 loading", "Please wait......")
+                .AddField("Role", MentionUtils.MentionRole(944968068113772594))
+                .WithCurrentTimestamp()
+                .WithColor(Color.Green);
+
+                var sent = await Context.Channel.SendMessageAsync("", false, Encounter3.Build());
+
+
+
 
             }
 
