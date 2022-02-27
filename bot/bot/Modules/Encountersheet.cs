@@ -22,7 +22,7 @@ namespace bot.Modules
 
             //Encounter1 embed
             [Command("encounter1")]
-            public async Task encounter1()//string time, DateTime starttime)
+            public async Task encounter1(string time, DateTime starttime)
             {
                 //Create Encounter 1 Emojis
                 var shieldEmoji = new Emoji("🛡");
@@ -64,7 +64,7 @@ namespace bot.Modules
                      EmbedBuilder encounter_edit = new EmbedBuilder()
 
                     .WithTitle("Test Encounter")
-                    .AddField("Time:", "starttime")
+                    .AddField("Time:", starttime)
                     .AddField("Looting:", " test")
                     .AddField("Team size:", " 0/7")
                     .AddField("Reactions:", "Remove your signup and role")
@@ -88,7 +88,7 @@ namespace bot.Modules
                         EmbedBuilder encounter_edit = new EmbedBuilder()
 
                        .WithTitle("Test Encounter")
-                       .AddField("Time:", "starttime")
+                       .AddField("Time:", starttime)
                        .AddField("Looting:", " test")
                        .AddField("Team size:", " 0/7")
                        .AddField("Reactions:", "Remove your signup and role")
@@ -106,7 +106,7 @@ namespace bot.Modules
             }
             //Encounter 2 embed
             [Command("encounter2")]
-            public async Task encounter2()
+            public async Task encounter2(string time, DateTime starttime)
             {
                 //Creating Encounter 2 Emojis
                 var shieldEmoji = new Emoji("🛡");
@@ -147,7 +147,7 @@ namespace bot.Modules
                     EmbedBuilder encounter_edit = new EmbedBuilder()
 
                    .WithTitle("Encounter2")
-                   .AddField("Time:", "starttime")
+                   .AddField("Time:", starttime)
                    .AddField("Looting:", "Energies and weapons are split between team mates")
                    .AddField("Team size:", "+1")
                    .AddField("Reactions:", "Remove your signup and role")
@@ -168,21 +168,72 @@ namespace bot.Modules
             [Command("encounter3")]
             public async Task encounter3()
             {
-
-
-
-
-
+                var shieldEmoji = new Emoji("🛡");
+                var rainShieldEmoji = new Emoji("🌧️");
+                var dpsEmoji = new Emoji("⚔️");
+                var shatterEmoji = new Emoji("💥");
+                var cleanseEmoji = new Emoji("🧼");
+                var firstRealmEmoji = new Emoji("1️⃣");
+                var secondRealmEmoji = new Emoji("2️⃣");
+                var hatEmoji = new Emoji("🎓");
+                var anyEmoji = new Emoji("🎲");
 
                 EmbedBuilder Encounter3 = new EmbedBuilder()
 
                 .WithTitle("Loading....")
                 .AddField("Encounter 3 loading", "Please wait......")
-                .AddField("Role", MentionUtils.MentionRole(944968068113772594))
+                .AddField("Role", MentionUtils.MentionRole(944968105199796245))
                 .WithCurrentTimestamp()
-                .WithColor(Color.Green);
+                .WithColor(Color.Purple);
 
                 var sent = await Context.Channel.SendMessageAsync("", false, Encounter3.Build());
+
+                await sent.AddReactionAsync(shieldEmoji);
+                await sent.AddReactionAsync(rainShieldEmoji);
+                await sent.AddReactionAsync(shatterEmoji);
+                await sent.AddReactionAsync(cleanseEmoji);
+                await sent.AddReactionAsync(firstRealmEmoji);
+                await sent.AddReactionAsync(secondRealmEmoji);
+                await sent.AddReactionAsync(dpsEmoji);
+                await sent.AddReactionAsync(hatEmoji);
+                await sent.AddReactionAsync(anyEmoji);
+
+
+                var baseTankRole = await Context.Message.GetReactionUsersAsync(shieldEmoji, 100).FlattenAsync();
+                var shieldRole = await Context.Message.GetReactionUsersAsync(rainShieldEmoji, 100).FlattenAsync();
+                var shatterRole= await Context.Message.GetReactionUsersAsync(shatterEmoji, 100).FlattenAsync();
+                var cleanseRole = await Context.Message.GetReactionUsersAsync(cleanseEmoji, 100).FlattenAsync();
+                var firstRealmRole = await Context.Message.GetReactionUsersAsync(firstRealmEmoji, 100).FlattenAsync();
+                var secondRealmRole = await Context.Message.GetReactionUsersAsync(secondRealmEmoji, 100).FlattenAsync();
+                var damageRole = await Context.Message.GetReactionUsersAsync(dpsEmoji, 100).FlattenAsync();
+                var anyRole = await Context.Message.GetReactionUsersAsync(anyEmoji, 100).FlattenAsync();
+                var learnerRole = await  Context.Message.GetReactionUsersAsync(hatEmoji, 100).FlattenAsync();
+
+
+
+                await (sent).ModifyAsync(x =>
+                {
+                    EmbedBuilder encounter_edit = new EmbedBuilder()
+
+                   .WithTitle("Test Encounter")
+                   .AddField("Time:", "starttime")
+                   .AddField("Looting:", " test")
+                   .AddField("Team size:", " 0/7")
+                   .AddField("Reactions:", "Remove your signup and role")
+                   .AddField("<:shield:927174765058326558> 1x Base Tank:", baseTankRole,true)       
+                   .AddField("<:cloud_rain:947534430891827320> 1x Rain Shield:", shieldRole, true)
+                   .AddField("<:boom:947534430891827320> 1x Shatter:", shatterRole, true)
+                   .AddField("<:soap:947534430891827320> 1x Cleanse:", cleanseRole, true)
+                   .AddField("<:one:947534430891827320> 1x 1/3 Realm:", firstRealmRole, true)
+                   .AddField("<:two:947534430891827320> 1x 2/4 Realm:", secondRealmRole, true)
+                   .AddField("<:crossed_swords:927174860524896276> 1x dps:", damageRole, true)
+                   .AddField("<:game_die:947476766283407370> 1x any role:", anyRole, true)
+                   .AddField("<:mortar_board:927185690867937330> 1x Learner:", learnerRole, true)
+                   .AddField("Role", MentionUtils.MentionRole(944968105199796245))
+                   .WithCurrentTimestamp()
+                   .WithColor(Color.DarkPurple);
+                    x.Embed = encounter_edit.Build();
+                });
 
 
 
