@@ -30,6 +30,8 @@
     border: none;
     padding: 3px 8px;
 }
+
+/*Main Content*/
 #outer
 {
     width:100%;
@@ -41,14 +43,36 @@
     display: inline-block;
 }
 
- #content {
+#content {
         position: relative;
+        padding: 5px 10px;
     }
     #content img {
         position: absolute;
         top: 0px;
         right: 0px;
     }
+.flex-container {
+    display: flex;
+}
+
+.flex-child {
+    flex: 1;
+    border: 5px solid white;
+}  
+
+.flex-child:first-child {
+    margin-right: 20px;
+} 
+#stats{
+    position: absolute;
+    top: : 100%;
+    right: 0%;
+    
+}
+
+
+/*Modal*/
 .modalbutton {
     display: inline-block;
     border: 1px solid;
