@@ -11,18 +11,20 @@ using Discord.WebSocket;
 using Discord.Net.WebSockets;
 using Discord.Net.Rest;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Configuration.EnvironmentVariables;
 
 namespace bot
 {
     class Program
     {
-        static void Main(string[] args) => new Program().RunBotAsync().GetAwaiter().GetResult();
         
+        static void Main(string[] args) => new Program().RunBotAsync().GetAwaiter().GetResult();
+       
 
         private DiscordSocketClient _client;
         private CommandService _commands;
         private IServiceProvider _services;
-
+       
 
         
 
@@ -36,7 +38,9 @@ namespace bot
                 .AddSingleton(_commands)
                 .BuildServiceProvider();
 
-            string token = "Token";
+
+
+            string token = Environment.GetEnvironmentVariable("Token");
             _client.Log += _client_Log;
 
             await RegisterCommandAsync();
