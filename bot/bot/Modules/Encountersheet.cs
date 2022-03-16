@@ -234,7 +234,79 @@ namespace bot.Modules
                    .WithColor(Color.DarkPurple);
                     x.Embed = encounter_edit.Build();
                 });
+            }
+            [Command("encounter4")]
+            public async Task encounter4(string time, DateTime starttime)
+            {
+                
+                var shieldEmoji = new Emoji("🛡");
+                var chinnerEmoji = new Emoji("🐿️");
+                var hammerEmoji = new Emoji("🔨");
+                var uMinionEmoji = new Emoji("🇺");
+                var gMinionEmoji = new Emoji("🇬");
+                var cMinionEmoji = new Emoji("🇨");
+                var fMinionEmoji = new Emoji("🇫");
+                var dpsEmoji = new Emoji("⚔️");
+                var hatEmoji = new Emoji("🎓");
+                var anyEmoji = new Emoji("🎲");
 
+                EmbedBuilder Encounter4 = new EmbedBuilder()
+
+                .WithTitle("Loading....")
+                .AddField("Encounter 4 loading", "Please wait")
+                .AddField("Role", MentionUtils.MentionRole(953223221807824898))
+                .WithCurrentTimestamp()
+                .WithColor(Color.DarkTeal);
+
+                var sent = await Context.Channel.SendMessageAsync("", false, Encounter4.Build());
+
+                //add reaction emojis to the post
+                await sent.AddReactionAsync(shieldEmoji);
+                await sent.AddReactionAsync(chinnerEmoji);
+                await sent.AddReactionAsync(hammerEmoji);   
+                await sent.AddReactionAsync(uMinionEmoji); 
+                await sent.AddReactionAsync(gMinionEmoji);
+                await sent.AddReactionAsync(cMinionEmoji);
+                await sent.AddReactionAsync(fMinionEmoji);
+                await sent.AddReactionAsync(dpsEmoji);
+                await sent.AddReactionAsync(hatEmoji);
+                await sent.AddReactionAsync(anyEmoji);
+
+                var baseTankRole = await Context.Message.GetReactionUsersAsync(shieldEmoji, 100).FlattenAsync();
+                var chinnerRole = await Context.Message.GetReactionUsersAsync(chinnerEmoji, 100).FlattenAsync();
+                var hammerRole = await Context.Message.GetReactionUsersAsync(hammerEmoji, 100).FlattenAsync();
+                var uMinionRole = await Context.Message.GetReactionUsersAsync(uMinionEmoji, 100).FlattenAsync();
+                var gMinionRole = await Context.Message.GetReactionUsersAsync(gMinionEmoji, 100).FlattenAsync();
+                var cMinionRole = await Context.Message.GetReactionUsersAsync(cMinionEmoji, 100).FlattenAsync();
+                var fMinionRole = await Context.Message.GetReactionUsersAsync(fMinionEmoji, 100).FlattenAsync();
+                var dpsRole = await Context.Message.GetReactionUsersAsync(dpsEmoji, 100).FlattenAsync();
+                var learnerRole = await Context.Message.GetReactionUsersAsync(hatEmoji, 100).FlattenAsync();
+                var anyRole = await Context.Message.GetReactionUsersAsync(anyEmoji, 100).FlattenAsync();   
+
+                await (sent).ModifyAsync(x =>
+                {
+                    EmbedBuilder encounter_edit = new EmbedBuilder()
+
+                   .WithTitle("Test Encounter")
+                   .AddField("Time:", starttime)
+                   .AddField("Looting:", " test")
+                   .AddField("Team size:", " 0/7")
+                   .AddField("Reactions:", "Remove your signup and role")
+                   .AddField("<:shield:927174765058326558> 1x Base Tank:", baseTankRole,true)
+                   .AddField("<:chipmunk:953223520446464060> 1x chinner:", chinnerRole,true)
+                   .AddField("<:hammer:953223520446464060> 1x hammer:", hammerRole,true)
+                   .AddField("<:regional_indicator_u:953229494863429652> 1x U Minion:", uMinionRole,true)
+                   .AddField("<:regional_indicator_g:953229494863429652> 1x G Minion:", gMinionRole,true)
+                   .AddField("<:regional_indicator_c:953229494863429652> 1x C Minion:", cMinionRole,true)
+                   .AddField("<:regional_indicator_f:953229494863429652> 1x F Minion:", fMinionRole,true)
+                   .AddField("<:crossed_swords:927174860524896276> 1x dps:", dpsRole,true)
+                   .AddField("<:game_die:947476766283407370> 1x any role:", anyRole,true)
+                   .AddField("<:mortar_board:927185690867937330> 1x Learner:", learnerRole,true)
+                   .AddField("Role", MentionUtils.MentionRole(953223221807824898))
+                   .WithCurrentTimestamp()
+                   .WithColor(Color.DarkPurple);
+                    x.Embed = encounter_edit.Build();
+                });
 
 
 
