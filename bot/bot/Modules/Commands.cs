@@ -59,14 +59,17 @@ namespace bot.Modules
             var encounter1 = new Emoji("1️⃣");
             var encounter2 = new Emoji("2️⃣");
             var encounter3 = new Emoji("3️⃣");
+            var encounter4 = new Emoji("4️⃣");
 
             ulong encounter1RoleId = 933000592362725396;
             ulong encounter2RoleId = 944968068113772594;
             ulong encounter3RoleId = 944968105199796245;
+            ulong encounter4RoleId = 953223221807824898;
 
             var encounter1role = Context.Guild.GetRole(encounter1RoleId);
             var encounter2role = Context.Guild.GetRole(encounter2RoleId);
             var encounter3role = Context.Guild.GetRole(encounter3RoleId);
+            var encounter4role = Context.Guild.GetRole(encounter4RoleId);
 
             EmbedBuilder welcome = new EmbedBuilder()
 
@@ -83,10 +86,12 @@ namespace bot.Modules
             await welcomemessage.AddReactionAsync(encounter1);
             await welcomemessage.AddReactionAsync(encounter2);
             await welcomemessage.AddReactionAsync(encounter3);
+            await welcomemessage.AddReactionAsync(encounter4);
 
             var roleencounter1 = Context.Message.GetReactionUsersAsync(encounter1, 100, null);
             var roleencounter2 = Context.Message.GetReactionUsersAsync(encounter2, 100, null);
             var roleencounter3 = Context.Message.GetReactionUsersAsync(encounter3, 100, null); 
+            var roleencounter4 = Context.Message.GetReactionUsersAsync(encounter4, 100, null);
         }
         [Command("encounterrole1")]
         public async Task encounterrole1()
@@ -119,6 +124,18 @@ namespace bot.Modules
             {
                 await this.Context.Channel.DeleteMessageAsync(i);
             }
+        }
+        [Command("encounterrole4")]
+        public async Task encounterrole4()
+        {
+            await ((SocketGuildUser)Context.User).AddRoleAsync(953223221807824898);
+            var messages = Context.Channel.GetMessagesAsync(1).Flatten();
+            foreach (var i in await messages.ToArrayAsync())
+            {
+                await this.Context.Channel.DeleteMessageAsync(i);
+            }
+
+
         }
     }
         
