@@ -19,7 +19,7 @@ namespace bot
     {
         
         static void Main(string[] args) => new Program().RunBotAsync().GetAwaiter().GetResult();
-       
+
 
         private DiscordSocketClient _client;
         private CommandService _commands;
@@ -30,7 +30,13 @@ namespace bot
 
         public async Task RunBotAsync()
         {
-            _client = new DiscordSocketClient();
+            var config = new DiscordSocketConfig()
+            {
+
+                GatewayIntents = GatewayIntents.All
+            };
+
+            _client = new DiscordSocketClient(config);
             _commands = new CommandService();
 
             _services = new ServiceCollection()
@@ -38,7 +44,7 @@ namespace bot
                 .AddSingleton(_commands)
                 .BuildServiceProvider();
 
-
+            _client.UserJoined += UserJoined;
 
             string token = Environment.GetEnvironmentVariable("Token");
             _client.Log += _client_Log;
@@ -50,7 +56,9 @@ namespace bot
             await _client.StartAsync();
 
             await Task.Delay(-1);
+            
         }
+
 
         private Task _client_Log(LogMessage arg)
         {
@@ -84,7 +92,24 @@ namespace bot
                 if (!result.IsSuccess) Console.WriteLine(result.ErrorReason);
 
             }
+           
         }
+        public async Task UserJoined(SocketGuildUser user)
+        {
+            var guild = _client.GetGuild(922123433620434984);
+            await user.ModifyAsync(x =>
+            {
+                x.Nickname = user.Username + " 🛡 ⚔️ ❤️";
+            });
+
+            await user.SendMessageAsync("Welcome to the server" +
+                "\n this server is for creating and join teams for bossing encounters" +
+                "\n have a look through the server to see how to sign up to an event" +
+                "\n if you need any help with the bot and its command type !help which will give you a handy list of commands" +
+                "\n I hope you enjoy your stay!!!");
+        }
+        
+
     }
 
 

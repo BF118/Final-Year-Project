@@ -14,7 +14,8 @@ namespace bot.Modules
     public class Commands : ModuleBase<SocketCommandContext>
     {
         public ulong UserId { get; }
-        
+
+
         [Command("Hello")]
         public async Task Hello()
         {
@@ -40,6 +41,8 @@ namespace bot.Modules
             .AddField("!encounter2", "Brings up sign up sheet for encounter2 as well as button to said sheet")
             .AddField("!encounter3", "Brings up sign up sheet for encounter3 as well as button to said sheet")
             .AddField("!encounter4", "Brings up sign up sheet for encounter4 as well as button to said sheet")
+            .AddField("!purge","will clear all messages in the channel if you have permissions to do so")
+            .AddField("","")
             .WithColor(Color.Green);
 
             var sent = await Context.Channel.SendMessageAsync("", false, help.Build());
@@ -134,8 +137,6 @@ namespace bot.Modules
             {
                 await this.Context.Channel.DeleteMessageAsync(i);
             }
-
-
         }
     }
         
