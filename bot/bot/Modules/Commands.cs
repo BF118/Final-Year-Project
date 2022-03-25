@@ -40,6 +40,7 @@ namespace bot.Modules
             .AddField("!encounter2", "Brings up sign up sheet for encounter2 as well as button to said sheet")
             .AddField("!encounter3", "Brings up sign up sheet for encounter3 as well as button to said sheet")
             .AddField("!encounter4", "Brings up sign up sheet for encounter4 as well as button to said sheet")
+            .AddField("!basetank, !dps, !healer, !bombtank etc","Doing !plus the role you want will add that emoji to username")
             .AddField("!purge", "will clear all messages in the channel if you have permissions to do so")
             .AddField("", "")
             .WithColor(Color.Green);
@@ -136,7 +137,211 @@ namespace bot.Modules
             {
                 await this.Context.Channel.DeleteMessageAsync(i);
             }
+        }
+        
+        
+        
+        [Command("role")]
+        public async Task basetank(string role,SocketGuildUser user = null)
+        {
+            user = Context.User as SocketGuildUser;
+            await user.ModifyAsync(x =>
+            {
+                x.Nickname = user.Username + ":";
+            });
 
+            var messages = Context.Channel.GetMessagesAsync(1).Flatten();
+            foreach (var i in await messages.ToArrayAsync())
+            {
+                await this.Context.Channel.DeleteMessageAsync(i);
+            }
+            
+            
+
+            //General Roles
+            if (role == "basetank")
+            {
+
+                //await user.ModifyAsync(x =>
+                //{
+                //    x.Nickname = user.Nickname + "🛡";
+                //});
+                await ((SocketGuildUser)Context.User).AddRoleAsync(956556279462113350);
+                await user.SendMessageAsync("Profile updated dps role has been given");
+                
+            }
+            if (role == "dps")
+            {
+
+                //await user.ModifyAsync(x =>
+                //{
+                //    x.Nickname = user.Nickname + "⚔️";
+                //});
+                await ((SocketGuildUser)Context.User).AddRoleAsync(956556579174506506);
+                await user.SendMessageAsync("Profile updated dps role has been given");
+            }
+            if (role == "healer")
+            {
+                //await user.ModifyAsync(x =>
+                //{
+                //    x.Nickname = user.Nickname + "❤️";
+                //});
+                await ((SocketGuildUser)Context.User).AddRoleAsync(956145603321151518);
+                await user.SendMessageAsync("Profile updated healer role has been given");
+            }
+            
+            //encounter2 Roles
+            if (role == "bombtank")
+            {
+                //await user.ModifyAsync(x =>
+                //{
+                //    x.Nickname = user.Nickname + "💣";
+                //});
+                await ((SocketGuildUser)Context.User).AddRoleAsync(956562683442921472);
+                await user.SendMessageAsync("Profile updated bombtank role has been given");
+            }
+            if (role == "toplure")
+            {
+                //await user.ModifyAsync(x =>
+                //{
+                //    x.Nickname = user.Nickname + "⬆️";
+                //});
+                await ((SocketGuildUser)Context.User).AddRoleAsync(956562683442921472);
+                await user.SendMessageAsync("Profile updated toplure role has been given");
+                
+            }
+
+            //encounter3 Roles
+            if (role == "rainshield")
+            {
+                //await user.ModifyAsync(x =>
+                //{
+                //    x.Nickname = user.Nickname + "🌧️";
+                //});
+                await ((SocketGuildUser)Context.User).AddRoleAsync(956564451253968916);
+                await user.SendMessageAsync("Profile updated rainshield role has been given");
+                
+            }
+            if (role == "shatter")
+            {
+                //await user.ModifyAsync(x =>
+                //{
+                //    x.Nickname = user.Nickname + "💥";
+                //});
+                await ((SocketGuildUser)Context.User).AddRoleAsync(956565009285132340);
+                await user.SendMessageAsync("Profile updated shatter role has been given");
+                
+            }
+            if (role == "cleanse")
+            {
+                //await user.ModifyAsync(x =>
+                //{
+                //    x.Nickname = user.Nickname + "🧼";
+                //});
+
+                await ((SocketGuildUser)Context.User).AddRoleAsync(956567001294340137);
+                await user.SendMessageAsync("Profile updated Cleanse role has been given");
+                
+            }
+            if (role == "1/3realm")
+            {
+                //await user.ModifyAsync(x =>
+                //{
+                //    x.Nickname = user.Nickname + "1️⃣";
+                //});
+                await ((SocketGuildUser)Context.User).AddRoleAsync(956567179086688366);
+                await user.SendMessageAsync("Profile updated 1/3 Realm role has been given");
+                
+            }
+            if (role == "2/4realm")
+            {
+                //await user.ModifyAsync(x =>
+                //{
+                //    x.Nickname = user.Nickname + "2️⃣";
+                //});
+                await ((SocketGuildUser)Context.User).AddRoleAsync(956567416836608050);
+                await user.SendMessageAsync("Profile updated 2/4 Realm role has been given");
+                
+            }
+
+            //encounter4 Roles
+            if (role == "chinner")
+            {
+                //await user.ModifyAsync(x =>
+                //{
+                //    x.Nickname = user.Nickname + "🐿️";
+                //});
+                await ((SocketGuildUser)Context.User).AddRoleAsync(956567677021863986);
+                await user.SendMessageAsync("Profile updated Chinner role has been given");
+                
+            }
+            if (role == "hammer")
+            {
+                //await user.ModifyAsync(x =>
+                //{
+                //    x.Nickname = user.Nickname + "🔨";
+                //});
+                await ((SocketGuildUser)Context.User).AddRoleAsync(956568612817219665);
+                await user.SendMessageAsync("Profile updated Hammer Realm role has been given");
+                
+            }
+            if (role == "uminion")
+            {
+                //await user.ModifyAsync(x =>
+                //{
+                //    x.Nickname = user.Nickname + "🇺";
+                //});
+                await ((SocketGuildUser)Context.User).AddRoleAsync(956569612080787567);
+                await user.SendMessageAsync("Profile updated Umbra Minion role has been given");
+                
+            }
+            if (role == "gminion")
+            {
+                //await user.ModifyAsync(x =>
+                //{
+                //    x.Nickname = user.Nickname + "🇬";
+                //});
+                await ((SocketGuildUser)Context.User).AddRoleAsync(956570089640050688);
+                await user.SendMessageAsync("Profile updated Glacies Minion role has been given");
+                
+            }
+            if (role == "cminion")
+            {
+                //await user.ModifyAsync(x =>
+                //{
+                //    x.Nickname = user.Nickname + "🇨";
+                //});
+                await ((SocketGuildUser)Context.User).AddRoleAsync(956570691422027786);
+                await user.SendMessageAsync("Profile updated Cruor Minion role has been given");
+                
+            }
+            if (role == "fminion")
+            {
+                //await user.ModifyAsync(x =>
+                //{
+                //    x.Nickname = user.Nickname + "🇫";
+                //});
+                await ((SocketGuildUser)Context.User).AddRoleAsync(956571248916312105);
+                await user.SendMessageAsync("Profile updated Fumus Minion role has been given");
+                
+            }
+
+            if(role == "allencounter2")
+            {
+                await ((SocketGuildUser)Context.User).AddRoleAsync(956562683442921472);
+                await ((SocketGuildUser)Context.User).AddRoleAsync(956562683442921472);
+                await user.SendMessageAsync("Profile updated all encounter2 roles have been given");
+
+            }
+            if(role == "allencounter3")
+            {
+                await ((SocketGuildUser)Context.User).AddRoleAsync(956565009285132340);
+                await ((SocketGuildUser)Context.User).AddRoleAsync(956565009285132340);
+                await ((SocketGuildUser)Context.User).AddRoleAsync(956567001294340137);
+                await ((SocketGuildUser)Context.User).AddRoleAsync(956567179086688366);
+                await ((SocketGuildUser)Context.User).AddRoleAsync(956567416836608050);
+
+            }
 
         }
     }

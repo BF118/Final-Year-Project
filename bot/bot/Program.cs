@@ -38,7 +38,6 @@ namespace bot
             };
 
             _client = new DiscordSocketClient(config);
-            _client = new DiscordSocketClient();
             _commands = new CommandService();
 
             _services = new ServiceCollection()
@@ -93,20 +92,16 @@ namespace bot
 
             }
         }
-        public async Task UserJoined(SocketGuildUser user)
-        {
-            await user.ModifyAsync(x =>
-            {
-                x.Nickname = user.Username + " 🛡 ⚔️ ❤️";
-            });
+         public async Task UserJoined(SocketGuildUser user)
+         {
 
             await user.SendMessageAsync("Welcome to the server" +
                 "\n this server is for creating and join teams for bossing encounters" +
                 "\n have a look through the server to see how to sign up to an event" +
                 "\n if you need any help with the bot and its command type !help which will give you a handy list of commands" +
                 "\n I hope you enjoy your stay!!!");
-        }
-
+         }
+        
     }
 
 
