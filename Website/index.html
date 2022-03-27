@@ -50,6 +50,12 @@
 <div id="content">
     <label>Role Information : click icon to view</label>
 </div>  
+
+ <!--encounter 1 signup sheet !-->       
+<div class="signup">
+
+<!--Base tank !-->
+<div class="grid-item">
 <!--Base tank !-->
 <a class="modalbutton" id="baseModal" href="#modal1"><img border="0" alt="baseTank" src="Images/basetank.png" width="30" height="30"></a>
     <div class="popup" id="modal1">
@@ -59,7 +65,14 @@
                     <p>I am the base</p>
             </div>
     </div>
-<!--DPS!-->
+<label>Base Tank</label>
+<input type="text" name="baseTank" id="baseTank" readonly="true"/>
+<button onclick="signUpBase(); this.onclick=null;"> Click here to sign up</button>
+    </div>
+    
+<!--DPS!-->   
+<div class="grid-item">
+    <!--DPS!-->
 <a class="modalbutton" id="dpsModal" href="#modal2"><img border="0" alt="dps" src="Images/dps.png" width="30" height="30"></a>
     <div class="popup" id="modal2">
         <a class="popup__overlay" href="#"></a>
@@ -68,7 +81,14 @@
                         <p>I am the dps</p>
             </div>
     </div>
+<label>DPS</label>
+<input readonly type="text" id="dps">
+<button onclick="signUpDps(); this.onclick=null;">Click here to sign up</button>
+    </div>
+
 <!--healer!-->
+<div class="grid-item">
+    <!--healer!-->
 <a class="modalbutton" id="healerModal" href="#modal3"><img border="0" alt="healer" src="Images/healer.png" width="30" height="30"></a>
     <div class="popup" id="modal3">
             <a class="popup__overlay" href="#"></a>
@@ -77,7 +97,14 @@
                         <p>I am the healer</p>
                         </div>
                             </div>
+<label>Healer</label>
+<input  readonly type="text" id="healer">
+<button onclick="signUpHealer(); this.onclick=null;">Click here to sign up</button>
+    </div>
+    
 <!--learner!-->
+<div class="grid-item">
+    <!--learner!-->
 <a class="modalbutton" id="learnerModal" href="#modal4"><img border="0" alt="learner" src="Images/learner.png" width="30" height="30"></a>        
     <div class="popup" id="modal4">
             <a class="popup__overlay" href="#"></a>
@@ -86,35 +113,15 @@
                         <p>I am the learner</p>
                         </div>
                             </div>
-         
- <!--encounter 1 signup sheet !-->       
-<div class="flex-container">
-
-<!--Base tank !-->
-<label>Base Tank</label>
-<input type="text" name="baseTank" id="baseTank" readonly="true"/>
-<button onclick="signUpBase(); this.onclick=null;"> Click here to sign up</button>
-
-<!--DPS!-->   
-<label>DPS</label>
-<input readonly type="text" id="dps">
-<button onclick="signUpDps(); this.onclick=null;">Click here to sign up</button>
-    </div>
-<div class="flex-child">
-
-<!--healer!-->
-<label>Healer</label>
-<input  readonly type="text" id="healer">
-<button onclick="signUpHealer(); this.onclick=null;">Click here to sign up</button>
-
-<!--learner!-->
 <label>Learner</label>
 <input readonly type="text" name="learner" id="learner" readonly="true"/>
 <button onclick="signUpLearner(); this.onclick=null;">Click here to sign up</button>
     </div>
-<div id="outer">
-    <div class="inner"><button onclick="Createsheet(); this.onclick=null;">Create Signup</button></div>
     </div>
+
+<button onclick="Createsheet(); this.onclick=null;">Create Signup</button>
+   
+    
 
 
 <script>
@@ -150,10 +157,12 @@ function Encounter1() {
       var request = new XMLHttpRequest();
       request.open("POST", "https://discord.com/api/webhooks/927916825885409300/zM6NZbJ-qitAo66WCLoZIQDtyKOQw0f-OF22Y4HcRzNE4niDJHOT5Vq02bs80c6JA1cK");
       var title = document.getElementById("username").value;
+      var basetank= document.getElementById("baseTank").value;
       request.setRequestHeader('Content-type', 'application/json');
       var myEmbed={
              author: {
     name: title
+    
   },
   title: "Encounter 1 Selected",
   description: "To see details of the event type: !encounter1",
@@ -161,6 +170,7 @@ function Encounter1() {
 
       var params = {
         username: "Signupsheetbot",
+        basetank,   
         avatar_url: "",
         embeds:[myEmbed]
       }
@@ -169,7 +179,7 @@ function Encounter1() {
     }
 function Encounter2() {
       var request = new XMLHttpRequest();
-      request.open("POST", "https://discord.com/api/webhooks/927916825885409300/zM6NZbJ-qitAo66WCLoZIQDtyKOQw0f-OF22Y4HcRzNE4niDJHOT5Vq02bs80c6JA1cK");
+      request.open("POST", "WEBHOOK");
 
       request.setRequestHeader('Content-type', 'application/json');
 
@@ -183,7 +193,7 @@ function Encounter2() {
     }
 function Encounter3() {
       var request = new XMLHttpRequest();
-      request.open("POST", "https://discord.com/api/webhooks/927916825885409300/zM6NZbJ-qitAo66WCLoZIQDtyKOQw0f-OF22Y4HcRzNE4niDJHOT5Vq02bs80c6JA1cK");
+      request.open("POST", "WEBHOOK");
 
       request.setRequestHeader('Content-type', 'application/json');
         var myEmbed={
@@ -204,7 +214,7 @@ function Encounter3() {
     }
 function Encounter4() {
       var request = new XMLHttpRequest();
-      request.open("POST", "https://discord.com/api/webhooks/927916825885409300/zM6NZbJ-qitAo66WCLoZIQDtyKOQw0f-OF22Y4HcRzNE4niDJHOT5Vq02bs80c6JA1cK");
+      request.open("POST", "WEBHOOK");
 
       request.setRequestHeader('Content-type', 'application/json');
         var myEmbed={
@@ -225,7 +235,7 @@ function Encounter4() {
     }
 function Createsheet() {
       var request = new XMLHttpRequest();
-      request.open("POST", "https://discord.com/api/webhooks/927916825885409300/zM6NZbJ-qitAo66WCLoZIQDtyKOQw0f-OF22Y4HcRzNE4niDJHOT5Vq02bs80c6JA1cK");
+      request.open("POST", "WEBHOOK");
 
       request.setRequestHeader('Content-type', 'application/json');
 
