@@ -48,6 +48,8 @@ namespace bot.Modules
             var sent = await Context.Channel.SendMessageAsync("", false, help.Build());
         }
         [Command("purge")]
+        [RequireBotPermission(GuildPermission.ManageMessages)]
+        [RequireUserPermission(GuildPermission.ManageMessages)]
         public async Task purge()
         {
             var messages = Context.Channel.GetMessagesAsync(1000).Flatten();
@@ -144,20 +146,12 @@ namespace bot.Modules
         [Command("role")]
         public async Task basetank(string role,SocketGuildUser user = null)
         {
-            user = Context.User as SocketGuildUser;
-            await user.ModifyAsync(x =>
-            {
-                x.Nickname = user.Username + ":";
-            });
-
             var messages = Context.Channel.GetMessagesAsync(1).Flatten();
             foreach (var i in await messages.ToArrayAsync())
             {
                 await this.Context.Channel.DeleteMessageAsync(i);
             }
             
-            
-
             //General Roles
             if (role == "basetank")
             {
@@ -281,7 +275,7 @@ namespace bot.Modules
                 //{
                 //    x.Nickname = user.Nickname + "🔨";
                 //});
-                await ((SocketGuildUser)Context.User).AddRoleAsync(956568612817219665);
+                 await ((SocketGuildUser)Context.User).AddRoleAsync(956567677021863986);
                 await user.SendMessageAsync("Profile updated Hammer Realm role has been given");
                 
             }
@@ -340,8 +334,114 @@ namespace bot.Modules
                 await ((SocketGuildUser)Context.User).AddRoleAsync(956567001294340137);
                 await ((SocketGuildUser)Context.User).AddRoleAsync(956567179086688366);
                 await ((SocketGuildUser)Context.User).AddRoleAsync(956567416836608050);
+            }
+            if(role =="allencounter4")
+            {
+                await ((SocketGuildUser)Context.User).AddRoleAsync(956567677021863986);
+                await ((SocketGuildUser)Context.User).AddRoleAsync(956567677021863986);
+                await ((SocketGuildUser)Context.User).AddRoleAsync(956569612080787567);
+                await ((SocketGuildUser)Context.User).AddRoleAsync(956570089640050688);
+                await ((SocketGuildUser)Context.User).AddRoleAsync(956570691422027786);
+                await ((SocketGuildUser)Context.User).AddRoleAsync(956571248916312105);
+            }
+        }
+        [Command("roleremove")]
+        [RequireBotPermission(GuildPermission.ManageRoles)]
+        [RequireUserPermission(GuildPermission.ManageRoles)]
+        public async Task removerole(string removerole, SocketGuildUser user = null)
+        {
+            if (removerole == "basetank")
+            { 
+                await ((SocketGuildUser)Context.User).RemoveRoleAsync(956556279462113350);
+                await user.SendMessageAsync("Profile updated dps role has been removed");
 
             }
+            if (removerole == "dps")
+            {
+                await ((SocketGuildUser)Context.User).RemoveRoleAsync(956556579174506506);
+                await user.SendMessageAsync("Profile updated dps role has been removed");
+            }
+            if (removerole == "healer")
+            {
+                await ((SocketGuildUser)Context.User).RemoveRoleAsync(956145603321151518);
+                await user.SendMessageAsync("Profile updated healer role has been removed");
+            }
+
+            //encounter2 Roles
+            if (removerole == "bombtank")
+            {
+                await ((SocketGuildUser)Context.User).RemoveRoleAsync(956562683442921472);
+                await user.SendMessageAsync("Profile updated bombtank role has been removed");
+            }
+            if (removerole == "toplure")
+            {
+                await ((SocketGuildUser)Context.User).RemoveRoleAsync(956562683442921472);
+                await user.SendMessageAsync("Profile updated toplure role has been removed");
+            }
+
+            //encounter3 Roles
+            if (removerole == "rainshield")
+            {
+                await ((SocketGuildUser)Context.User).RemoveRoleAsync(956564451253968916);
+                await user.SendMessageAsync("Profile updated rainshield role has been removed");
+
+            }
+            if (removerole == "shatter")
+            {
+                await ((SocketGuildUser)Context.User).RemoveRoleAsync(956565009285132340);
+                await user.SendMessageAsync("Profile updated shatter role has been removed");
+            }
+            if (removerole == "cleanse")
+            {              
+                await ((SocketGuildUser)Context.User).RemoveRoleAsync(956567001294340137);
+                await user.SendMessageAsync("Profile updated Cleanse role has been removed");
+            }
+            if (removerole == "1/3realm")
+            {              
+                await ((SocketGuildUser)Context.User).RemoveRoleAsync(956567179086688366);
+                await user.SendMessageAsync("Profile updated 1/3 Realm role has been removed");
+
+            }
+            if (removerole == "2/4realm")
+            {
+                await ((SocketGuildUser)Context.User).RemoveRoleAsync(956567416836608050);
+                await user.SendMessageAsync("Profile updated 2/4 Realm role has been removed");
+            }
+
+            //encounter4 Roles
+            if (removerole == "chinner")
+            {
+                await ((SocketGuildUser)Context.User).RemoveRoleAsync(956567677021863986);
+                await user.SendMessageAsync("Profile updated Chinner role has been given");
+            }
+            if (removerole == "hammer")
+            {
+                await ((SocketGuildUser)Context.User).RemoveRoleAsync(956568612817219665);
+                await user.SendMessageAsync("Profile updated Hammer Realm role has been given");
+            }
+            if (removerole == "uminion")
+            {
+                await ((SocketGuildUser)Context.User).RemoveRoleAsync(956569612080787567);
+                await user.SendMessageAsync("Profile updated Umbra Minion role has been given");
+            }
+            if (removerole == "gminion")
+            {
+                await ((SocketGuildUser)Context.User).RemoveRoleAsync(956570089640050688);
+                await user.SendMessageAsync("Profile updated Glacies Minion role has been given");
+            }
+            if (removerole == "cminion")
+            {
+                await ((SocketGuildUser)Context.User).RemoveRoleAsync(956570691422027786);
+                await user.SendMessageAsync("Profile updated Cruor Minion role has been given");
+            }
+            if (removerole == "fminion")
+            {
+                await ((SocketGuildUser)Context.User).RemoveRoleAsync(956571248916312105);
+                await user.SendMessageAsync("Profile updated Fumus Minion role has been given");
+            }
+
+
+
 
         }
     }
