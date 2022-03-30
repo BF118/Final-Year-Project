@@ -139,10 +139,7 @@ namespace bot.Modules
             {
                 await this.Context.Channel.DeleteMessageAsync(i);
             }
-        }
-        
-        
-        
+        }      
         [Command("role")]
         public async Task basetank(string role,SocketGuildUser user = null)
         {
@@ -344,12 +341,51 @@ namespace bot.Modules
                 await ((SocketGuildUser)Context.User).AddRoleAsync(956570691422027786);
                 await ((SocketGuildUser)Context.User).AddRoleAsync(956571248916312105);
             }
+
+            if(role == "list")
+            {
+                EmbedBuilder rolelist = new EmbedBuilder()
+
+                .WithTitle("Role list")
+                .AddField("General Roles", "basetank, dps, healer")
+                .AddField("Encounter2 Roles","bombtank, toplure")
+                .AddField("Encounter3 Roles","rainshield, shatter, cleanse, 1/3realm, 2/4realm")
+                .AddField("Encounter4 Roles","chinner, hammer, uminion(Umbra Minion), gminion(Glacies Minion), cminion(Cruor Minion), fminion(Fumus Minion)")
+
+                .WithColor(Color.DarkRed);
+
+
+                var sent = await Context.Channel.SendMessageAsync("", false, rolelist.Build());
+
+            }
+
+
+
+            if(role == "help")
+            {
+                EmbedBuilder rolehelp = new EmbedBuilder()
+
+                .WithTitle("Role help")
+                .AddField("---------","!role list ::  Will show a list of all the possible roles that can be given for each encounter")
+                .AddField("---------","!role general  ::  adds all of the general role that apply to all encounters")
+                .AddField("---------","!role 'rolename' ::  adds indiviual role ")
+                .AddField("---------","!role allencounter'2-4'  ::  adds all specific roles for that encounter")
+                .AddField("---------","!roleremove 'rolename' :: Removes indiviual role (requires admin)")
+                .AddField("---------","!roleremove allencounter'2-4'  ::  Removes all specific roles for that encounter(requires admin)")
+                .WithColor(Color.DarkRed);
+
+                var sent = await Context.Channel.SendMessageAsync("", false, rolehelp.Build());
+            }
+
         }
         [Command("roleremove")]
         [RequireBotPermission(GuildPermission.ManageRoles)]
         [RequireUserPermission(GuildPermission.ManageRoles)]
         public async Task removerole(string removerole, SocketGuildUser user = null)
         {
+
+
+
             if (removerole == "basetank")
             { 
                 await ((SocketGuildUser)Context.User).RemoveRoleAsync(956556279462113350);
