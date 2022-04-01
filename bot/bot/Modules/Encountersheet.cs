@@ -19,18 +19,18 @@ namespace bot.Modules
             public Optional<IUser> User { get; }
             bool IsBot { get; }
             string Discriminator { get; }
+            string Username { get; }
 
             //Encounter1 embed
             [Command("encounter1")]
             public async Task encounter1(string time, DateTime starttime)
             {
                 //Create Encounter 1 Emojis
-                var shieldEmoji = new Emoji("🛡");
-                var dpsEmoji = new Emoji("⚔️");
-                var heartEmoji = new Emoji("❤️");
-                var hatEmoji = new Emoji("🎓");
-                var anyEmoji = new Emoji("🎲");
-
+                var shieldEmoji = Emoji.Parse(":shield:");
+                var dpsEmoji = Emoji.Parse(":crossed_swords:");
+                var heartEmoji = Emoji.Parse(":heart:");
+                var hatEmoji = Emoji.Parse(":mortar_board:");
+                var anyEmoji =  Emoji.Parse(":game_die:");
 
                 //Loading screen Embed
                 EmbedBuilder Encounter1 = new EmbedBuilder()
@@ -50,16 +50,18 @@ namespace bot.Modules
                 await sent.AddReactionAsync(hatEmoji);
                 await sent.AddReactionAsync(anyEmoji);
 
-                var baseTankRole = await Context.Message.GetReactionUsersAsync(shieldEmoji, 100).FlattenAsync();
-                var damageRole = await Context.Message.GetReactionUsersAsync(dpsEmoji, 100).FlattenAsync();
-                var healerRole = await Context.Message.GetReactionUsersAsync(heartEmoji, 100).FlattenAsync();
-                var learnerRole = await Context.Message.GetReactionUsersAsync(hatEmoji, 100).FlattenAsync();
-                var anyRole = await Context.Message.GetReactionUsersAsync(anyEmoji, 100).FlattenAsync();
+                var baseTankRole = await sent.GetReactionUsersAsync(shieldEmoji, 100).FlattenAsync();
+                var damageRole = await sent.GetReactionUsersAsync(dpsEmoji, 100).FlattenAsync();
+                var healerRole = await sent.GetReactionUsersAsync(heartEmoji, 100).FlattenAsync();
+                var learnerRole = await sent.GetReactionUsersAsync(hatEmoji, 100).FlattenAsync();
+                var anyRole = await sent.GetReactionUsersAsync(anyEmoji, 100).FlattenAsync();
 
-                
+                IEnumerable<string> baseTankUsernames = baseTankRole.Where(x => x.IsBot == false).Select(user => user.Username);
+                string baseTanksAsSingleString = string.Join(" ,", baseTankUsernames);
                 
 
-                await (sent).ModifyAsync(x =>
+
+                await sent.ModifyAsync(x =>
                  {
                      EmbedBuilder encounter_edit = new EmbedBuilder()
 
@@ -68,7 +70,7 @@ namespace bot.Modules
                     .AddField("Looting:", " test")
                     .AddField("Team size:", " 0/7")
                     .AddField("Reactions:", "Remove your signup and role")
-                    .AddField("<:shield:927174765058326558> 1x Base Tank:", baseTankRole)
+                    .AddField("<:shield:927174765058326558> 1x Base Tank:", baseTanksAsSingleString)
                     .AddField("<:crossed_swords:927174860524896276> 1x dps:", damageRole)
                     .AddField("<:heart:927185322050199612> 1x Healer", healerRole)
                     .AddField("<:game_die:947476766283407370> 1x any role:", anyRole)
@@ -78,31 +80,6 @@ namespace bot.Modules
                     .WithColor(Color.DarkBlue);
                      x.Embed = encounter_edit.Build();
                  });
-
-
-                if (!(baseTankRole is null))
-                {
-                    
-                    await (sent).ModifyAsync(x =>
-                    {
-                        EmbedBuilder encounter_edit = new EmbedBuilder()
-
-                       .WithTitle("Test Encounter")
-                       .AddField("Time:", starttime)
-                       .AddField("Looting:", " test")
-                       .AddField("Team size:", " 0/7")
-                       .AddField("Reactions:", "Remove your signup and role")
-                       .AddField("<:shield:927174765058326558> 1x Base Tank:",baseTankRole )
-                       .AddField("<:crossed_swords:927174860524896276> 4x dps:", ".", true)
-                       .AddField("<:heart:927185322050199612> 1x Healer", ".", true)
-                       .AddField("<:mortar_board:927185690867937330> 1x Learner:", ".", true)
-                       .AddField("Role", MentionUtils.MentionRole(933000592362725396))
-                       .WithCurrentTimestamp()
-                       .WithColor(Color.DarkRed);
-                        x.Embed = encounter_edit.Build();
-                    });
-                }
-
             }
             //Encounter 2 embed
             [Command("encounter2")]

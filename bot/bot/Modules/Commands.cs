@@ -381,7 +381,7 @@ namespace bot.Modules
         [Command("roleremove")]
         [RequireBotPermission(GuildPermission.ManageRoles)]
         [RequireUserPermission(GuildPermission.ManageRoles)]
-        public async Task removerole(string removerole, SocketGuildUser user = null)
+        public async Task removerole(SocketGuildUser user ,string removerole)
         {
 
 

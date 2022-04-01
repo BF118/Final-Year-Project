@@ -24,8 +24,7 @@ namespace bot
         private DiscordSocketClient _client;
         private CommandService _commands;
         private IServiceProvider _services;
-       
-
+        
         
 
         public async Task RunBotAsync()
