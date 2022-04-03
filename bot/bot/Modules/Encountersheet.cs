@@ -21,6 +21,8 @@ namespace bot.Modules
             string Discriminator { get; }
             string Username { get; }
 
+
+
             //Encounter1 embed
             [Command("encounter1")]
             public async Task encounter1(string time, DateTime starttime)
@@ -30,13 +32,13 @@ namespace bot.Modules
                 var dpsEmoji = Emoji.Parse(":crossed_swords:");
                 var heartEmoji = Emoji.Parse(":heart:");
                 var hatEmoji = Emoji.Parse(":mortar_board:");
-                var anyEmoji =  Emoji.Parse(":game_die:");
+                var anyEmoji = Emoji.Parse(":game_die:");
 
                 //Loading screen Embed
                 EmbedBuilder Encounter1 = new EmbedBuilder()
 
                 .WithTitle("Loading....")
-                .AddField("Encounter 1 loading","Please wait")
+                .AddField("Encounter 1 loading", "Please wait")
                 .AddField("Role", MentionUtils.MentionRole(933000592362725396))
                 .WithCurrentTimestamp()
                 .WithColor(Color.Blue);
@@ -58,7 +60,42 @@ namespace bot.Modules
 
                 IEnumerable<string> baseTankUsernames = baseTankRole.Where(x => x.IsBot == false).Select(user => user.Username);
                 string baseTanksAsSingleString = string.Join(" ,", baseTankUsernames);
-                
+                IEnumerable<string> dpsUsernames = damageRole.Where(x => x.IsBot == false).Select(user => user.Username);
+                string dpsAsSingleString = string.Join(" ,", dpsUsernames);
+                IEnumerable<string> healerUsernames = healerRole.Where(x => x.IsBot == false).Select(user => user.Username);
+                string healerAsSingleString = string.Join(" ,", healerUsernames);
+                IEnumerable<string> learnerUsernames = learnerRole.Where(x => x.IsBot == false).Select(user => user.Username);
+                string learnerAsSingleString = string.Join(" ,", learnerUsernames);
+                IEnumerable<string> anyRoleUsernames = anyRole.Where(x => x.IsBot == false).Select(user => user.Username);
+                string anyRoleAsSingleString = string.Join(" ,", anyRoleUsernames);
+
+
+                if (baseTanksAsSingleString == string.Empty)
+                {
+                    baseTanksAsSingleString = ".";
+                }
+                if (dpsAsSingleString == string.Empty)
+                { 
+                    dpsAsSingleString = ".";
+                }
+                if (healerAsSingleString == string.Empty)
+                {
+                    healerAsSingleString = ".";
+                }
+                if (learnerAsSingleString == string.Empty)
+                {
+                    learnerAsSingleString = ".";
+                }
+                if (anyRoleAsSingleString == string.Empty)
+                {
+                    anyRoleAsSingleString = ".";
+                }
+
+
+
+
+
+
 
 
                 await sent.ModifyAsync(x =>
@@ -70,11 +107,11 @@ namespace bot.Modules
                     .AddField("Looting:", " test")
                     .AddField("Team size:", " 0/7")
                     .AddField("Reactions:", "Remove your signup and role")
-                    .AddField("<:shield:927174765058326558> 1x Base Tank:", baseTanksAsSingleString)
-                    .AddField("<:crossed_swords:927174860524896276> 1x dps:", damageRole)
-                    .AddField("<:heart:927185322050199612> 1x Healer", healerRole)
-                    .AddField("<:game_die:947476766283407370> 1x any role:", anyRole)
-                    .AddField("<:mortar_board:927185690867937330> 1x Learner:", learnerRole)
+                    .AddField("<:shield:927174765058326558> 1x Base Tank:", baseTanksAsSingleString, true)
+                    .AddField("<:crossed_swords:927174860524896276> 1x dps:", dpsAsSingleString,true)
+                    .AddField("<:heart:927185322050199612> 1x Healer", healerAsSingleString,true)
+                    .AddField("<:game_die:947476766283407370> 1x any role:", anyRoleAsSingleString,true)
+                    .AddField("<:mortar_board:927185690867937330> 1x Learner:", learnerAsSingleString,true)
                     .AddField("Role", MentionUtils.MentionRole(933000592362725396))
                     .WithCurrentTimestamp()
                     .WithColor(Color.DarkBlue);
