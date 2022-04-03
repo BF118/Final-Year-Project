@@ -91,13 +91,6 @@ namespace bot.Modules
                     anyRoleAsSingleString = ".";
                 }
 
-
-
-
-
-
-
-
                 await sent.ModifyAsync(x =>
                  {
                      EmbedBuilder encounter_edit = new EmbedBuilder()
@@ -123,12 +116,12 @@ namespace bot.Modules
             public async Task encounter2(string time, DateTime starttime)
             {
                 //Creating Encounter 2 Emojis
-                var shieldEmoji = new Emoji("🛡");
-                var dpsEmoji = new Emoji("⚔️");
-                var bombEmoji = new Emoji("💣");
-                var toplureEmoji = new Emoji("⬆️");
-                var hatEmoji = new Emoji("🎓");
-                var anyEmoji = new Emoji("🎲");
+                var shieldEmoji = Emoji.Parse(":shield:");
+                var dpsEmoji = Emoji.Parse(":crossed_swords:");
+                var bombEmoji = Emoji.Parse(":bomb:");
+                var toplureEmoji = Emoji.Parse(":arrow_up:");
+                var hatEmoji = Emoji.Parse(":mortar_board:");
+                var anyEmoji = Emoji.Parse(":game_die:");
 
 
                 EmbedBuilder Encounter2 = new EmbedBuilder()
@@ -182,15 +175,15 @@ namespace bot.Modules
             [Command("encounter3")]
             public async Task encounter3()
             {
-                var shieldEmoji = new Emoji("🛡");
-                var rainShieldEmoji = new Emoji("🌧️");
-                var dpsEmoji = new Emoji("⚔️");
-                var shatterEmoji = new Emoji("💥");
-                var cleanseEmoji = new Emoji("🧼");
-                var firstRealmEmoji = new Emoji("1️⃣");
-                var secondRealmEmoji = new Emoji("2️⃣");
-                var hatEmoji = new Emoji("🎓");
-                var anyEmoji = new Emoji("🎲");
+                var shieldEmoji = Emoji.Parse(":shield:");
+                var rainShieldEmoji = Emoji.Parse(":cloud_rain:");
+                var dpsEmoji = Emoji.Parse(":crossed_swords:");
+                var shatterEmoji = Emoji.Parse(":boom:");
+                var cleanseEmoji = Emoji.Parse(":soap:");
+                var firstRealmEmoji = Emoji.Parse(":one:");
+                var secondRealmEmoji = Emoji.Parse(":two:");
+                var hatEmoji = Emoji.Parse(":mortar_board:");
+                var anyEmoji = Emoji.Parse(":game_die:");
 
                 EmbedBuilder Encounter3 = new EmbedBuilder()
 
@@ -252,17 +245,17 @@ namespace bot.Modules
             [Command("encounter4")]
             public async Task encounter4(string time, DateTime starttime)
             {
-                
-                var shieldEmoji = new Emoji("🛡");
-                var chinnerEmoji = new Emoji("🐿️");
-                var hammerEmoji = new Emoji("🔨");
-                var uMinionEmoji = new Emoji("🇺");
-                var gMinionEmoji = new Emoji("🇬");
-                var cMinionEmoji = new Emoji("🇨");
-                var fMinionEmoji = new Emoji("🇫");
-                var dpsEmoji = new Emoji("⚔️");
-                var hatEmoji = new Emoji("🎓");
-                var anyEmoji = new Emoji("🎲");
+
+                var shieldEmoji = Emoji.Parse(":shield:");
+                var chinnerEmoji = Emoji.Parse(":chipmunk:");
+                var hammerEmoji = Emoji.Parse(":hammer:");
+                var uMinionEmoji = Emoji.Parse(":regional_indicator_u:");
+                var gMinionEmoji = Emoji.Parse(":regional_indicator_g:");
+                var cMinionEmoji = Emoji.Parse(":regional_indicator_c:");
+                var fMinionEmoji = Emoji.Parse(":regional_indicator_f:");
+                var dpsEmoji = Emoji.Parse(":crossed_swords:");
+                var hatEmoji = Emoji.Parse(":mortar_board:");
+                var anyEmoji = Emoji.Parse(":game_die:");
 
                 EmbedBuilder Encounter4 = new EmbedBuilder()
 
