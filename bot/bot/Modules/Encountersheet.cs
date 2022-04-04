@@ -21,8 +21,6 @@ namespace bot.Modules
             string Discriminator { get; }
             string Username { get; }
 
-
-
             //Encounter1 embed
             [Command("encounter1")]
             public async Task encounter1(string time, DateTime starttime)
@@ -69,28 +67,32 @@ namespace bot.Modules
                 IEnumerable<string> anyRoleUsernames = anyRole.Where(x => x.IsBot == false).Select(user => user.Username);
                 string anyRoleAsSingleString = string.Join(" ,", anyRoleUsernames);
 
+                var blankSignUp = "\u200B";
 
                 if (baseTanksAsSingleString == string.Empty)
                 {
-                    baseTanksAsSingleString = ".";
+                    baseTanksAsSingleString = blankSignUp;
                 }
                 if (dpsAsSingleString == string.Empty)
                 { 
-                    dpsAsSingleString = ".";
+                    dpsAsSingleString = blankSignUp;
                 }
                 if (healerAsSingleString == string.Empty)
                 {
-                    healerAsSingleString = ".";
+                    healerAsSingleString = blankSignUp;
                 }
                 if (learnerAsSingleString == string.Empty)
                 {
-                    learnerAsSingleString = ".";
+                    learnerAsSingleString = blankSignUp;
                 }
                 if (anyRoleAsSingleString == string.Empty)
                 {
-                    anyRoleAsSingleString = ".";
+                    anyRoleAsSingleString = blankSignUp;
                 }
 
+
+                
+                
                 await sent.ModifyAsync(x =>
                  {
                      EmbedBuilder encounter_edit = new EmbedBuilder()
@@ -101,15 +103,18 @@ namespace bot.Modules
                     .AddField("Team size:", " 0/7")
                     .AddField("Reactions:", "Remove your signup and role")
                     .AddField("<:shield:927174765058326558> 1x Base Tank:", baseTanksAsSingleString, true)
-                    .AddField("<:crossed_swords:927174860524896276> 1x dps:", dpsAsSingleString,true)
-                    .AddField("<:heart:927185322050199612> 1x Healer", healerAsSingleString,true)
-                    .AddField("<:game_die:947476766283407370> 1x any role:", anyRoleAsSingleString,true)
-                    .AddField("<:mortar_board:927185690867937330> 1x Learner:", learnerAsSingleString,true)
+                    .AddField("<:crossed_swords:927174860524896276> 1x dps:", dpsAsSingleString, true)
+                    .AddField("<:heart:927185322050199612> 1x Healer", healerAsSingleString, true)
+                    .AddField("<:game_die:947476766283407370> 1x any role:", anyRoleAsSingleString, true)
+                    .AddField("<:mortar_board:927185690867937330> 1x Learner:", learnerAsSingleString, true)
                     .AddField("Role", MentionUtils.MentionRole(933000592362725396))
                     .WithCurrentTimestamp()
                     .WithColor(Color.DarkBlue);
                      x.Embed = encounter_edit.Build();
+                     
                  });
+
+
             }
             //Encounter 2 embed
             [Command("encounter2")]
