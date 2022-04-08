@@ -20,11 +20,21 @@ namespace bot.Modules
             bool IsBot { get; }
             string Discriminator { get; }
             string Username { get; }
+            //public event Func<Cacheable<IUserMessage, ulong>, Cacheable<IMessageChannel, ulong>, SocketReaction, Task> ReactionAdded;
+            //public event Func<Cacheable<IUserMessage, ulong>, Cacheable<IMessageChannel, ulong>, SocketReaction, Task> ReactionRemoved;
+
+            PostedSignupSheets PostedSignupSheets { get; }
+
+            public Commands(PostedSignupSheets postedSignupSheets)
+            {
+                PostedSignupSheets = postedSignupSheets ?? throw new ArgumentNullException(nameof(postedSignupSheets));
+            }
 
             //Encounter1 embed
             [Command("encounter1")]
             public async Task encounter1(string time, DateTime starttime)
             {
+                var blankSignUp = "\u200B";
                 //Create Encounter 1 Emojis
                 var shieldEmoji = Emoji.Parse(":shield:");
                 var dpsEmoji = Emoji.Parse(":crossed_swords:");
@@ -42,6 +52,7 @@ namespace bot.Modules
                 .WithColor(Color.Blue);
 
                 var sent = await Context.Channel.SendMessageAsync("", false, Encounter1.Build());
+                var msgid = sent.Id;
 
                 //add reaction emojis to the post
                 await sent.AddReactionAsync(shieldEmoji);
@@ -67,14 +78,13 @@ namespace bot.Modules
                 IEnumerable<string> anyRoleUsernames = anyRole.Where(x => x.IsBot == false).Select(user => user.Username);
                 string anyRoleAsSingleString = string.Join(" ,", anyRoleUsernames);
 
-                var blankSignUp = "\u200B";
 
                 if (baseTanksAsSingleString == string.Empty)
                 {
                     baseTanksAsSingleString = blankSignUp;
                 }
                 if (dpsAsSingleString == string.Empty)
-                { 
+                {
                     dpsAsSingleString = blankSignUp;
                 }
                 if (healerAsSingleString == string.Empty)
@@ -91,8 +101,7 @@ namespace bot.Modules
                 }
 
 
-                
-                
+
                 await sent.ModifyAsync(x =>
                  {
                      EmbedBuilder encounter_edit = new EmbedBuilder()
@@ -111,8 +120,15 @@ namespace bot.Modules
                     .WithCurrentTimestamp()
                     .WithColor(Color.DarkBlue);
                      x.Embed = encounter_edit.Build();
-                     
                  });
+
+                #region test stuff
+
+                var signupSheet = new SignupSheet(sent.Id, Context.Channel.Id, Context.Guild.Id);
+
+                PostedSignupSheets.AddSignupSheet(signupSheet);
+
+                #endregion
 
 
             }
@@ -213,13 +229,13 @@ namespace bot.Modules
 
                 var baseTankRole = await Context.Message.GetReactionUsersAsync(shieldEmoji, 100).FlattenAsync();
                 var shieldRole = await Context.Message.GetReactionUsersAsync(rainShieldEmoji, 100).FlattenAsync();
-                var shatterRole= await Context.Message.GetReactionUsersAsync(shatterEmoji, 100).FlattenAsync();
+                var shatterRole = await Context.Message.GetReactionUsersAsync(shatterEmoji, 100).FlattenAsync();
                 var cleanseRole = await Context.Message.GetReactionUsersAsync(cleanseEmoji, 100).FlattenAsync();
                 var firstRealmRole = await Context.Message.GetReactionUsersAsync(firstRealmEmoji, 100).FlattenAsync();
                 var secondRealmRole = await Context.Message.GetReactionUsersAsync(secondRealmEmoji, 100).FlattenAsync();
                 var damageRole = await Context.Message.GetReactionUsersAsync(dpsEmoji, 100).FlattenAsync();
                 var anyRole = await Context.Message.GetReactionUsersAsync(anyEmoji, 100).FlattenAsync();
-                var learnerRole = await  Context.Message.GetReactionUsersAsync(hatEmoji, 100).FlattenAsync();
+                var learnerRole = await Context.Message.GetReactionUsersAsync(hatEmoji, 100).FlattenAsync();
 
 
 
@@ -232,7 +248,7 @@ namespace bot.Modules
                    .AddField("Looting:", " test")
                    .AddField("Team size:", " 0/7")
                    .AddField("Reactions:", "Remove your signup and role")
-                   .AddField("<:shield:927174765058326558> 1x Base Tank:", baseTankRole,true)       
+                   .AddField("<:shield:927174765058326558> 1x Base Tank:", baseTankRole, true)
                    .AddField("<:cloud_rain:947534430891827320> 1x Rain Shield:", shieldRole, true)
                    .AddField("<:boom:947534430891827320> 1x Shatter:", shatterRole, true)
                    .AddField("<:soap:947534430891827320> 1x Cleanse:", cleanseRole, true)
@@ -275,8 +291,8 @@ namespace bot.Modules
                 //add reaction emojis to the post
                 await sent.AddReactionAsync(shieldEmoji);
                 await sent.AddReactionAsync(chinnerEmoji);
-                await sent.AddReactionAsync(hammerEmoji);   
-                await sent.AddReactionAsync(uMinionEmoji); 
+                await sent.AddReactionAsync(hammerEmoji);
+                await sent.AddReactionAsync(uMinionEmoji);
                 await sent.AddReactionAsync(gMinionEmoji);
                 await sent.AddReactionAsync(cMinionEmoji);
                 await sent.AddReactionAsync(fMinionEmoji);
@@ -293,7 +309,7 @@ namespace bot.Modules
                 var fMinionRole = await Context.Message.GetReactionUsersAsync(fMinionEmoji, 100).FlattenAsync();
                 var dpsRole = await Context.Message.GetReactionUsersAsync(dpsEmoji, 100).FlattenAsync();
                 var learnerRole = await Context.Message.GetReactionUsersAsync(hatEmoji, 100).FlattenAsync();
-                var anyRole = await Context.Message.GetReactionUsersAsync(anyEmoji, 100).FlattenAsync();   
+                var anyRole = await Context.Message.GetReactionUsersAsync(anyEmoji, 100).FlattenAsync();
 
                 await (sent).ModifyAsync(x =>
                 {
@@ -304,16 +320,16 @@ namespace bot.Modules
                    .AddField("Looting:", " test")
                    .AddField("Team size:", " 0/7")
                    .AddField("Reactions:", "Remove your signup and role")
-                   .AddField("<:shield:927174765058326558> 1x Base Tank:", baseTankRole,true)
-                   .AddField("<:chipmunk:953223520446464060> 1x chinner:", chinnerRole,true)
-                   .AddField("<:hammer:953223520446464060> 1x hammer:", hammerRole,true)
-                   .AddField("<:regional_indicator_u:953229494863429652> 1x U Minion:", uMinionRole,true)
-                   .AddField("<:regional_indicator_g:953229494863429652> 1x G Minion:", gMinionRole,true)
-                   .AddField("<:regional_indicator_c:953229494863429652> 1x C Minion:", cMinionRole,true)
-                   .AddField("<:regional_indicator_f:953229494863429652> 1x F Minion:", fMinionRole,true)
-                   .AddField("<:crossed_swords:927174860524896276> 1x dps:", dpsRole,true)
-                   .AddField("<:game_die:947476766283407370> 1x any role:", anyRole,true)
-                   .AddField("<:mortar_board:927185690867937330> 1x Learner:", learnerRole,true)
+                   .AddField("<:shield:927174765058326558> 1x Base Tank:", baseTankRole, true)
+                   .AddField("<:chipmunk:953223520446464060> 1x chinner:", chinnerRole, true)
+                   .AddField("<:hammer:953223520446464060> 1x hammer:", hammerRole, true)
+                   .AddField("<:regional_indicator_u:953229494863429652> 1x U Minion:", uMinionRole, true)
+                   .AddField("<:regional_indicator_g:953229494863429652> 1x G Minion:", gMinionRole, true)
+                   .AddField("<:regional_indicator_c:953229494863429652> 1x C Minion:", cMinionRole, true)
+                   .AddField("<:regional_indicator_f:953229494863429652> 1x F Minion:", fMinionRole, true)
+                   .AddField("<:crossed_swords:927174860524896276> 1x dps:", dpsRole, true)
+                   .AddField("<:game_die:947476766283407370> 1x any role:", anyRole, true)
+                   .AddField("<:mortar_board:927185690867937330> 1x Learner:", learnerRole, true)
                    .AddField("Role", MentionUtils.MentionRole(953223221807824898))
                    .WithCurrentTimestamp()
                    .WithColor(Color.DarkPurple);
@@ -323,6 +339,7 @@ namespace bot.Modules
 
 
             }
+
 
         }
     }

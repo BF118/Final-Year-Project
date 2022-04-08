@@ -125,6 +125,7 @@
   <ItemGroup>
     <Compile Include="Modules\Encountersheet.cs" />
     <Compile Include="Modules\Commands.cs" />
+    <Compile Include="PostedSignupSheets.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
