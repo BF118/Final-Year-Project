@@ -20,25 +20,26 @@ namespace bot.Modules
             bool IsBot { get; }
             string Discriminator { get; }
             string Username { get; }
-            //public event Func<Cacheable<IUserMessage, ulong>, Cacheable<IMessageChannel, ulong>, SocketReaction, Task> ReactionAdded;
-            //public event Func<Cacheable<IUserMessage, ulong>, Cacheable<IMessageChannel, ulong>, SocketReaction, Task> ReactionRemoved;
-
             PostedSignupSheets PostedSignupSheets { get; }
 
             public Commands(PostedSignupSheets postedSignupSheets)
             {
                 PostedSignupSheets = postedSignupSheets ?? throw new ArgumentNullException(nameof(postedSignupSheets));
             }
-
+            public string blankSignUp = "\u200B";
+            
+            
+            
+            
             //Encounter1 embed
             [Command("encounter1")]
             public async Task encounter1(string time, DateTime starttime)
             {
-                var blankSignUp = "\u200B";
+                
+                
                 //Create Encounter 1 Emojis
                 var shieldEmoji = Emoji.Parse(":shield:");
                 var dpsEmoji = Emoji.Parse(":crossed_swords:");
-                var heartEmoji = Emoji.Parse(":heart:");
                 var hatEmoji = Emoji.Parse(":mortar_board:");
                 var anyEmoji = Emoji.Parse(":game_die:");
 
@@ -54,31 +55,33 @@ namespace bot.Modules
                 var sent = await Context.Channel.SendMessageAsync("", false, Encounter1.Build());
                 var msgid = sent.Id;
 
+                #region Add reactions
                 //add reaction emojis to the post
                 await sent.AddReactionAsync(shieldEmoji);
                 await sent.AddReactionAsync(dpsEmoji);
-                await sent.AddReactionAsync(heartEmoji);
-                await sent.AddReactionAsync(hatEmoji);
                 await sent.AddReactionAsync(anyEmoji);
+                await sent.AddReactionAsync(hatEmoji);
+                #endregion
 
+                #region Get User Reactions Encounter1
                 var baseTankRole = await sent.GetReactionUsersAsync(shieldEmoji, 100).FlattenAsync();
                 var damageRole = await sent.GetReactionUsersAsync(dpsEmoji, 100).FlattenAsync();
-                var healerRole = await sent.GetReactionUsersAsync(heartEmoji, 100).FlattenAsync();
-                var learnerRole = await sent.GetReactionUsersAsync(hatEmoji, 100).FlattenAsync();
                 var anyRole = await sent.GetReactionUsersAsync(anyEmoji, 100).FlattenAsync();
+                var learnerRole = await sent.GetReactionUsersAsync(hatEmoji, 100).FlattenAsync();
+                #endregion
 
+                #region Convert role to string
                 IEnumerable<string> baseTankUsernames = baseTankRole.Where(x => x.IsBot == false).Select(user => user.Username);
                 string baseTanksAsSingleString = string.Join(" ,", baseTankUsernames);
                 IEnumerable<string> dpsUsernames = damageRole.Where(x => x.IsBot == false).Select(user => user.Username);
                 string dpsAsSingleString = string.Join(" ,", dpsUsernames);
-                IEnumerable<string> healerUsernames = healerRole.Where(x => x.IsBot == false).Select(user => user.Username);
-                string healerAsSingleString = string.Join(" ,", healerUsernames);
-                IEnumerable<string> learnerUsernames = learnerRole.Where(x => x.IsBot == false).Select(user => user.Username);
-                string learnerAsSingleString = string.Join(" ,", learnerUsernames);
                 IEnumerable<string> anyRoleUsernames = anyRole.Where(x => x.IsBot == false).Select(user => user.Username);
                 string anyRoleAsSingleString = string.Join(" ,", anyRoleUsernames);
+                IEnumerable<string> learnerUsernames = learnerRole.Where(x => x.IsBot == false).Select(user => user.Username);
+                string learnerAsSingleString = string.Join(" ,", learnerUsernames);
+                #endregion
 
-
+                #region empty signup
                 if (baseTanksAsSingleString == string.Empty)
                 {
                     baseTanksAsSingleString = blankSignUp;
@@ -86,10 +89,6 @@ namespace bot.Modules
                 if (dpsAsSingleString == string.Empty)
                 {
                     dpsAsSingleString = blankSignUp;
-                }
-                if (healerAsSingleString == string.Empty)
-                {
-                    healerAsSingleString = blankSignUp;
                 }
                 if (learnerAsSingleString == string.Empty)
                 {
@@ -99,9 +98,9 @@ namespace bot.Modules
                 {
                     anyRoleAsSingleString = blankSignUp;
                 }
+                #endregion
 
-
-
+                #region Modified Signup Encounter1
                 await sent.ModifyAsync(x =>
                  {
                      EmbedBuilder encounter_edit = new EmbedBuilder()
@@ -109,26 +108,30 @@ namespace bot.Modules
                     .WithTitle("Test Encounter")
                     .AddField("Time:", starttime)
                     .AddField("Looting:", " test")
-                    .AddField("Team size:", " 0/7")
+                    .AddField("Team size:", "0/7")
                     .AddField("Reactions:", "Remove your signup and role")
                     .AddField("<:shield:927174765058326558> 1x Base Tank:", baseTanksAsSingleString, true)
-                    .AddField("<:crossed_swords:927174860524896276> 1x dps:", dpsAsSingleString, true)
-                    .AddField("<:heart:927185322050199612> 1x Healer", healerAsSingleString, true)
-                    .AddField("<:game_die:947476766283407370> 1x any role:", anyRoleAsSingleString, true)
+                    .AddField("<:crossed_swords:927174860524896276> 1x DPS:", dpsAsSingleString, true)
+                    .AddField("<:game_die:947476766283407370> 1x Any role:", anyRoleAsSingleString, true)
                     .AddField("<:mortar_board:927185690867937330> 1x Learner:", learnerAsSingleString, true)
                     .AddField("Role", MentionUtils.MentionRole(933000592362725396))
                     .WithCurrentTimestamp()
                     .WithColor(Color.DarkBlue);
                      x.Embed = encounter_edit.Build();
                  });
+                #endregion
 
-                #region test stuff
+                #region Get signup ID's
 
                 var signupSheet = new SignupSheet(sent.Id, Context.Channel.Id, Context.Guild.Id);
 
                 PostedSignupSheets.AddSignupSheet(signupSheet);
 
                 #endregion
+
+
+
+
 
 
             }
@@ -139,12 +142,11 @@ namespace bot.Modules
                 //Creating Encounter 2 Emojis
                 var shieldEmoji = Emoji.Parse(":shield:");
                 var dpsEmoji = Emoji.Parse(":crossed_swords:");
+                var anyEmoji = Emoji.Parse(":game_die:");
+                var hatEmoji = Emoji.Parse(":mortar_board:");         
                 var bombEmoji = Emoji.Parse(":bomb:");
                 var toplureEmoji = Emoji.Parse(":arrow_up:");
-                var hatEmoji = Emoji.Parse(":mortar_board:");
-                var anyEmoji = Emoji.Parse(":game_die:");
-
-
+                
                 EmbedBuilder Encounter2 = new EmbedBuilder()
 
                 .WithTitle("Loading....")
@@ -155,20 +157,63 @@ namespace bot.Modules
 
                 var sent = await Context.Channel.SendMessageAsync("", false, Encounter2.Build());
 
+                #region add Reaction Encounter2
                 await sent.AddReactionAsync(shieldEmoji);
                 await sent.AddReactionAsync(dpsEmoji);
+                await sent.AddReactionAsync(anyEmoji);
+                await sent.AddReactionAsync(hatEmoji);
                 await sent.AddReactionAsync(bombEmoji);
                 await sent.AddReactionAsync(toplureEmoji);
-                await sent.AddReactionAsync(hatEmoji);
-                await sent.AddReactionAsync(anyEmoji);
-
+                #endregion
 
                 var baseTankRole = await Context.Message.GetReactionUsersAsync(shieldEmoji, 100).FlattenAsync();
                 var damageRole = await Context.Message.GetReactionUsersAsync(dpsEmoji, 100).FlattenAsync();
+                var anyroleRole = await Context.Message.GetReactionUsersAsync(anyEmoji, 100).FlattenAsync();
+                var learnerRole = await Context.Message.GetReactionUsersAsync(hatEmoji, 100).FlattenAsync(); 
                 var bombtankRole = await Context.Message.GetReactionUsersAsync(bombEmoji, 100).FlattenAsync();
                 var toplureRole = await Context.Message.GetReactionUsersAsync(toplureEmoji, 100).FlattenAsync();
-                var learnerRole = await Context.Message.GetReactionUsersAsync(hatEmoji, 100).FlattenAsync();
-                var anyroleRole = await Context.Message.GetReactionUsersAsync(anyEmoji, 100).FlattenAsync();
+
+                #region Convert roles to string Encounter2
+                IEnumerable<string> baseTankUsernames = baseTankRole.Where(x => x.IsBot == false).Select(user => user.Username);
+                string baseTanksAsSingleString = string.Join(" ,", baseTankUsernames);
+                IEnumerable<string> dpsUsernames = damageRole.Where(x => x.IsBot == false).Select(user => user.Username);
+                string dpsAsSingleString = string.Join(" ,", dpsUsernames);
+                IEnumerable<string> anyRoleUsernames = anyroleRole.Where(x => x.IsBot == false).Select(user => user.Username);
+                string anyRoleAsSingleString = string.Join(" ,", anyRoleUsernames);
+                IEnumerable<string> learnerUsernames = learnerRole.Where(x => x.IsBot == false).Select(user => user.Username);
+                string learnerAsSingleString = string.Join(" ,", learnerUsernames);
+                IEnumerable<string> bombTankUsernames = bombtankRole.Where(x =>x.IsBot == false).Select(user => user.Username);
+                string bombTankAsSingleString = string.Join(" ,", bombTankUsernames);
+                IEnumerable<string> topLureUsernames = toplureRole.Where(x => x.IsBot == false).Select(user => user.Username);  
+                string topLureAsSingleString = string.Join(",",topLureUsernames);
+                #endregion
+
+                #region Empty Signup Encounter2
+                if (baseTanksAsSingleString == string.Empty)
+                {
+                    baseTanksAsSingleString = blankSignUp;
+                }
+                if (dpsAsSingleString == string.Empty)
+                {
+                    dpsAsSingleString = blankSignUp;
+                }
+                if (learnerAsSingleString == string.Empty)
+                {
+                    learnerAsSingleString = blankSignUp;
+                }
+                if (anyRoleAsSingleString == string.Empty)
+                {
+                    anyRoleAsSingleString = blankSignUp;
+                }
+                if(bombTankAsSingleString == string.Empty)
+                {
+                    bombTankAsSingleString = blankSignUp;
+                }
+                if(topLureAsSingleString == string.Empty)
+                {
+                    topLureAsSingleString = blankSignUp;
+                }
+                #endregion
 
                 await (sent).ModifyAsync(x =>
                 {
@@ -177,20 +222,23 @@ namespace bot.Modules
                    .WithTitle("Encounter2")
                    .AddField("Time:", starttime)
                    .AddField("Looting:", "Energies and weapons are split between team mates")
-                   .AddField("Team size:", "+1")
+                   .AddField("Team size:", "0/7")
                    .AddField("Reactions:", "Remove your signup and role")
-                   .AddField("<:shield:927174765058326558> 1x Base Tank:", baseTankRole)
-                   .AddField("<:crossed_swords:927174860524896276> 4x dps:", damageRole, true)
-                   .AddField("<:heart:927185322050199612> 1x bomb tank", bombtankRole, true)
-                   .AddField("<:mortar_board:927185690867937330> 1x top lure:", toplureRole, true)
-                   .AddField("<:game_die:947476766283407370> 1x any role:", anyroleRole, true)
-                   .AddField("<:arrow_up:947161060253769758> 1x learner:", learnerRole, true)
+                   .AddField("<:shield:927174765058326558> 1x Base Tank:", baseTanksAsSingleString)
+                   .AddField("<:crossed_swords:927174860524896276> 4x dps:", dpsAsSingleString, true)
+                   .AddField("<:game_die:947476766283407370> 1x any role:", anyRoleAsSingleString, true)
+                   .AddField("<:mortar_board:927185690867937330> 1x learner:", learnerAsSingleString, true)
+                   .AddField("<:bomb:961993455092002886> 1x bomb tank", bombTankAsSingleString, true)
+                   .AddField("<:arrow_up:947161060253769758> 1x top lure:", topLureAsSingleString, true) 
                    .AddField("Role", MentionUtils.MentionRole(944968068113772594))
                    .WithCurrentTimestamp()
                    .WithColor(Color.DarkOrange);
                     x.Embed = encounter_edit.Build();
                 });
+                
+                var signupSheet = new SignupSheet(sent.Id, Context.Channel.Id, Context.Guild.Id);
 
+                PostedSignupSheets.AddSignupSheet(signupSheet);
             }
 
             [Command("encounter3")]

@@ -17,7 +17,7 @@ namespace bot
 {
     class Program
     {
-
+        int i = 0;
         static void Main(string[] args) => new Program().RunBotAsync().GetAwaiter().GetResult();
 
 
@@ -61,75 +61,129 @@ namespace bot
             await Task.Delay(-1);
         }
 
-        private async Task ReactionRemoved_Event(Cacheable<IUserMessage, ulong> arg1, Cacheable<IMessageChannel, ulong> arg2, SocketReaction reaction)
+        private async Task ReactionRemoved_Event(Cacheable<IUserMessage, ulong> userid, Cacheable<IMessageChannel, ulong> msgid, SocketReaction reaction)
         {
+            var blankSignUp = "\u200B";
             if (!reaction.User.Value.IsBot)
             {
                 var postedSignupSheets = _services.GetRequiredService<PostedSignupSheets>();
-                if (postedSignupSheets.SignupSheets.Any(x => x.MessagesId == arg1.Id && x.ChannelsId == arg2.Id))
+                if (postedSignupSheets.SignupSheets.Any(x => x.MessagesId == userid.Id && x.ChannelsId == msgid.Id))
                 {
-                    var message = await arg1.GetOrDownloadAsync();
+                    var message = await userid.GetOrDownloadAsync();
 
                     var newEmbedBuilder = message.Embeds.First().ToEmbedBuilder();
 
-                    if (reaction.Emote.Name == "🛡️")
+                    #region Remove general roles
+                    if (reaction.Emote.Name == "🛡️")//Get basetank reaction
                     {
                         newEmbedBuilder.Fields.Select(x => x.Name == "<:shield:927174765058326558> 1x Base Tank:");
-                        newEmbedBuilder.Fields[4].Value = ".";
+                        newEmbedBuilder.Fields[4].Value = blankSignUp;
+                        i--;
+                        newEmbedBuilder.Fields[2].Value = i+"/7";
                     }
+                    if (reaction.Emote.Name == "⚔️")
+                    {
+                        newEmbedBuilder.Fields.Select(x => x.Name == "<:crossed_swords:927174860524896276> 1x DPS:");
+                        newEmbedBuilder.Fields[5].Value = blankSignUp;
+                        i--;
+                        newEmbedBuilder.Fields[2].Value = i + "/7";
+                    }
+                    if (reaction.Emote.Name == "❤️")
+                    {
+                        newEmbedBuilder.Fields.Select(x => x.Name == "<:heart:927185322050199612> 1x Healer:");
+                        i--;
+                        newEmbedBuilder.Fields[6].Value = blankSignUp;
+                        newEmbedBuilder.Fields[2].Value = i + "/7";
+                    }
+                    if (reaction.Emote.Name == "🎲")
+                    {
+                        newEmbedBuilder.Fields.Select(x => x.Name == "<:game_die:947476766283407370> 1x Any role:");
+                        i--;
+                        newEmbedBuilder.Fields[7].Value = blankSignUp;
+                        newEmbedBuilder.Fields[2].Value = i + "/7";
+                    }
+                    if (reaction.Emote.Name == "🎓")
+                    {
+                        newEmbedBuilder.Fields.Select(x => x.Name == "<:mortar_board:927185690867937330> 1x Learner:");
+                        i--;
+                        newEmbedBuilder.Fields[8].Value = blankSignUp;
+                        newEmbedBuilder.Fields[2].Value = i + "/7";
+                    }
+                    #endregion
 
+                    #region Encounter2 specific remove
+
+                    #endregion
+
+                    await message.ModifyAsync(x => x.Embed = newEmbedBuilder.Build());
                 }
 
             }
-
-
-
-
-
-
+            Console.WriteLine("role removed");
             throw new NotImplementedException();
         }
 
-        private async Task ReactionAdded_Event(Cacheable<IUserMessage, ulong> arg1, Cacheable<IMessageChannel, ulong> arg2, SocketReaction reaction)
-        {
+        private async Task ReactionAdded_Event(Cacheable<IUserMessage, ulong> userid, Cacheable<IMessageChannel, ulong> msgid, SocketReaction reaction)
+        {           
             if (!reaction.User.Value.IsBot)
             {
-                
                 var postedSignupSheets = _services.GetRequiredService<PostedSignupSheets>();
-                if (postedSignupSheets.SignupSheets.Any(x => x.MessagesId == arg1.Id && x.ChannelsId == arg2.Id))
+                if (postedSignupSheets.SignupSheets.Any(x => x.MessagesId == userid.Id && x.ChannelsId == msgid.Id))
                 {
 
-                    var message = await arg1.GetOrDownloadAsync();
+                    var message = await userid.GetOrDownloadAsync();
 
                     var newEmbedBuilder = message.Embeds.First().ToEmbedBuilder();
 
-                    //newEmbedBuilder.AddField("New Title", "SomeValue");
-
+                    #region add General Roles
                     if (reaction.Emote.Name == "🛡️")
                     {
                         newEmbedBuilder.Fields.Select(x => x.Name == "<:shield:927174765058326558> 1x Base Tank:");
                         newEmbedBuilder.Fields[4].Value = reaction.User.Value.Username;
+                        i++;
+                        newEmbedBuilder.Fields[2].Value = i+"/7";
                     }
-
                     if (reaction.Emote.Name == "⚔️")
                     {
-                        newEmbedBuilder.Fields.Select(x => x.Name == "<:crossed_swords:927174860524896276> 1x dps:");
+                        newEmbedBuilder.Fields.Select(x => x.Name == "<:crossed_swords:927174860524896276> 1x DPS:");
                         newEmbedBuilder.Fields[5].Value = reaction.User.Value.Username;
+                        i++;
+                        newEmbedBuilder.Fields[2].Value = i+"/7";
                     }
-                    if (reaction.Emote.Name == "❤️")
+                    if (reaction.Emote.Name == "🎲")
                     {
-                        newEmbedBuilder.Fields.Select(x => x.Name == "<:crossed_swords:927174860524896276> 1x dps:");
+                        newEmbedBuilder.Fields.Select(x => x.Name == "<:game_die:947476766283407370> 1x Any role:");
+                        i++;
                         newEmbedBuilder.Fields[6].Value = reaction.User.Value.Username;
+                        newEmbedBuilder.Fields[2].Value = i + "/7";
                     }
+                    if (reaction.Emote.Name == "🎓")
+                    {
+                        newEmbedBuilder.Fields.Select(x => x.Name == "<:mortar_board:927185690867937330> 1x Learner:");
+                        i++;
+                        newEmbedBuilder.Fields[7].Value = reaction.User.Value.Username;
+                        newEmbedBuilder.Fields[2].Value = i + "/7";
+                    }
+                    #endregion
+                    #region Encounter2 specific roles add
+                    if(reaction.Emote.Name == "💣")
+                    {
+                        newEmbedBuilder.Fields.Select(x => x.Name == " <:bomb:961993455092002886> 1x bomb tank");
+                        newEmbedBuilder.Fields[8].Value = reaction.User.Value.Username;
+                        i++;
+                        newEmbedBuilder.Fields[2].Value = i + "/7";
+                    }
+                    #endregion
+
                     await message.ModifyAsync(x => x.Embed = newEmbedBuilder.Build());
 
-                    var foo = "asdfasdf";
+      
 
                 }
             }
 
 
-            Console.WriteLine("Foo");
+            Console.WriteLine("Signupadded");
             throw new NotImplementedException();
         }
 
@@ -149,7 +203,6 @@ namespace bot
             _client.MessageReceived += HandleCommandAsync;
             await _commands.AddModulesAsync(Assembly.GetEntryAssembly(), _services);
         }
-
 
         private async Task HandleCommandAsync(SocketMessage arg)
         {
