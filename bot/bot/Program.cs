@@ -88,30 +88,37 @@ namespace bot
                         i--;
                         newEmbedBuilder.Fields[2].Value = i + "/7";
                     }
-                    if (reaction.Emote.Name == "❤️")
-                    {
-                        newEmbedBuilder.Fields.Select(x => x.Name == "<:heart:927185322050199612> 1x Healer:");
-                        i--;
-                        newEmbedBuilder.Fields[6].Value = blankSignUp;
-                        newEmbedBuilder.Fields[2].Value = i + "/7";
-                    }
                     if (reaction.Emote.Name == "🎲")
                     {
                         newEmbedBuilder.Fields.Select(x => x.Name == "<:game_die:947476766283407370> 1x Any role:");
                         i--;
-                        newEmbedBuilder.Fields[7].Value = blankSignUp;
+                        newEmbedBuilder.Fields[6].Value = blankSignUp;
                         newEmbedBuilder.Fields[2].Value = i + "/7";
                     }
                     if (reaction.Emote.Name == "🎓")
                     {
                         newEmbedBuilder.Fields.Select(x => x.Name == "<:mortar_board:927185690867937330> 1x Learner:");
                         i--;
-                        newEmbedBuilder.Fields[8].Value = blankSignUp;
+                        newEmbedBuilder.Fields[7].Value = blankSignUp;
                         newEmbedBuilder.Fields[2].Value = i + "/7";
                     }
                     #endregion
 
                     #region Encounter2 specific remove
+                    if (reaction.Emote.Name == "💣")
+                    {
+                        newEmbedBuilder.Fields.Select(x => x.Name == "<:bomb:961993455092002886> 1x bomb tank");
+                        newEmbedBuilder.Fields[8].Value = blankSignUp;
+                        i--;
+                        newEmbedBuilder.Fields[2].Value = i + "/7";
+                    }
+                    if (reaction.Emote.Name == "⬆️")
+                    {
+                        newEmbedBuilder.Fields.Select(x => x.Name == "<:arrow_up:947161060253769758> 1x top lure:");
+                        newEmbedBuilder.Fields[9].Value = blankSignUp;
+                        i--;
+                        newEmbedBuilder.Fields[2].Value = i + "/7";
+                    }
 
                     #endregion
 
@@ -165,14 +172,26 @@ namespace bot
                         newEmbedBuilder.Fields[2].Value = i + "/7";
                     }
                     #endregion
+
                     #region Encounter2 specific roles add
                     if(reaction.Emote.Name == "💣")
                     {
-                        newEmbedBuilder.Fields.Select(x => x.Name == " <:bomb:961993455092002886> 1x bomb tank");
+                        newEmbedBuilder.Fields.Select(x => x.Name == "<:bomb:961993455092002886> 1x bomb tank");
                         newEmbedBuilder.Fields[8].Value = reaction.User.Value.Username;
                         i++;
                         newEmbedBuilder.Fields[2].Value = i + "/7";
                     }
+                    if (reaction.Emote.Name == "⬆️")
+                    {
+                        newEmbedBuilder.Fields.Select(x => x.Name == "<:arrow_up:947161060253769758> 1x top lure:");
+                        newEmbedBuilder.Fields[9].Value = reaction.User.Value.Username;
+                        i++;
+                        newEmbedBuilder.Fields[2].Value = i + "/7";
+                    }
+                    #endregion
+
+                    #region Encounter3 Specific Roles Add
+
                     #endregion
 
                     await message.ModifyAsync(x => x.Embed = newEmbedBuilder.Build());

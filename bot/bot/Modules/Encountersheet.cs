@@ -12,14 +12,11 @@ using System.Windows.Forms;
 
 namespace bot.Modules
 {
-    class Encountersheet
+    public class Encountersheet
     {
         public class Commands : ModuleBase<SocketCommandContext>
         {
-            public Optional<IUser> User { get; }
-            bool IsBot { get; }
-            string Discriminator { get; }
-            string Username { get; }
+            
             PostedSignupSheets PostedSignupSheets { get; }
 
             public Commands(PostedSignupSheets postedSignupSheets)
@@ -35,14 +32,16 @@ namespace bot.Modules
             [Command("encounter1")]
             public async Task encounter1(string time, DateTime starttime)
             {
-                
-                
+
+                #region Create Reactions Encounter1
                 //Create Encounter 1 Emojis
                 var shieldEmoji = Emoji.Parse(":shield:");
                 var dpsEmoji = Emoji.Parse(":crossed_swords:");
                 var hatEmoji = Emoji.Parse(":mortar_board:");
                 var anyEmoji = Emoji.Parse(":game_die:");
+                #endregion
 
+                #region Loading Screen
                 //Loading screen Embed
                 EmbedBuilder Encounter1 = new EmbedBuilder()
 
@@ -53,7 +52,7 @@ namespace bot.Modules
                 .WithColor(Color.Blue);
 
                 var sent = await Context.Channel.SendMessageAsync("", false, Encounter1.Build());
-                var msgid = sent.Id;
+                #endregion
 
                 #region Add reactions
                 //add reaction emojis to the post
@@ -129,16 +128,12 @@ namespace bot.Modules
 
                 #endregion
 
-
-
-
-
-
             }
             //Encounter 2 embed
             [Command("encounter2")]
             public async Task encounter2(string time, DateTime starttime)
             {
+                #region Create Encounter2 Emojis
                 //Creating Encounter 2 Emojis
                 var shieldEmoji = Emoji.Parse(":shield:");
                 var dpsEmoji = Emoji.Parse(":crossed_swords:");
@@ -146,7 +141,9 @@ namespace bot.Modules
                 var hatEmoji = Emoji.Parse(":mortar_board:");         
                 var bombEmoji = Emoji.Parse(":bomb:");
                 var toplureEmoji = Emoji.Parse(":arrow_up:");
-                
+                #endregion
+
+                #region Loading Screen
                 EmbedBuilder Encounter2 = new EmbedBuilder()
 
                 .WithTitle("Loading....")
@@ -156,6 +153,7 @@ namespace bot.Modules
                 .WithColor(Color.LightOrange);
 
                 var sent = await Context.Channel.SendMessageAsync("", false, Encounter2.Build());
+                #endregion
 
                 #region add Reaction Encounter2
                 await sent.AddReactionAsync(shieldEmoji);
@@ -166,12 +164,14 @@ namespace bot.Modules
                 await sent.AddReactionAsync(toplureEmoji);
                 #endregion
 
+                #region Get User reactions Encounter2
                 var baseTankRole = await Context.Message.GetReactionUsersAsync(shieldEmoji, 100).FlattenAsync();
                 var damageRole = await Context.Message.GetReactionUsersAsync(dpsEmoji, 100).FlattenAsync();
                 var anyroleRole = await Context.Message.GetReactionUsersAsync(anyEmoji, 100).FlattenAsync();
                 var learnerRole = await Context.Message.GetReactionUsersAsync(hatEmoji, 100).FlattenAsync(); 
                 var bombtankRole = await Context.Message.GetReactionUsersAsync(bombEmoji, 100).FlattenAsync();
                 var toplureRole = await Context.Message.GetReactionUsersAsync(toplureEmoji, 100).FlattenAsync();
+                #endregion
 
                 #region Convert roles to string Encounter2
                 IEnumerable<string> baseTankUsernames = baseTankRole.Where(x => x.IsBot == false).Select(user => user.Username);
@@ -215,6 +215,7 @@ namespace bot.Modules
                 }
                 #endregion
 
+                #region Modified signup Encounter2
                 await (sent).ModifyAsync(x =>
                 {
                     EmbedBuilder encounter_edit = new EmbedBuilder()
@@ -225,7 +226,7 @@ namespace bot.Modules
                    .AddField("Team size:", "0/7")
                    .AddField("Reactions:", "Remove your signup and role")
                    .AddField("<:shield:927174765058326558> 1x Base Tank:", baseTanksAsSingleString)
-                   .AddField("<:crossed_swords:927174860524896276> 4x dps:", dpsAsSingleString, true)
+                   .AddField("<:crossed_swords:927174860524896276> 1x dps:", dpsAsSingleString, true)
                    .AddField("<:game_die:947476766283407370> 1x any role:", anyRoleAsSingleString, true)
                    .AddField("<:mortar_board:927185690867937330> 1x learner:", learnerAsSingleString, true)
                    .AddField("<:bomb:961993455092002886> 1x bomb tank", bombTankAsSingleString, true)
@@ -235,24 +236,30 @@ namespace bot.Modules
                    .WithColor(Color.DarkOrange);
                     x.Embed = encounter_edit.Build();
                 });
-                
+                #endregion
+
+                #region Get Signup ID's
                 var signupSheet = new SignupSheet(sent.Id, Context.Channel.Id, Context.Guild.Id);
 
                 PostedSignupSheets.AddSignupSheet(signupSheet);
+                #endregion
             }
 
             [Command("encounter3")]
             public async Task encounter3()
             {
+                //Create Encounter3 Emojis
                 var shieldEmoji = Emoji.Parse(":shield:");
-                var rainShieldEmoji = Emoji.Parse(":cloud_rain:");
                 var dpsEmoji = Emoji.Parse(":crossed_swords:");
+                var anyEmoji = Emoji.Parse(":game_die:");
+                var hatEmoji = Emoji.Parse(":mortar_board:");
+                var rainShieldEmoji = Emoji.Parse(":cloud_rain:");
                 var shatterEmoji = Emoji.Parse(":boom:");
                 var cleanseEmoji = Emoji.Parse(":soap:");
                 var firstRealmEmoji = Emoji.Parse(":one:");
                 var secondRealmEmoji = Emoji.Parse(":two:");
-                var hatEmoji = Emoji.Parse(":mortar_board:");
-                var anyEmoji = Emoji.Parse(":game_die:");
+                
+                
 
                 EmbedBuilder Encounter3 = new EmbedBuilder()
 
