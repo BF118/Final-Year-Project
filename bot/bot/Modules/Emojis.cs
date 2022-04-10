@@ -9,9 +9,9 @@ namespace bot
 {
     public class Emojis
     {
-       var shieldEmoji = Emoji.Parse(":shield:");
+       //var shieldEmoji = Emoji.Parse(":shield:");
 
-
+        
 
     }
 }

@@ -248,6 +248,7 @@ namespace bot.Modules
             [Command("encounter3")]
             public async Task encounter3()
             {
+                #region Create Reactions Encounter2
                 //Create Encounter3 Emojis
                 var shieldEmoji = Emoji.Parse(":shield:");
                 var dpsEmoji = Emoji.Parse(":crossed_swords:");
@@ -258,9 +259,9 @@ namespace bot.Modules
                 var cleanseEmoji = Emoji.Parse(":soap:");
                 var firstRealmEmoji = Emoji.Parse(":one:");
                 var secondRealmEmoji = Emoji.Parse(":two:");
-                
-                
+                #endregion
 
+                #region Loading Screen
                 EmbedBuilder Encounter3 = new EmbedBuilder()
 
                 .WithTitle("Loading....")
@@ -270,30 +271,93 @@ namespace bot.Modules
                 .WithColor(Color.Purple);
 
                 var sent = await Context.Channel.SendMessageAsync("", false, Encounter3.Build());
+                #endregion
 
+                #region Add Reactions
                 await sent.AddReactionAsync(shieldEmoji);
+                await sent.AddReactionAsync(dpsEmoji);
+                await sent.AddReactionAsync(anyEmoji);
+                await sent.AddReactionAsync(hatEmoji);
                 await sent.AddReactionAsync(rainShieldEmoji);
                 await sent.AddReactionAsync(shatterEmoji);
                 await sent.AddReactionAsync(cleanseEmoji);
                 await sent.AddReactionAsync(firstRealmEmoji);
                 await sent.AddReactionAsync(secondRealmEmoji);
-                await sent.AddReactionAsync(dpsEmoji);
-                await sent.AddReactionAsync(hatEmoji);
-                await sent.AddReactionAsync(anyEmoji);
+                #endregion
 
-
-                var baseTankRole = await Context.Message.GetReactionUsersAsync(shieldEmoji, 100).FlattenAsync();
+                #region Get User Reactions Encounter3
+                var baseTankRole = await Context.Message.GetReactionUsersAsync(shieldEmoji, 100).FlattenAsync();              
+                var damageRole = await Context.Message.GetReactionUsersAsync(dpsEmoji, 100).FlattenAsync();
+                var anyRole = await Context.Message.GetReactionUsersAsync(anyEmoji, 100).FlattenAsync();
+                var learnerRole = await Context.Message.GetReactionUsersAsync(hatEmoji, 100).FlattenAsync();
                 var shieldRole = await Context.Message.GetReactionUsersAsync(rainShieldEmoji, 100).FlattenAsync();
                 var shatterRole = await Context.Message.GetReactionUsersAsync(shatterEmoji, 100).FlattenAsync();
                 var cleanseRole = await Context.Message.GetReactionUsersAsync(cleanseEmoji, 100).FlattenAsync();
                 var firstRealmRole = await Context.Message.GetReactionUsersAsync(firstRealmEmoji, 100).FlattenAsync();
                 var secondRealmRole = await Context.Message.GetReactionUsersAsync(secondRealmEmoji, 100).FlattenAsync();
-                var damageRole = await Context.Message.GetReactionUsersAsync(dpsEmoji, 100).FlattenAsync();
-                var anyRole = await Context.Message.GetReactionUsersAsync(anyEmoji, 100).FlattenAsync();
-                var learnerRole = await Context.Message.GetReactionUsersAsync(hatEmoji, 100).FlattenAsync();
+                #endregion
 
+                #region Convert roles to string
+                IEnumerable<string> baseTankUsernames = baseTankRole.Where(x => x.IsBot == false).Select(user => user.Username);
+                string baseTanksAsSingleString = string.Join(" ,", baseTankUsernames);
+                IEnumerable<string> dpsUsernames = damageRole.Where(x => x.IsBot == false).Select(user => user.Username);
+                string dpsAsSingleString = string.Join(" ,", dpsUsernames);
+                IEnumerable<string> anyRoleUsernames = anyRole.Where(x => x.IsBot == false).Select(user => user.Username);
+                string anyRoleAsSingleString = string.Join(" ,", anyRoleUsernames);
+                IEnumerable<string> learnerUsernames = learnerRole.Where(x => x.IsBot == false).Select(user => user.Username);
+                string learnerAsSingleString = string.Join(" ,", learnerUsernames);
+                IEnumerable<string> rainShieldUsernames = shieldRole.Where(x=> x.IsBot == false).Select(user => user.Username);
+                string rainShieldAsSingleString = string.Join(" ,", rainShieldUsernames);
+                IEnumerable<string> shatterUsernames = shatterRole.Where(x=> x.IsBot == false).Select(user => user.Username);
+                string shatterAsSingleString = string.Join(" ,", shatterUsernames);
+                IEnumerable<string> cleanseUsernames = cleanseRole.Where(x => x.IsBot == false).Select(user => user.Username);
+                string cleanseAsSingleString = string.Join(" ,", cleanseUsernames);
+                IEnumerable<string> firstRealmUsernames = firstRealmRole.Where(x => x.IsBot == false).Select(user => user.Username);
+                string firstRealmAsSingleString = string.Join(" ,", firstRealmUsernames);
+                IEnumerable<string> secondRealmUsernames = secondRealmRole.Where(x => x.IsBot == false).Select(user => user.Username);
+                string secondRealmAsSingleString = string.Join(" ,", secondRealmUsernames);
+                #endregion
 
+                #region empty signup
+                if (baseTanksAsSingleString == string.Empty)
+                {
+                    baseTanksAsSingleString = blankSignUp;
+                }
+                if (dpsAsSingleString == string.Empty)
+                {
+                    dpsAsSingleString = blankSignUp;
+                }
+                if (learnerAsSingleString == string.Empty)
+                {
+                    learnerAsSingleString = blankSignUp;
+                }
+                if (anyRoleAsSingleString == string.Empty)
+                {
+                    anyRoleAsSingleString = blankSignUp;
+                }
+                if(rainShieldAsSingleString == string.Empty)
+                {
+                    rainShieldAsSingleString = blankSignUp;
+                }
+                if(shatterAsSingleString == string.Empty)
+                {
+                    shatterAsSingleString = blankSignUp;
+                }
+                if(cleanseAsSingleString == string.Empty)
+                {
+                    cleanseAsSingleString = blankSignUp;
+                }
+                if(firstRealmAsSingleString == string.Empty)
+                {
+                    firstRealmAsSingleString = blankSignUp;
+                }
+                if(secondRealmAsSingleString == string.Empty) 
+                {                 
+                    secondRealmAsSingleString= blankSignUp;
+                }
+                #endregion
 
+                #region Modified Signup Encounter3
                 await (sent).ModifyAsync(x =>
                 {
                     EmbedBuilder encounter_edit = new EmbedBuilder()
@@ -303,20 +367,30 @@ namespace bot.Modules
                    .AddField("Looting:", " test")
                    .AddField("Team size:", " 0/7")
                    .AddField("Reactions:", "Remove your signup and role")
-                   .AddField("<:shield:927174765058326558> 1x Base Tank:", baseTankRole, true)
-                   .AddField("<:cloud_rain:947534430891827320> 1x Rain Shield:", shieldRole, true)
-                   .AddField("<:boom:947534430891827320> 1x Shatter:", shatterRole, true)
-                   .AddField("<:soap:947534430891827320> 1x Cleanse:", cleanseRole, true)
-                   .AddField("<:one:947534430891827320> 1x 1/3 Realm:", firstRealmRole, true)
-                   .AddField("<:two:947534430891827320> 1x 2/4 Realm:", secondRealmRole, true)
-                   .AddField("<:crossed_swords:927174860524896276> 1x dps:", damageRole, true)
-                   .AddField("<:game_die:947476766283407370> 1x any role:", anyRole, true)
-                   .AddField("<:mortar_board:927185690867937330> 1x Learner:", learnerRole, true)
+                   .AddField("<:shield:927174765058326558> 1x Base Tank:", baseTanksAsSingleString, true)
+                   .AddField("<:crossed_swords:927174860524896276> 1x dps:", dpsAsSingleString, true)
+                   .AddField("<:game_die:947476766283407370> 1x any role:", anyRoleAsSingleString, true)
+                   .AddField("<:mortar_board:927185690867937330> 1x Learner:", learnerAsSingleString, true)
+                   .AddField("<:cloud_rain:947534430891827320> 1x Rain Shield:", rainShieldAsSingleString, true)
+                   .AddField("<:boom:947534430891827320> 1x Shatter:", shatterAsSingleString, true)
+                   .AddField("<:soap:947534430891827320> 1x Cleanse:", cleanseAsSingleString, true)
+                   .AddField("<:one:947534430891827320> 1x 1/3 Realm:", firstRealmAsSingleString, true)
+                   .AddField("<:two:947534430891827320> 1x 2/4 Realm:", secondRealmAsSingleString, true)
                    .AddField("Role", MentionUtils.MentionRole(944968105199796245))
                    .WithCurrentTimestamp()
                    .WithColor(Color.DarkPurple);
                     x.Embed = encounter_edit.Build();
                 });
+                #endregion
+
+                #region Get signup ID's
+
+                var signupSheet = new SignupSheet(sent.Id, Context.Channel.Id, Context.Guild.Id);
+
+                PostedSignupSheets.AddSignupSheet(signupSheet);
+
+                #endregion
+
             }
             [Command("encounter4")]
             public async Task encounter4(string time, DateTime starttime)

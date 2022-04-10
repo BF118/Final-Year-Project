@@ -123,6 +123,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Modules\Emojis.cs" />
     <Compile Include="Modules\Encountersheet.cs" />
     <Compile Include="Modules\Commands.cs" />
     <Compile Include="PostedSignupSheets.cs" />

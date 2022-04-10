@@ -122,6 +122,44 @@ namespace bot
 
                     #endregion
 
+                    #region Encounter3 Specific Remove
+                    if (reaction.Emote.Name == "🌧️")
+                    {
+                        newEmbedBuilder.Fields.Select(x => x.Name == "<:cloud_rain:947534430891827320> 1x Rain Shield:");
+                        newEmbedBuilder.Fields[8].Value = blankSignUp;
+                        i--;
+                        newEmbedBuilder.Fields[2].Value = i + "/7";
+                    }
+                    if (reaction.Emote.Name == "💥")
+                    {
+                        newEmbedBuilder.Fields.Select(x => x.Name == "<:boom:947534430891827320> 1x Shatter:");
+                        newEmbedBuilder.Fields[9].Value = blankSignUp;
+                        i--;
+                        newEmbedBuilder.Fields[2].Value = i + "/7";
+                    }
+                    if (reaction.Emote.Name == "🧼")
+                    {
+                        newEmbedBuilder.Fields.Select(x => x.Name == "<:soap:947534430891827320> 1x Cleanse: 1x Shatter:");
+                        newEmbedBuilder.Fields[10].Value = blankSignUp;
+                        i--;
+                        newEmbedBuilder.Fields[2].Value = i + "/7";
+                    }
+                    if (reaction.Emote.Name == "1️⃣")
+                    {
+                        newEmbedBuilder.Fields.Select(x => x.Name == "<:one:947534430891827320> 1x 1/3 Realm:");
+                        newEmbedBuilder.Fields[11].Value = blankSignUp;
+                        i--;
+                        newEmbedBuilder.Fields[2].Value = i + "/7";
+                    }
+                    if (reaction.Emote.Name == "2️⃣")
+                    {
+                        newEmbedBuilder.Fields.Select(x => x.Name == "<:two:947534430891827320> 1x 2/4 Realm:");
+                        newEmbedBuilder.Fields[12].Value = blankSignUp;
+                        i--;
+                        newEmbedBuilder.Fields[2].Value = i + "/7";
+                    }
+                    #endregion
+
                     await message.ModifyAsync(x => x.Embed = newEmbedBuilder.Build());
                 }
 
@@ -191,9 +229,48 @@ namespace bot
                     #endregion
 
                     #region Encounter3 Specific Roles Add
+                    if (reaction.Emote.Name == "🌧️")
+                    {
+                        newEmbedBuilder.Fields.Select(x => x.Name == "<:cloud_rain:947534430891827320> 1x Rain Shield:");
+                        newEmbedBuilder.Fields[8].Value = reaction.User.Value.Username;
+                        i++;
+                        newEmbedBuilder.Fields[2].Value = i + "/7";
+                    }
+                    if (reaction.Emote.Name == "💥")
+                    {
+                        newEmbedBuilder.Fields.Select(x => x.Name == "<:boom:947534430891827320> 1x Shatter:");
+                        newEmbedBuilder.Fields[9].Value = reaction.User.Value.Username;
+                        i++;
+                        newEmbedBuilder.Fields[2].Value = i + "/7";
+                    }
+                    if (reaction.Emote.Name == "🧼")
+                    {
+                        newEmbedBuilder.Fields.Select(x => x.Name == "<:soap:947534430891827320> 1x Cleanse: 1x Shatter:");
+                        newEmbedBuilder.Fields[10].Value = reaction.User.Value.Username;
+                        i++;
+                        newEmbedBuilder.Fields[2].Value = i + "/7";
+                    }
+                    if (reaction.Emote.Name == "1️⃣")
+                    {
+                        newEmbedBuilder.Fields.Select(x => x.Name == "<:one:947534430891827320> 1x 1/3 Realm:");
+                        newEmbedBuilder.Fields[11].Value = reaction.User.Value.Username;
+                        i++;
+                        newEmbedBuilder.Fields[2].Value = i + "/7";
+                    }
+                    if (reaction.Emote.Name == "2️⃣")
+                    {
+                        newEmbedBuilder.Fields.Select(x => x.Name == "<:two:947534430891827320> 1x 2/4 Realm:");
+                        newEmbedBuilder.Fields[12].Value = reaction.User.Value.Username;
+                        i++;
+                        newEmbedBuilder.Fields[2].Value = i + "/7";
+                    }
 
                     #endregion
-
+                    
+                    
+                    
+                    
+                    
                     await message.ModifyAsync(x => x.Embed = newEmbedBuilder.Build());
 
       
