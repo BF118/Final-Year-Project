@@ -3,6 +3,7 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="stylesheets/styles.css" />
+    
 
 </head>
 <body>
@@ -31,52 +32,92 @@
     <div class="inner"><button onclick="Encounter2()">Encounter2</button></div>
     <div class="inner"><button onclick="Encounter3()">Encounter3</button></div>
     <div class="inner"><button onclick="Encounter4()">Encounter4</button></div>
-</div>  
+</div>
+<div id="stats">
+<p>Test user has been base tank: <a id="baseClicks">0 times</a></p>
+<p2>Test user has been dps: <a id="dpsClicks">0 times</a></p2>
+<p3>Test user has been healer: <a id="healerClicks">0 times</a></p3>
+<p4>Test user has been learner: <a id="learnerClicks">0 times</a></p4>
+</div>
+    
+  
 <label>Username</label>
 <input type="text" name="username" id="username" />
 
   
 
 <!--Encounter info !-->
+
 <div id="content">
     <label>Role Information : click icon to view</label>
 </div>  
-
  <!--encounter 1 signup sheet !-->       
 <div class="signup">
-
 <!--Base tank !-->
 <div class="grid-item">
-<!--Base tank !-->
 <a class="modalbutton" id="baseModal" href="#modal1"><img border="0" alt="baseTank" src="Images/basetank.png" width="30" height="30"></a>
     <div class="popup" id="modal1">
         <a class="popup__overlay" href="#"></a>
-            <div class="popup__wrapper">
-                <a class="popup__close" href="#">Press here to Close</a>
-                    <p>I am the base</p>
-            </div>
+    <div class="popup__wrapper">
+        <a class="popup__close" href="#">Press here to Close</a>
+        <p>I am the base</p>
+    </div>
     </div>
 <label>Base Tank</label>
 <input type="text" name="baseTank" id="baseTank" readonly="true"/>
-<button onclick="signUpBase(); this.onclick=null;" id="signUpBaseButton"> Click here to sign up</button>
-    </div>
-    
-<!--DPS!-->   
+<button onclick="signUpBase(); this.onclick=null;"> Click here to sign up</button>
+</div>
+
+<!--DPS!-->  
 <div class="grid-item">
-    <!--DPS!-->
+<!--DPS!-->
 <a class="modalbutton" id="dpsModal" href="#modal2"><img border="0" alt="dps" src="Images/dps.png" width="30" height="30"></a>
     <div class="popup" id="modal2">
         <a class="popup__overlay" href="#"></a>
-            <div class="popup__wrapper">
-                <a class="popup__close" href="#">Press here to Close</a>
-                        <p>I am the dps</p>
-            </div>
+    <div class="popup__wrapper">
+        <a class="popup__close" href="#">Press here to Close</a>
+        <p>I am the dps</p>
+    </div>
     </div>
 <label>DPS</label>
-<input type="text" name="dps" id="dps" readonly="true">
-<button onclick="signUpDps(); this.onclick=null;" id="signUpDpsButton">Click here to sign up</button>
+<input readonly type="text" id="dps">
+<button onclick="signUpDps(); this.onclick=null;">Click here to sign up</button>
+</div>
+
+
+<!--bombtank!-->
+<div class="grid-item">
+    <!--bombtank-->
+<a class="modalbutton" id="bombTankModal" href="#modal3"><img border="0" alt="healer" src="Images/bombtank.png" width="30" height="30"></a>
+    <div class="popup" id="modal3">
+            <a class="popup__overlay" href="#"></a>
+                <div class="popup__wrapper">
+                    <a class="popup__close" href="#">Press here to Close</a>
+                        <p>I am the bomb tank</p>
+                        </div>
+                            </div>
+<label>Bomb Tank</label>
+<input  readonly type="text" id="bombTank">
+<label></label>
+<button onclick="signUpBombTank(); this.onclick=null;">Click here to sign up</button>
+</div>
+
+<!--toplure!-->
+<div class="grid-item">
+<!--toplure-->
+<a class="modalbutton" id="topLureModal" href="#modal4"><img border="0" alt="healer" src="Images/toplure.png" width="30" height="30"></a>
+    <div class="popup" id="modal4">
+            <a class="popup__overlay" href="#"></a>
+                <div class="popup__wrapper">
+                    <a class="popup__close" href="#">Press here to Close</a>
+                        <p>I am the top lurer</p>
+                        </div>
+                            </div>
+<label>top lure</label>
+<input  readonly type="text" id="topLure">
+<button onclick="signUpTopLure(); this.onclick=null;">Click here to sign up</button>
     </div>
-    
+
 <!--any role!-->
 <div class="grid-item">
 <!--anyrole-->
@@ -89,15 +130,15 @@
                         </div>
                             </div> 
 <label>Any Role</label>
-<input  readonly type="text" name="anyrole" id="anyRole">
-<button onclick="signUpAnyRole(); this.onclick=null;" id="signUpAnyRoleButton">Click here to sign up</button>
+<input  readonly type="text" id="anyRole">
+<button onclick="signUpAnyRole(); this.onclick=null;">Click here to sign up</button>
     </div>
-
+    
 <!--learner!-->
 <div class="grid-item">
-    <!--learner!-->
-<a class="modalbutton" id="learnerModal" href="#modal4"><img border="0" alt="learner" src="Images/learner.png" width="30" height="30"></a>        
-    <div class="popup" id="modal4">
+<!--learner!-->
+<a class="modalbutton" id="learnerModal" href="#modal6"><img border="0" alt="learner" src="Images/learner.png" width="30" height="30"></a>        
+    <div class="popup" id="modal6">
             <a class="popup__overlay" href="#"></a>
                 <div class="popup__wrapper">
                     <a class="popup__close" href="#">Press here to Close</a>
@@ -106,24 +147,18 @@
                             </div>
 <label>Learner</label>
 <input readonly type="text" name="learner" id="learner" readonly="true"/>
-<button onclick="signUpLearner(); this.onclick=null;" id="signUpLearnerButton">Click here to sign up</button>
-    </div>
-    <div id="time">
-<label>Event Start time</label>   
-<input type="time" id="eventTime" name="eventTime   "
-       min="00:00" max="24:00" required>
+<button onclick="signUpLearner(); this.onclick=null;">Click here to sign up</button>
     </div>
     </div>
 
 
-
-    
-    
-<button onclick="Createsheet(); this.onclick=null;">Create Signup</button>
-<button onclick="RemoveSignup(); this.onclick=null;">Lock Sign up</button>
+<div id="outer">
+    <div class="inner"><button onclick="Createsheet2(); this.onclick=null;">Create Signup</button></div>
+    </div>
     
 <script src="scripts/scripts.js">
-</script>
+</script>    
+    
     
 </body>
 </html> 
