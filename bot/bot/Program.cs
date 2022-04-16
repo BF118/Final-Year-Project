@@ -160,11 +160,57 @@ namespace bot
                     }
                     #endregion
 
+                    #region Encounter4 specific Remove
+                    if (reaction.Emote.Name == "🐿️")
+                    {
+                        newEmbedBuilder.Fields.Select(x => x.Name == "<:chipmunk:953223520446464060> 1x chinner:");
+                        newEmbedBuilder.Fields[8].Value = blankSignUp;
+                        i--;
+                        newEmbedBuilder.Fields[2].Value = i + "/7";
+                    }
+                    if (reaction.Emote.Name == "🔨")
+                    {
+                        newEmbedBuilder.Fields.Select(x => x.Name == "<:hammer:953223520446464060> 1x hammer:");
+                        newEmbedBuilder.Fields[9].Value = blankSignUp;
+                        i--;
+                        newEmbedBuilder.Fields[2].Value = i + "/7";
+                    }
+                    if (reaction.Emote.Name == "🇺")
+                    {
+                        newEmbedBuilder.Fields.Select(x => x.Name == "<:regional_indicator_u:953229494863429652> 1x U Minion:");
+                        newEmbedBuilder.Fields[10].Value = blankSignUp;
+                        i--;
+                        newEmbedBuilder.Fields[2].Value = i + "/7";
+                    }
+                    if (reaction.Emote.Name == "🇬")
+                    {
+                        newEmbedBuilder.Fields.Select(x => x.Name == "<:regional_indicator_g:953229494863429652> 1x G Minion:");
+                        newEmbedBuilder.Fields[11].Value = blankSignUp;
+                        i--;
+                        newEmbedBuilder.Fields[2].Value = i + "/7";
+                    }
+                    if (reaction.Emote.Name == "🇨")
+                    {
+                        newEmbedBuilder.Fields.Select(x => x.Name == "<:regional_indicator_c:953229494863429652> 1x C Minion:");
+                        newEmbedBuilder.Fields[12].Value = blankSignUp;
+                        i--;
+                        newEmbedBuilder.Fields[2].Value = i + "/7";
+                    }
+                    if (reaction.Emote.Name == "🇫")
+                    {
+                        newEmbedBuilder.Fields.Select(x => x.Name == "<:regional_indicator_f:953229494863429652> 1x F Minion:");
+                        newEmbedBuilder.Fields[13].Value = blankSignUp;
+                        i--;
+                        newEmbedBuilder.Fields[2].Value = i + "/7";
+                    }
+
+                    #endregion
+
                     await message.ModifyAsync(x => x.Embed = newEmbedBuilder.Build());
                 }
 
             }
-            Console.WriteLine("role removed");
+            Console.WriteLine("Sign up Removed");
             throw new NotImplementedException();
         }
 
@@ -245,7 +291,7 @@ namespace bot
                     }
                     if (reaction.Emote.Name == "🧼")
                     {
-                        newEmbedBuilder.Fields.Select(x => x.Name == "<:soap:947534430891827320> 1x Cleanse: 1x Shatter:");
+                        newEmbedBuilder.Fields.Select(x => x.Name == "<:soap:947534430891827320> 1x Cleanse:");
                         newEmbedBuilder.Fields[10].Value = reaction.User.Value.Username;
                         i++;
                         newEmbedBuilder.Fields[2].Value = i + "/7";
@@ -266,19 +312,56 @@ namespace bot
                     }
 
                     #endregion
-                    
-                    
-                    
-                    
-                    
-                    await message.ModifyAsync(x => x.Embed = newEmbedBuilder.Build());
 
-      
+                    #region Encounter4 Specific Roles add
+                    if (reaction.Emote.Name == "🐿️")
+                    {
+                        newEmbedBuilder.Fields.Select(x => x.Name == "<:chipmunk:953223520446464060> 1x chinner:");
+                        newEmbedBuilder.Fields[8].Value = reaction.User.Value.Username;
+                        i++;
+                        newEmbedBuilder.Fields[2].Value = i + "/7";
+                    }
+                    if (reaction.Emote.Name == "🔨")
+                    {
+                        newEmbedBuilder.Fields.Select(x => x.Name == "<:hammer:953223520446464060> 1x hammer:");
+                        newEmbedBuilder.Fields[9].Value = reaction.User.Value.Username;
+                        i++;
+                        newEmbedBuilder.Fields[2].Value = i + "/7";
+                    }
+                    if (reaction.Emote.Name == "🇺")
+                    {
+                        newEmbedBuilder.Fields.Select(x => x.Name == "<:regional_indicator_u:953229494863429652> 1x U Minion:");
+                        newEmbedBuilder.Fields[10].Value = reaction.User.Value.Username;
+                        i++;
+                        newEmbedBuilder.Fields[2].Value = i + "/7";
+                    }
+                    if (reaction.Emote.Name == "🇬")
+                    {
+                        newEmbedBuilder.Fields.Select(x => x.Name == "<:regional_indicator_g:953229494863429652> 1x G Minion:");
+                        newEmbedBuilder.Fields[11].Value = reaction.User.Value.Username;
+                        i++;
+                        newEmbedBuilder.Fields[2].Value = i + "/7";
+                    }
+                    if (reaction.Emote.Name == "🇨")
+                    {
+                        newEmbedBuilder.Fields.Select(x => x.Name == "<:regional_indicator_c:953229494863429652> 1x C Minion:");
+                        newEmbedBuilder.Fields[12].Value = reaction.User.Value.Username;
+                        i++;
+                        newEmbedBuilder.Fields[2].Value = i + "/7";
+                    }
+                    if (reaction.Emote.Name == "🇫")
+                    {
+                        newEmbedBuilder.Fields.Select(x => x.Name == "<:regional_indicator_f:953229494863429652> 1x F Minion:");
+                        newEmbedBuilder.Fields[13].Value = reaction.User.Value.Username;
+                        i++;
+                        newEmbedBuilder.Fields[2].Value = i + "/7";
+                    }
+                    #endregion
+
+                    await message.ModifyAsync(x => x.Embed = newEmbedBuilder.Build());
 
                 }
             }
-
-
             Console.WriteLine("Signupadded");
             throw new NotImplementedException();
         }
