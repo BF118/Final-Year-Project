@@ -141,7 +141,7 @@ namespace bot.Modules
             }
         }      
         [Command("role")]
-        public async Task basetank(string role)
+        public async Task roles(string role)
         {
             var user = Context.User;
             var messages = Context.Channel.GetMessagesAsync(1).Flatten();
