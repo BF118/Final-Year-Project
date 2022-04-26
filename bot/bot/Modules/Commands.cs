@@ -14,7 +14,9 @@ namespace bot.Modules
     public class Commands : ModuleBase<SocketCommandContext>
     {
         public ulong UserId { get; }
-        
+
+        string fileName = @"E:\GITHUB UNI\fyp\bot\bot\Modules\setup.txt";
+
         [Command("Hello")]
         public async Task Hello()
         {
@@ -28,6 +30,7 @@ namespace bot.Modules
             await ReplyAsync("Click here to be taken to the website", components: builder.Build());
 
         }
+
         
         [Command("help")]
         public async Task help()
@@ -153,12 +156,18 @@ namespace bot.Modules
             //General Roles
             if (role == "basetank")
             {
+                string[] lines =  File.ReadAllLines("setup.txt");
+
+                var basetank = Convert.ToUInt64(lines[1]);
+
 
                 //await user.ModifyAsync(x =>
                 //{
                 //    x.Nickname = user.Nickname + "🛡";
                 //});
-                await ((SocketGuildUser)Context.User).AddRoleAsync(956556279462113350);
+
+                Console.WriteLine(basetank);
+                await ((SocketGuildUser)Context.User).AddRoleAsync(basetank);
                 await user.SendMessageAsync("Profile updated basetank role has been given");
                 
             }
@@ -359,8 +368,6 @@ namespace bot.Modules
                 var sent = await Context.Channel.SendMessageAsync("", false, rolelist.Build());
 
             }
-
-
 
             if(role == "help")
             {

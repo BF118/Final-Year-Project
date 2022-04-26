@@ -8,7 +8,6 @@ using System.IO;
 using Discord;
 using Discord.WebSocket;
 using System.Windows.Forms;
-
 namespace bot.Modules
 {
     public class setup
@@ -19,13 +18,24 @@ namespace bot.Modules
             [Command("setup")]
             public async Task ServerSetUp()
             {
-                var roles = await Context.Guild.CreateRoleAsync("jail", color: Color.DarkRed, isMentionable: false, isHoisted: true, permissions: GuildPermissions.None);
+
+                var roles = await Context.Guild.CreateRoleAsync("jail", color: Color.DarkRed, isMentionable: false, isHoisted: false, permissions: GuildPermissions.None);
+                var roles2 = await Context.Guild.CreateRoleAsync("jailer", color: Color.DarkRed, isMentionable: false, isHoisted: false, permissions: GuildPermissions.None);
+
 
                 string roleid = roles.Id.ToString();
+                string roleid2 = roles2.Id.ToString();
+                string fileName = "setup.txt";
+               
+                
+                
+                using (StreamWriter streamWriter = new StreamWriter(fileName))
+                {
+                    streamWriter.Write(roleid + "\n" + roleid2);
+                } ;
 
-                Console.WriteLine(roleid);
-
-
+                
+                
             }
 
         }
