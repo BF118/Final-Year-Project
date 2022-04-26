@@ -25,7 +25,7 @@ namespace bot.Modules
 
                 string roleid = roles.Id.ToString();
                 string roleid2 = roles2.Id.ToString();
-                string fileName = "setup.txt";
+                string fileName = "BotData/setup.txt";
                
                 
                 

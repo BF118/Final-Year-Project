@@ -15,7 +15,7 @@ namespace bot.Modules
     {
         public ulong UserId { get; }
 
-        string fileName = @"E:\GITHUB UNI\fyp\bot\bot\Modules\setup.txt";
+        string fileName = "BotData/setup.txt";
 
         [Command("Hello")]
         public async Task Hello()
@@ -156,7 +156,7 @@ namespace bot.Modules
             //General Roles
             if (role == "basetank")
             {
-                string[] lines =  File.ReadAllLines("setup.txt");
+                string[] lines =  File.ReadAllLines("BotData/setup.txt");
 
                 var basetank = Convert.ToUInt64(lines[1]);
 
