@@ -20,7 +20,7 @@ namespace bot.Modules
             [Command("setup")]
             public async Task ServerSetUp()
             {
-                string fileName = @"E:\GITHUB UNI\fyp\bot\bot\Modules\setup.txt";
+                string fileName = Path.Combine(Environment.CurrentDirectory, "setup.txt");
 
                 Console.WriteLine("Setup Underway......");
 

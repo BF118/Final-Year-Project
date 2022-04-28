@@ -18,7 +18,7 @@ namespace bot.Modules
         {
             
             PostedSignupSheets PostedSignupSheets { get; }
-            public string fileName = @"E:\GITHUB UNI\fyp\bot\bot\Modules\setup.txt";
+            public string fileName = Path.Combine(Environment.CurrentDirectory, "setup.txt");
 
 
             public Commands(PostedSignupSheets postedSignupSheets)
