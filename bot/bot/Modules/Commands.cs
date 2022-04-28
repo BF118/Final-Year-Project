@@ -23,7 +23,7 @@ namespace bot.Modules
         {
             await ReplyAsync("Hello there");
         }
-        
+
         [Command("website")]
         public async Task Spawn()
         {
@@ -39,19 +39,18 @@ namespace bot.Modules
             EmbedBuilder help = new EmbedBuilder()
 
             .WithTitle(" = Command List =")
-            .AddField("!website", "Shows a button that will take you to the website")
-            .AddField("!encounter1", "Brings up sign up sheet for encounter1 as well as button to said sheet")
-            .AddField("!encounter2", "Brings up sign up sheet for encounter2 as well as button to said sheet")
-            .AddField("!encounter3", "Brings up sign up sheet for encounter3 as well as button to said sheet")
-            .AddField("!encounter4", "Brings up sign up sheet for encounter4 as well as button to said sheet")
-            .AddField("!basetank, !dps, !healer, !bombtank etc","Doing !plus the role you want will add that emoji to username")
-            .AddField("!purge", "will clear all messages in the channel if you have permissions to do so")
-            .AddField("", "")
+            .AddField("--------------", "!setup will set the bot up for you and the roles needed for it to work (requires admin permissions)")
+            .AddField("--------------", "!website Brings up a button to the website")
+            .AddField("--------------", "!encounter1-4 time 'starttime' This will create a signup sheet for users starttime is in 24hr format")
+            .AddField("--------------", "!role 'rolename' This will assign you the role you want !role help !role list give more information")
+            .AddField("--------------", "!removerole 'username' 'role' This will remove roles from users !role help !role list give more information (requires admin permissions)")
+            .AddField("--------------", "!welcome shows the welcome message for the server (requires admin permissions)")
+            .AddField("--------------", "!purge Will clear all messages in the channel (requires admin permissions)")
             .WithColor(Color.Green);
 
             var sent = await Context.Channel.SendMessageAsync("", false, help.Build());
         }
-        
+
         [Command("purge")]
         [RequireBotPermission(GuildPermission.ManageMessages)]
         [RequireUserPermission(GuildPermission.ManageMessages)]
@@ -63,6 +62,8 @@ namespace bot.Modules
                 await this.Context.Channel.DeleteMessageAsync(i);
             }
         }
+
+        [RequireUserPermission(GuildPermission.Administrator)]
         [Command("welcome")]
         public async Task welcome()
         {
@@ -71,22 +72,13 @@ namespace bot.Modules
             var encounter3 = new Emoji("3️⃣");
             var encounter4 = new Emoji("4️⃣");
 
-            ulong encounter1RoleId = 933000592362725396;
-            ulong encounter2RoleId = 944968068113772594;
-            ulong encounter3RoleId = 944968105199796245;
-            ulong encounter4RoleId = 953223221807824898;
-
-            var encounter1role = Context.Guild.GetRole(encounter1RoleId);
-            var encounter2role = Context.Guild.GetRole(encounter2RoleId);
-            var encounter3role = Context.Guild.GetRole(encounter3RoleId);
-            var encounter4role = Context.Guild.GetRole(encounter4RoleId);
-
             EmbedBuilder welcome = new EmbedBuilder()
 
                 .WithTitle("welcome to the server")
-                .AddField("To get assigned a role for the encounter you want to do","!")
-                .AddField("Type !encounterrolen where n is the encounter you want","!")
-                .AddField("All avaiable encounters can be seen with the reactions on this post","!")
+                .AddField("--------------", "To get Started Assign yourself an Encounter Role")
+                .AddField("--------------", "This can be done by typing !encounterrole plus the encounter number")
+                .AddField("--------------", "The Amount of Encounter can be seen as reactions on this post")
+                .AddField("--------------", "If you need help type !help if you need role help type !role help")
                 .WithThumbnailUrl(Context.Client.CurrentUser.GetAvatarUrl() ?? Context.Client.CurrentUser.GetDefaultAvatarUrl())
                 .WithColor(Color.DarkBlue);
 
@@ -97,75 +89,46 @@ namespace bot.Modules
             await welcomemessage.AddReactionAsync(encounter2);
             await welcomemessage.AddReactionAsync(encounter3);
             await welcomemessage.AddReactionAsync(encounter4);
-
-            var roleencounter1 = Context.Message.GetReactionUsersAsync(encounter1, 100, null);
-            var roleencounter2 = Context.Message.GetReactionUsersAsync(encounter2, 100, null);
-            var roleencounter3 = Context.Message.GetReactionUsersAsync(encounter3, 100, null); 
-            var roleencounter4 = Context.Message.GetReactionUsersAsync(encounter4, 100, null);
         }
-        
-        [Command("encounterrole1")]
-        public async Task encounterrole1()
+
+        [Command("encounterrole")]
+        public async Task encounterrole1(int encounterrole)
         {
             string[] lines = File.ReadAllLines(fileName);
 
             var Encounter1 = Convert.ToUInt64(lines[0]);
-
-            await ((SocketGuildUser)Context.User).AddRoleAsync(Encounter1);
-
-            var messages = Context.Channel.GetMessagesAsync(1).Flatten();
-            foreach(var i in await messages.ToArrayAsync())
-            {
-                await this.Context.Channel.DeleteMessageAsync(i);
-            }
-        }
-        
-        [Command("encounterrole2")]
-        public async Task encounterrole2()
-        {
-
-            string[] lines = File.ReadAllLines(fileName);
-
             var Encounter2 = Convert.ToUInt64(lines[1]);
-
-            await ((SocketGuildUser)Context.User).AddRoleAsync(Encounter2);
-            var messages = Context.Channel.GetMessagesAsync(1).Flatten();
-            foreach (var i in await messages.ToArrayAsync())
-            {
-                await this.Context.Channel.DeleteMessageAsync(i);
-            }
-        }
-        
-        [Command("encounterrole3")]
-        public async Task encounterrole3()
-        {
-            string[] lines = File.ReadAllLines(fileName);
-
             var Encounter3 = Convert.ToUInt64(lines[2]);
-
-            await ((SocketGuildUser)Context.User).AddRoleAsync(Encounter3);
-            var messages = Context.Channel.GetMessagesAsync(1).Flatten();
-            foreach (var i in await messages.ToArrayAsync())
-            {
-                await this.Context.Channel.DeleteMessageAsync(i);
-            }
-        }
-        
-        [Command("encounterrole4")]
-        public async Task encounterrole4()
-        {
-            string[] lines = File.ReadAllLines(fileName);
-
             var Encounter4 = Convert.ToUInt64(lines[3]);
 
-            await ((SocketGuildUser)Context.User).AddRoleAsync(Encounter4);
             var messages = Context.Channel.GetMessagesAsync(1).Flatten();
             foreach (var i in await messages.ToArrayAsync())
             {
                 await this.Context.Channel.DeleteMessageAsync(i);
             }
-        }      
-        
+
+
+            if (encounterrole == 1)
+            {
+                await ((SocketGuildUser)Context.User).AddRoleAsync(Encounter1);
+            }
+            if (encounterrole == 2)
+            {
+                await ((SocketGuildUser)Context.User).AddRoleAsync(Encounter2);
+            }
+            if (encounterrole == 3)
+            {
+                await ((SocketGuildUser)Context.User).AddRoleAsync(Encounter3);
+            }
+            if (encounterrole == 4)
+            {
+                await ((SocketGuildUser)Context.User).AddRoleAsync(Encounter4);
+            }
+
+
+        }
+
+
         [Command("role")]
         public async Task roles(string role)
         {
@@ -179,7 +142,7 @@ namespace bot.Modules
             var topLure = Convert.ToUInt64(lines[8]);
             var rainShield = Convert.ToUInt64(lines[9]);
             var shatter = Convert.ToUInt64(lines[10]);
-            var cleanse = Convert.ToUInt64(lines[11]);  
+            var cleanse = Convert.ToUInt64(lines[11]);
             var realm13 = Convert.ToUInt64(lines[12]);
             var realm24 = Convert.ToUInt64(lines[13]);
             var chinner = Convert.ToUInt64(lines[14]);
@@ -239,7 +202,7 @@ namespace bot.Modules
                 //});
                 await ((SocketGuildUser)Context.User).AddRoleAsync(topLure);
                 await user.SendMessageAsync("Profile updated toplure role has been given");
-                
+
             }
             #endregion
 
@@ -261,7 +224,7 @@ namespace bot.Modules
                 //});
                 await ((SocketGuildUser)Context.User).AddRoleAsync(shatter);
                 await user.SendMessageAsync("Profile updated shatter role has been given");
-                
+
             }
             if (role == "cleanse")
             {
@@ -272,7 +235,7 @@ namespace bot.Modules
 
                 await ((SocketGuildUser)Context.User).AddRoleAsync(cleanse);
                 await user.SendMessageAsync("Profile updated Cleanse role has been given");
-                
+
             }
             if (role == "1/3realm")
             {
@@ -282,7 +245,7 @@ namespace bot.Modules
                 //});
                 await ((SocketGuildUser)Context.User).AddRoleAsync(realm13);
                 await user.SendMessageAsync("Profile updated 1/3 Realm role has been given");
-                
+
             }
             if (role == "2/4realm")
             {
@@ -292,7 +255,7 @@ namespace bot.Modules
                 //});
                 await ((SocketGuildUser)Context.User).AddRoleAsync(realm24);
                 await user.SendMessageAsync("Profile updated 2/4 Realm role has been given");
-                
+
             }
             #endregion
 
@@ -306,7 +269,7 @@ namespace bot.Modules
                 //});
                 await ((SocketGuildUser)Context.User).AddRoleAsync(chinner);
                 await user.SendMessageAsync("Profile updated Chinner role has been given");
-                
+
             }
             if (role == "hammer")
             {
@@ -314,9 +277,9 @@ namespace bot.Modules
                 //{
                 //    x.Nickname = user.Nickname + "🔨";
                 //});
-                 await ((SocketGuildUser)Context.User).AddRoleAsync(hammer);
+                await ((SocketGuildUser)Context.User).AddRoleAsync(hammer);
                 await user.SendMessageAsync("Profile updated Hammer Realm role has been given");
-                
+
             }
             if (role == "uminion")
             {
@@ -326,7 +289,7 @@ namespace bot.Modules
                 //});
                 await ((SocketGuildUser)Context.User).AddRoleAsync(uminion);
                 await user.SendMessageAsync("Profile updated Umbra Minion role has been given");
-                
+
             }
             if (role == "gminion")
             {
@@ -336,7 +299,7 @@ namespace bot.Modules
                 //});
                 await ((SocketGuildUser)Context.User).AddRoleAsync(gminion);
                 await user.SendMessageAsync("Profile updated Glacies Minion role has been given");
-                
+
             }
             if (role == "cminion")
             {
@@ -346,7 +309,7 @@ namespace bot.Modules
                 //});
                 await ((SocketGuildUser)Context.User).AddRoleAsync(cminion);
                 await user.SendMessageAsync("Profile updated Cruor Minion role has been given");
-                
+
             }
             if (role == "fminion")
             {
@@ -356,26 +319,26 @@ namespace bot.Modules
                 //});
                 await ((SocketGuildUser)Context.User).AddRoleAsync(fminion);
                 await user.SendMessageAsync("Profile updated Fumus Minion role has been given");
-                
+
             }
             #endregion
 
             #region ADD all Roles
-            if(role == "general")
+            if (role == "general")
             {
                 await ((SocketGuildUser)Context.User).AddRoleAsync(baseTank);
                 await ((SocketGuildUser)Context.User).AddRoleAsync(dps);
                 await user.SendMessageAsync("Profile updated all General roles have been given");
 
             }
-            if(role == "allencounter2")
+            if (role == "allencounter2")
             {
                 await ((SocketGuildUser)Context.User).AddRoleAsync(bombTank);
                 await ((SocketGuildUser)Context.User).AddRoleAsync(topLure);
                 await user.SendMessageAsync("Profile updated all encounter2 roles have been given");
 
             }
-            if(role == "allencounter3")
+            if (role == "allencounter3")
             {
                 await ((SocketGuildUser)Context.User).AddRoleAsync(rainShield);
                 await ((SocketGuildUser)Context.User).AddRoleAsync(shatter);
@@ -383,7 +346,7 @@ namespace bot.Modules
                 await ((SocketGuildUser)Context.User).AddRoleAsync(realm13);
                 await ((SocketGuildUser)Context.User).AddRoleAsync(realm24);
             }
-            if(role =="allencounter4")
+            if (role == "allencounter4")
             {
                 await ((SocketGuildUser)Context.User).AddRoleAsync(chinner);
                 await ((SocketGuildUser)Context.User).AddRoleAsync(hammer);
@@ -400,9 +363,9 @@ namespace bot.Modules
 
                 .WithTitle("Role list")
                 .AddField("General Roles", "basetank, dps")
-                .AddField("Encounter2 Roles","bombtank, toplure")
-                .AddField("Encounter3 Roles","rainshield, shatter, cleanse, 1/3realm, 2/4realm")
-                .AddField("Encounter4 Roles","chinner, hammer, uminion(Umbra Minion), gminion(Glacies Minion), cminion(Cruor Minion), fminion(Fumus Minion)")
+                .AddField("Encounter2 Roles", "bombtank, toplure")
+                .AddField("Encounter3 Roles", "rainshield, shatter, cleanse, 1/3realm, 2/4realm")
+                .AddField("Encounter4 Roles", "chinner, hammer, uminion(Umbra Minion), gminion(Glacies Minion), cminion(Cruor Minion), fminion(Fumus Minion)")
                 .WithColor(Color.DarkRed);
 
 
@@ -410,33 +373,34 @@ namespace bot.Modules
 
             }
 
-            if(role == "help")
+            if (role == "help")
             {
                 EmbedBuilder rolehelp = new EmbedBuilder()
 
                 .WithTitle("Role help")
-                .AddField("---------","!role list ::  Will show a list of all the possible roles that can be given for each encounter")
-                .AddField("---------","!role general  ::  adds all of the general role that apply to all encounters")
-                .AddField("---------","!role 'rolename' ::  adds indiviual role ")
-                .AddField("---------","!role allencounter'2-4'  ::  adds all specific roles for that encounter")
-                .AddField("---------","!roleremove 'rolename' :: Removes indiviual role (requires admin)")
-                .AddField("---------","!roleremove allencounter'2-4'  ::  Removes all specific roles for that encounter(requires admin)")
+                .AddField("---------", "!role list ::  Will show a list of all the possible roles that can be given for each encounter")
+                .AddField("---------", "!role general  ::  adds all of the general role that apply to all encounters")
+                .AddField("---------", "!role 'rolename' ::  adds indiviual role ")
+                .AddField("---------", "!role allencounter'2-4'  ::  adds all specific roles for that encounter")
+                .AddField("---------", "!roleremove 'rolename' :: Removes indiviual role (requires admin)")
+                .AddField("---------", "!roleremove allencounter'2-4'  ::  Removes all specific roles for that encounter(requires admin)")
                 .WithColor(Color.DarkRed);
 
                 var sent = await Context.Channel.SendMessageAsync("", false, rolehelp.Build());
             }
 
-            else
-            {
-                await user.SendMessageAsync("Role not found type !role list for a list of roles or !role help for any further help");
+            //else
+            //{
+            //    await user.SendMessageAsync("Role not found type !role list for a list of roles or !role help for any further help");
 
-            }
+            //}
 
         }
+
         [Command("removerole")]
         [RequireBotPermission(GuildPermission.ManageRoles)]
         [RequireUserPermission(GuildPermission.ManageRoles)]
-        public async Task removerole(SocketGuildUser user ,string removerole)
+        public async Task removerole(SocketGuildUser user, string removerole)
         {
             string[] lines = File.ReadAllLines(fileName);
 
@@ -460,7 +424,7 @@ namespace bot.Modules
 
 
             if (removerole == "basetank")
-            { 
+            {
                 await user.RemoveRoleAsync(baseTank);
                 await user.SendMessageAsync("Profile updated dps role has been removed");
 
@@ -496,12 +460,12 @@ namespace bot.Modules
                 await user.SendMessageAsync("Profile updated shatter role has been removed");
             }
             if (removerole == "cleanse")
-            {              
+            {
                 await user.RemoveRoleAsync(cleanse);
                 await user.SendMessageAsync("Profile updated Cleanse role has been removed");
             }
             if (removerole == "1/3realm")
-            {              
+            {
                 await user.RemoveRoleAsync(realm13);
                 await user.SendMessageAsync("Profile updated 1/3 Realm role has been removed");
 
@@ -553,11 +517,11 @@ namespace bot.Modules
 
         }
     }
-        
 
 
 
-    
+
+
 }
 
 
