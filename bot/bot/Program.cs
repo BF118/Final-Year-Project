@@ -207,11 +207,17 @@ namespace bot
                     #endregion
 
                     await message.ModifyAsync(x => x.Embed = newEmbedBuilder.Build());
+
+                    Console.WriteLine(reaction.User.Value.Username + " is no longer attending Event");
                 }
 
             }
-            Console.WriteLine("Sign up Removed");
-            throw new NotImplementedException();
+            else
+            {
+                Console.WriteLine("Sign up Removed");
+                throw new NotImplementedException();
+            }
+            
         }
 
         private async Task ReactionAdded_Event(Cacheable<IUserMessage, ulong> userid, Cacheable<IMessageChannel, ulong> msgid, SocketReaction reaction)
@@ -359,11 +365,14 @@ namespace bot
                     #endregion
 
                     await message.ModifyAsync(x => x.Embed = newEmbedBuilder.Build());
+                    Console.WriteLine(reaction.User.Value.Username + " Signed up to Event");
 
                 }
             }
-            Console.WriteLine("Signupadded");
-            throw new NotImplementedException();
+            else
+            {
+                Console.WriteLine("Reactions added Created");
+            } 
         }
 
         private Task _client_Log(LogMessage arg)
@@ -406,8 +415,6 @@ namespace bot
                 "\n have a look through the server to see how to sign up to an event" +
                 "\n if you need any help with the bot and its command type !help which will give you a handy list of commands" +
                 "\n I hope you enjoy your stay!!!");
-
-            await user.AddRoleAsync(958001530139721760);
         }
 
     }

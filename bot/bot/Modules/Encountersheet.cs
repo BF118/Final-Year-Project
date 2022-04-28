@@ -18,6 +18,8 @@ namespace bot.Modules
         {
             
             PostedSignupSheets PostedSignupSheets { get; }
+            public string fileName = @"E:\GITHUB UNI\fyp\bot\bot\Modules\setup.txt";
+
 
             public Commands(PostedSignupSheets postedSignupSheets)
             {
@@ -32,6 +34,8 @@ namespace bot.Modules
             [Command("encounter1")]
             public async Task encounter1(string time, DateTime starttime)
             {
+                string[] encounter1Line = File.ReadAllLines(fileName);
+                var encounter1Role = Convert.ToUInt64(encounter1Line[0]);
 
                 #region Create Reactions Encounter1
                 //Create Encounter 1 Emojis
@@ -47,7 +51,7 @@ namespace bot.Modules
 
                 .WithTitle("Loading....")
                 .AddField("Encounter 1 loading", "Please wait")
-                .AddField("Role", MentionUtils.MentionRole(933000592362725396))
+                .AddField("Role", MentionUtils.MentionRole(encounter1Role))
                 .WithCurrentTimestamp()
                 .WithColor(Color.DarkBlue);
 
@@ -113,7 +117,7 @@ namespace bot.Modules
                     .AddField("<:crossed_swords:927174860524896276> 1x DPS:", dpsAsSingleString, true)
                     .AddField("<:game_die:947476766283407370> 1x Any role:", anyRoleAsSingleString, true)
                     .AddField("<:mortar_board:927185690867937330> 1x Learner:", learnerAsSingleString, true)
-                    .AddField("Role", MentionUtils.MentionRole(933000592362725396))
+                    .AddField("Role", MentionUtils.MentionRole(encounter1Role))
                     .WithCurrentTimestamp()
                     .WithColor(Color.DarkBlue);
                      x.Embed = encounter_edit.Build();
@@ -133,6 +137,9 @@ namespace bot.Modules
             [Command("encounter2")]
             public async Task encounter2(string time, DateTime starttime)
             {
+                string[] encounter2Line = File.ReadAllLines(fileName);
+                var encounter2Role = Convert.ToUInt64(encounter2Line[1]);
+
                 #region Create Reactions Encounter2 
                 //Creating Encounter 2 Emojis
                 var shieldEmoji = Emoji.Parse(":shield:");
@@ -148,7 +155,7 @@ namespace bot.Modules
 
                 .WithTitle("Loading....")
                 .AddField("Encounter 2 loading", "Please wait......")
-                .AddField("Role", MentionUtils.MentionRole(944968068113772594))
+                .AddField("Role", MentionUtils.MentionRole(encounter2Role))
                 .WithCurrentTimestamp()
                 .WithColor(Color.Teal);
 
@@ -231,7 +238,7 @@ namespace bot.Modules
                    .AddField("<:mortar_board:927185690867937330> 1x learner:", learnerAsSingleString, true)
                    .AddField("<:bomb:961993455092002886> 1x bomb tank", bombTankAsSingleString, true)
                    .AddField("<:arrow_up:947161060253769758> 1x top lure:", topLureAsSingleString, true) 
-                   .AddField("Role", MentionUtils.MentionRole(944968068113772594))
+                   .AddField("Role", MentionUtils.MentionRole(encounter2Role))
                    .WithCurrentTimestamp()
                    .WithColor(Color.Teal);
                     x.Embed = encounter_edit.Build();
@@ -248,6 +255,9 @@ namespace bot.Modules
             [Command("encounter3")]
             public async Task encounter3(string time, DateTime starttime)
             {
+                string[] encounter3Line = File.ReadAllLines(fileName);
+                var encounter3Role = Convert.ToUInt64(encounter3Line[2]);
+
                 #region Create Reactions Encounter3
                 //Create Encounter3 Emojis
                 var shieldEmoji = Emoji.Parse(":shield:");
@@ -266,7 +276,7 @@ namespace bot.Modules
 
                 .WithTitle("Loading....")
                 .AddField("Encounter 3 loading", "Please wait......")
-                .AddField("Role", MentionUtils.MentionRole(944968105199796245))
+                .AddField("Role", MentionUtils.MentionRole(encounter3Role))
                 .WithCurrentTimestamp()
                 .WithColor(Color.Green);
 
@@ -376,7 +386,7 @@ namespace bot.Modules
                    .AddField("<:soap:947534430891827320> 1x Cleanse:", cleanseAsSingleString, true)
                    .AddField("<:one:947534430891827320> 1x 1/3 Realm:", firstRealmAsSingleString, true)
                    .AddField("<:two:947534430891827320> 1x 2/4 Realm:", secondRealmAsSingleString, true)
-                   .AddField("Role", MentionUtils.MentionRole(944968105199796245))
+                   .AddField("Role", MentionUtils.MentionRole(encounter3Role))
                    .WithCurrentTimestamp()
                    .WithColor(Color.Green);
                     x.Embed = encounter_edit.Build();
@@ -395,6 +405,9 @@ namespace bot.Modules
             [Command("encounter4")]
             public async Task encounter4(string time, DateTime starttime)
             {
+                string[] encounter4Line = File.ReadAllLines(fileName);
+                var encounter4Role = Convert.ToUInt64(encounter4Line[3]);
+
                 #region Creation Reactions Encounter 4
                 var shieldEmoji = Emoji.Parse(":shield:");
                 var dpsEmoji = Emoji.Parse(":crossed_swords:");

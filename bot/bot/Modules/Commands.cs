@@ -15,13 +15,15 @@ namespace bot.Modules
     {
         public ulong UserId { get; }
 
-        string fileName = "BotData/setup.txt";
+        public string fileName = @"E:\GITHUB UNI\fyp\bot\bot\Modules\setup.txt";
+
 
         [Command("Hello")]
         public async Task Hello()
         {
             await ReplyAsync("Hello there");
         }
+        
         [Command("website")]
         public async Task Spawn()
         {
@@ -31,7 +33,6 @@ namespace bot.Modules
 
         }
 
-        
         [Command("help")]
         public async Task help()
         {
@@ -50,6 +51,7 @@ namespace bot.Modules
 
             var sent = await Context.Channel.SendMessageAsync("", false, help.Build());
         }
+        
         [Command("purge")]
         [RequireBotPermission(GuildPermission.ManageMessages)]
         [RequireUserPermission(GuildPermission.ManageMessages)]
@@ -101,11 +103,15 @@ namespace bot.Modules
             var roleencounter3 = Context.Message.GetReactionUsersAsync(encounter3, 100, null); 
             var roleencounter4 = Context.Message.GetReactionUsersAsync(encounter4, 100, null);
         }
+        
         [Command("encounterrole1")]
         public async Task encounterrole1()
         {
+            string[] lines = File.ReadAllLines(fileName);
 
-            await ((SocketGuildUser)Context.User).AddRoleAsync(933000592362725396);
+            var Encounter1 = Convert.ToUInt64(lines[0]);
+
+            await ((SocketGuildUser)Context.User).AddRoleAsync(Encounter1);
 
             var messages = Context.Channel.GetMessagesAsync(1).Flatten();
             foreach(var i in await messages.ToArrayAsync())
@@ -113,92 +119,116 @@ namespace bot.Modules
                 await this.Context.Channel.DeleteMessageAsync(i);
             }
         }
+        
         [Command("encounterrole2")]
         public async Task encounterrole2()
         {
-            await ((SocketGuildUser)Context.User).AddRoleAsync(944968068113772594);
+
+            string[] lines = File.ReadAllLines(fileName);
+
+            var Encounter2 = Convert.ToUInt64(lines[1]);
+
+            await ((SocketGuildUser)Context.User).AddRoleAsync(Encounter2);
             var messages = Context.Channel.GetMessagesAsync(1).Flatten();
             foreach (var i in await messages.ToArrayAsync())
             {
                 await this.Context.Channel.DeleteMessageAsync(i);
             }
         }
+        
         [Command("encounterrole3")]
         public async Task encounterrole3()
         {
-            await ((SocketGuildUser)Context.User).AddRoleAsync(944968105199796245);
+            string[] lines = File.ReadAllLines(fileName);
+
+            var Encounter3 = Convert.ToUInt64(lines[2]);
+
+            await ((SocketGuildUser)Context.User).AddRoleAsync(Encounter3);
             var messages = Context.Channel.GetMessagesAsync(1).Flatten();
             foreach (var i in await messages.ToArrayAsync())
             {
                 await this.Context.Channel.DeleteMessageAsync(i);
             }
         }
+        
         [Command("encounterrole4")]
         public async Task encounterrole4()
         {
-            await ((SocketGuildUser)Context.User).AddRoleAsync(953223221807824898);
+            string[] lines = File.ReadAllLines(fileName);
+
+            var Encounter4 = Convert.ToUInt64(lines[3]);
+
+            await ((SocketGuildUser)Context.User).AddRoleAsync(Encounter4);
             var messages = Context.Channel.GetMessagesAsync(1).Flatten();
             foreach (var i in await messages.ToArrayAsync())
             {
                 await this.Context.Channel.DeleteMessageAsync(i);
             }
         }      
+        
         [Command("role")]
         public async Task roles(string role)
         {
             var user = Context.User;
+            string[] lines = File.ReadAllLines(fileName);
+
+            #region Get Role ID's
+            var baseTank = Convert.ToUInt64(lines[5]);
+            var dps = Convert.ToUInt64(lines[6]);
+            var bombTank = Convert.ToUInt64(lines[7]);
+            var topLure = Convert.ToUInt64(lines[8]);
+            var rainShield = Convert.ToUInt64(lines[9]);
+            var shatter = Convert.ToUInt64(lines[10]);
+            var cleanse = Convert.ToUInt64(lines[11]);  
+            var realm13 = Convert.ToUInt64(lines[12]);
+            var realm24 = Convert.ToUInt64(lines[13]);
+            var chinner = Convert.ToUInt64(lines[14]);
+            var hammer = Convert.ToUInt64(lines[15]);
+            var uminion = Convert.ToUInt64(lines[16]);
+            var gminion = Convert.ToUInt64(lines[17]);
+            var cminion = Convert.ToUInt64(lines[18]);
+            var fminion = Convert.ToUInt64(lines[19]);
+            #endregion
+
+            #region Delete Command After Sent
             var messages = Context.Channel.GetMessagesAsync(1).Flatten();
             foreach (var i in await messages.ToArrayAsync())
             {
                 await this.Context.Channel.DeleteMessageAsync(i);
             }
-            
-            //General Roles
+            #endregion
+
+            #region General Roles
             if (role == "basetank")
             {
-                string[] lines =  File.ReadAllLines("BotData/setup.txt");
-
-                var basetank = Convert.ToUInt64(lines[1]);
-
-
                 //await user.ModifyAsync(x =>
                 //{
                 //    x.Nickname = user.Nickname + "🛡";
                 //});
 
-                Console.WriteLine(basetank);
-                await ((SocketGuildUser)Context.User).AddRoleAsync(basetank);
+                Console.WriteLine(baseTank);
+                await ((SocketGuildUser)Context.User).AddRoleAsync(baseTank);
                 await user.SendMessageAsync("Profile updated basetank role has been given");
-                
             }
             if (role == "dps")
             {
-
                 //await user.ModifyAsync(x =>
                 //{
                 //    x.Nickname = user.Nickname + "⚔️";
                 //});
-                await ((SocketGuildUser)Context.User).AddRoleAsync(956556579174506506);
+                await ((SocketGuildUser)Context.User).AddRoleAsync(dps);
                 await user.SendMessageAsync("Profile updated dps role has been given");
             }
-            if (role == "healer")
-            {
-                //await user.ModifyAsync(x =>
-                //{
-                //    x.Nickname = user.Nickname + "❤️";
-                //});
-                await ((SocketGuildUser)Context.User).AddRoleAsync(956145603321151518);
-                await user.SendMessageAsync("Profile updated healer role has been given");
-            }
-            
-            //encounter2 Roles
+            #endregion
+
+            #region Encounter2 Roles
             if (role == "bombtank")
             {
                 //await user.ModifyAsync(x =>
                 //{
                 //    x.Nickname = user.Nickname + "💣";
                 //});
-                await ((SocketGuildUser)Context.User).AddRoleAsync(956562683442921472);
+                await ((SocketGuildUser)Context.User).AddRoleAsync(bombTank);
                 await user.SendMessageAsync("Profile updated bombtank role has been given");
             }
             if (role == "toplure")
@@ -207,21 +237,21 @@ namespace bot.Modules
                 //{
                 //    x.Nickname = user.Nickname + "⬆️";
                 //});
-                await ((SocketGuildUser)Context.User).AddRoleAsync(956562683442921472);
+                await ((SocketGuildUser)Context.User).AddRoleAsync(topLure);
                 await user.SendMessageAsync("Profile updated toplure role has been given");
                 
             }
+            #endregion
 
-            //encounter3 Roles
+            #region Encounter3 Roles
             if (role == "rainshield")
             {
                 //await user.ModifyAsync(x =>
                 //{
                 //    x.Nickname = user.Nickname + "🌧️";
                 //});
-                await ((SocketGuildUser)Context.User).AddRoleAsync(956564451253968916);
+                await ((SocketGuildUser)Context.User).AddRoleAsync(rainShield);
                 await user.SendMessageAsync("Profile updated rainshield role has been given");
-                
             }
             if (role == "shatter")
             {
@@ -229,7 +259,7 @@ namespace bot.Modules
                 //{
                 //    x.Nickname = user.Nickname + "💥";
                 //});
-                await ((SocketGuildUser)Context.User).AddRoleAsync(956565009285132340);
+                await ((SocketGuildUser)Context.User).AddRoleAsync(shatter);
                 await user.SendMessageAsync("Profile updated shatter role has been given");
                 
             }
@@ -240,7 +270,7 @@ namespace bot.Modules
                 //    x.Nickname = user.Nickname + "🧼";
                 //});
 
-                await ((SocketGuildUser)Context.User).AddRoleAsync(956567001294340137);
+                await ((SocketGuildUser)Context.User).AddRoleAsync(cleanse);
                 await user.SendMessageAsync("Profile updated Cleanse role has been given");
                 
             }
@@ -250,7 +280,7 @@ namespace bot.Modules
                 //{
                 //    x.Nickname = user.Nickname + "1️⃣";
                 //});
-                await ((SocketGuildUser)Context.User).AddRoleAsync(956567179086688366);
+                await ((SocketGuildUser)Context.User).AddRoleAsync(realm13);
                 await user.SendMessageAsync("Profile updated 1/3 Realm role has been given");
                 
             }
@@ -260,11 +290,13 @@ namespace bot.Modules
                 //{
                 //    x.Nickname = user.Nickname + "2️⃣";
                 //});
-                await ((SocketGuildUser)Context.User).AddRoleAsync(956567416836608050);
+                await ((SocketGuildUser)Context.User).AddRoleAsync(realm24);
                 await user.SendMessageAsync("Profile updated 2/4 Realm role has been given");
                 
             }
+            #endregion
 
+            #region Encounter 4 Roles
             //encounter4 Roles
             if (role == "chinner")
             {
@@ -272,7 +304,7 @@ namespace bot.Modules
                 //{
                 //    x.Nickname = user.Nickname + "🐿️";
                 //});
-                await ((SocketGuildUser)Context.User).AddRoleAsync(956567677021863986);
+                await ((SocketGuildUser)Context.User).AddRoleAsync(chinner);
                 await user.SendMessageAsync("Profile updated Chinner role has been given");
                 
             }
@@ -282,7 +314,7 @@ namespace bot.Modules
                 //{
                 //    x.Nickname = user.Nickname + "🔨";
                 //});
-                 await ((SocketGuildUser)Context.User).AddRoleAsync(956567677021863986);
+                 await ((SocketGuildUser)Context.User).AddRoleAsync(hammer);
                 await user.SendMessageAsync("Profile updated Hammer Realm role has been given");
                 
             }
@@ -292,7 +324,7 @@ namespace bot.Modules
                 //{
                 //    x.Nickname = user.Nickname + "🇺";
                 //});
-                await ((SocketGuildUser)Context.User).AddRoleAsync(956569612080787567);
+                await ((SocketGuildUser)Context.User).AddRoleAsync(uminion);
                 await user.SendMessageAsync("Profile updated Umbra Minion role has been given");
                 
             }
@@ -302,7 +334,7 @@ namespace bot.Modules
                 //{
                 //    x.Nickname = user.Nickname + "🇬";
                 //});
-                await ((SocketGuildUser)Context.User).AddRoleAsync(956570089640050688);
+                await ((SocketGuildUser)Context.User).AddRoleAsync(gminion);
                 await user.SendMessageAsync("Profile updated Glacies Minion role has been given");
                 
             }
@@ -312,7 +344,7 @@ namespace bot.Modules
                 //{
                 //    x.Nickname = user.Nickname + "🇨";
                 //});
-                await ((SocketGuildUser)Context.User).AddRoleAsync(956570691422027786);
+                await ((SocketGuildUser)Context.User).AddRoleAsync(cminion);
                 await user.SendMessageAsync("Profile updated Cruor Minion role has been given");
                 
             }
@@ -322,46 +354,55 @@ namespace bot.Modules
                 //{
                 //    x.Nickname = user.Nickname + "🇫";
                 //});
-                await ((SocketGuildUser)Context.User).AddRoleAsync(956571248916312105);
+                await ((SocketGuildUser)Context.User).AddRoleAsync(fminion);
                 await user.SendMessageAsync("Profile updated Fumus Minion role has been given");
                 
             }
+            #endregion
 
+            #region ADD all Roles
+            if(role == "general")
+            {
+                await ((SocketGuildUser)Context.User).AddRoleAsync(baseTank);
+                await ((SocketGuildUser)Context.User).AddRoleAsync(dps);
+                await user.SendMessageAsync("Profile updated all General roles have been given");
+
+            }
             if(role == "allencounter2")
             {
-                await ((SocketGuildUser)Context.User).AddRoleAsync(956562683442921472);
-                await ((SocketGuildUser)Context.User).AddRoleAsync(956562683442921472);
+                await ((SocketGuildUser)Context.User).AddRoleAsync(bombTank);
+                await ((SocketGuildUser)Context.User).AddRoleAsync(topLure);
                 await user.SendMessageAsync("Profile updated all encounter2 roles have been given");
 
             }
             if(role == "allencounter3")
             {
-                await ((SocketGuildUser)Context.User).AddRoleAsync(956565009285132340);
-                await ((SocketGuildUser)Context.User).AddRoleAsync(956565009285132340);
-                await ((SocketGuildUser)Context.User).AddRoleAsync(956567001294340137);
-                await ((SocketGuildUser)Context.User).AddRoleAsync(956567179086688366);
-                await ((SocketGuildUser)Context.User).AddRoleAsync(956567416836608050);
+                await ((SocketGuildUser)Context.User).AddRoleAsync(rainShield);
+                await ((SocketGuildUser)Context.User).AddRoleAsync(shatter);
+                await ((SocketGuildUser)Context.User).AddRoleAsync(cleanse);
+                await ((SocketGuildUser)Context.User).AddRoleAsync(realm13);
+                await ((SocketGuildUser)Context.User).AddRoleAsync(realm24);
             }
             if(role =="allencounter4")
             {
-                await ((SocketGuildUser)Context.User).AddRoleAsync(956567677021863986);
-                await ((SocketGuildUser)Context.User).AddRoleAsync(956567677021863986);
-                await ((SocketGuildUser)Context.User).AddRoleAsync(956569612080787567);
-                await ((SocketGuildUser)Context.User).AddRoleAsync(956570089640050688);
-                await ((SocketGuildUser)Context.User).AddRoleAsync(956570691422027786);
-                await ((SocketGuildUser)Context.User).AddRoleAsync(956571248916312105);
+                await ((SocketGuildUser)Context.User).AddRoleAsync(chinner);
+                await ((SocketGuildUser)Context.User).AddRoleAsync(hammer);
+                await ((SocketGuildUser)Context.User).AddRoleAsync(uminion);
+                await ((SocketGuildUser)Context.User).AddRoleAsync(gminion);
+                await ((SocketGuildUser)Context.User).AddRoleAsync(cminion);
+                await ((SocketGuildUser)Context.User).AddRoleAsync(fminion);
             }
+            #endregion
 
-            if(role == "list")
+            if (role == "list")
             {
                 EmbedBuilder rolelist = new EmbedBuilder()
 
                 .WithTitle("Role list")
-                .AddField("General Roles", "basetank, dps, healer")
+                .AddField("General Roles", "basetank, dps")
                 .AddField("Encounter2 Roles","bombtank, toplure")
                 .AddField("Encounter3 Roles","rainshield, shatter, cleanse, 1/3realm, 2/4realm")
                 .AddField("Encounter4 Roles","chinner, hammer, uminion(Umbra Minion), gminion(Glacies Minion), cminion(Cruor Minion), fminion(Fumus Minion)")
-
                 .WithColor(Color.DarkRed);
 
 
@@ -385,106 +426,129 @@ namespace bot.Modules
                 var sent = await Context.Channel.SendMessageAsync("", false, rolehelp.Build());
             }
 
+            else
+            {
+                await user.SendMessageAsync("Role not found type !role list for a list of roles or !role help for any further help");
+
+            }
+
         }
-        [Command("roleremove")]
+        [Command("removerole")]
         [RequireBotPermission(GuildPermission.ManageRoles)]
         [RequireUserPermission(GuildPermission.ManageRoles)]
         public async Task removerole(SocketGuildUser user ,string removerole)
         {
+            string[] lines = File.ReadAllLines(fileName);
 
+            #region Get Role ID's
+            var baseTank = Convert.ToUInt64(lines[5]);
+            var dps = Convert.ToUInt64(lines[6]);
+            var bombTank = Convert.ToUInt64(lines[7]);
+            var topLure = Convert.ToUInt64(lines[8]);
+            var rainShield = Convert.ToUInt64(lines[9]);
+            var shatter = Convert.ToUInt64(lines[10]);
+            var cleanse = Convert.ToUInt64(lines[11]);
+            var realm13 = Convert.ToUInt64(lines[12]);
+            var realm24 = Convert.ToUInt64(lines[13]);
+            var chinner = Convert.ToUInt64(lines[14]);
+            var hammer = Convert.ToUInt64(lines[15]);
+            var uminion = Convert.ToUInt64(lines[16]);
+            var gminion = Convert.ToUInt64(lines[17]);
+            var cminion = Convert.ToUInt64(lines[18]);
+            var fminion = Convert.ToUInt64(lines[19]);
+            #endregion
 
 
             if (removerole == "basetank")
             { 
-                await ((SocketGuildUser)Context.User).RemoveRoleAsync(956556279462113350);
+                await user.RemoveRoleAsync(baseTank);
                 await user.SendMessageAsync("Profile updated dps role has been removed");
 
             }
             if (removerole == "dps")
             {
-                await ((SocketGuildUser)Context.User).RemoveRoleAsync(956556579174506506);
+                await user.RemoveRoleAsync(dps);
                 await user.SendMessageAsync("Profile updated dps role has been removed");
-            }
-            if (removerole == "healer")
-            {
-                await ((SocketGuildUser)Context.User).RemoveRoleAsync(956145603321151518);
-                await user.SendMessageAsync("Profile updated healer role has been removed");
             }
 
             //encounter2 Roles
             if (removerole == "bombtank")
             {
-                await ((SocketGuildUser)Context.User).RemoveRoleAsync(956562683442921472);
+                await user.RemoveRoleAsync(bombTank);
                 await user.SendMessageAsync("Profile updated bombtank role has been removed");
             }
             if (removerole == "toplure")
             {
-                await ((SocketGuildUser)Context.User).RemoveRoleAsync(956562683442921472);
+                await user.RemoveRoleAsync(topLure);
                 await user.SendMessageAsync("Profile updated toplure role has been removed");
             }
 
             //encounter3 Roles
             if (removerole == "rainshield")
             {
-                await ((SocketGuildUser)Context.User).RemoveRoleAsync(956564451253968916);
+                await user.RemoveRoleAsync(rainShield);
                 await user.SendMessageAsync("Profile updated rainshield role has been removed");
 
             }
             if (removerole == "shatter")
             {
-                await ((SocketGuildUser)Context.User).RemoveRoleAsync(956565009285132340);
+                await user.RemoveRoleAsync(shatter);
                 await user.SendMessageAsync("Profile updated shatter role has been removed");
             }
             if (removerole == "cleanse")
             {              
-                await ((SocketGuildUser)Context.User).RemoveRoleAsync(956567001294340137);
+                await user.RemoveRoleAsync(cleanse);
                 await user.SendMessageAsync("Profile updated Cleanse role has been removed");
             }
             if (removerole == "1/3realm")
             {              
-                await ((SocketGuildUser)Context.User).RemoveRoleAsync(956567179086688366);
+                await user.RemoveRoleAsync(realm13);
                 await user.SendMessageAsync("Profile updated 1/3 Realm role has been removed");
 
             }
             if (removerole == "2/4realm")
             {
-                await ((SocketGuildUser)Context.User).RemoveRoleAsync(956567416836608050);
+                await user.RemoveRoleAsync(realm24);
                 await user.SendMessageAsync("Profile updated 2/4 Realm role has been removed");
             }
 
             //encounter4 Roles
             if (removerole == "chinner")
             {
-                await ((SocketGuildUser)Context.User).RemoveRoleAsync(956567677021863986);
+                await user.RemoveRoleAsync(chinner);
                 await user.SendMessageAsync("Profile updated Chinner role has been given");
             }
             if (removerole == "hammer")
             {
-                await ((SocketGuildUser)Context.User).RemoveRoleAsync(956568612817219665);
+                await user.RemoveRoleAsync(hammer);
                 await user.SendMessageAsync("Profile updated Hammer Realm role has been given");
             }
             if (removerole == "uminion")
             {
-                await ((SocketGuildUser)Context.User).RemoveRoleAsync(956569612080787567);
+                await user.RemoveRoleAsync(uminion);
                 await user.SendMessageAsync("Profile updated Umbra Minion role has been given");
             }
             if (removerole == "gminion")
             {
-                await ((SocketGuildUser)Context.User).RemoveRoleAsync(956570089640050688);
+                await user.RemoveRoleAsync(gminion);
                 await user.SendMessageAsync("Profile updated Glacies Minion role has been given");
             }
             if (removerole == "cminion")
             {
-                await ((SocketGuildUser)Context.User).RemoveRoleAsync(956570691422027786);
+                await user.RemoveRoleAsync(cminion);
                 await user.SendMessageAsync("Profile updated Cruor Minion role has been given");
             }
             if (removerole == "fminion")
             {
-                await ((SocketGuildUser)Context.User).RemoveRoleAsync(956571248916312105);
+                await user.RemoveRoleAsync(fminion);
                 await user.SendMessageAsync("Profile updated Fumus Minion role has been given");
             }
 
-
+            else
+            {
+                await user.SendMessageAsync("Role couldn't be removed type !role list for a list of roles or !role help for any further help");
+                await user.SendMessageAsync("To remove role type !removerole theuseryouwanttheroleremovedfrom rolename");
+            }
 
 
         }
