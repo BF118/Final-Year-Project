@@ -1,4 +1,12 @@
 # Final-Year-Project
+# Discord Event Organiser Bot/Website
+
+# Getting Started
+  ## Overview
+  ## Discord Bot setup
+  ## Website
+
+
 test push
 http://bf118.webhosting.canterbury.ac.uk/
 https://pretagteam.com/question/discord-send-messages-from-a-channel-to-my-website-in-real-time
