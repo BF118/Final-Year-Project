@@ -62,13 +62,23 @@ All Commands should be written in any text channel
 * The prefix to trigger the bot is set to ! as default this can be changed in program.cs
 
 ## Website
-The website part of the system is 4 html pages with java script and css for styling
+* [Website](http://bf118.webhosting.canterbury.ac.uk/)
+* The website part of the system is 4 html pages with java script and css for styling
 * Part of the website uses webhooks that link with Discord this need some configuring
 
-###
+### Requirements
+ * Any form of webhosting
+ * Any html/js Editor
+ * Admin Role in the server you want the webhooks in
 
-test push
-http://bf118.webhosting.canterbury.ac.uk/
+### Webhook Configuration
+For the website webhooks are needed to interact with a discord server
+1. In server settings in Discord go to Integrations
+2. In Integrations go to view webhooks
+3. Create a new webhook and select the channel you want to webhook bot to go in
+4. Copy Webhook URL and in script.js replace WEBHOOK with the URL you've just copied
+
+
 https://pretagteam.com/question/discord-send-messages-from-a-channel-to-my-website-in-real-time
 https://dev.to/oskarcodes/send-automated-discord-messages-through-webhooks-using-javascript-1p01
 https://dev.to/oskarcodes/send-automated-discord-messages-through-webhooks-using-javascript-part-2-embeds-588n
