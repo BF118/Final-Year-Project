@@ -42,9 +42,30 @@ Each of which need some setting up
 1. Create a new application in the [Discord Developer Portal](https://discord.com/developers/applications)
 2. Go to the bot section and click Add bot
 3. Copy the bot token from the build-a-bot menu
-4. In windows create an [environment variable](https://docs.oracle.com/en/database/oracle/machine-learning/oml4r/1.5.1/oread/creating-and-modifying-environment-variables-on-windows.html) Named Token
+4. In windows create an [Environment Variables](https://docs.oracle.com/en/database/oracle/machine-learning/oml4r/1.5.1/oread/creating-and-modifying-environment-variables-on-windows.html) Named Token
+5. To invite the bot to a server in the Discord Developer Portal go to Oauth2 then URL Generator
+6. Copy URL and paste in search bar 
+7. Select the server you want to bot to be on
 
+### Configuring Server
+Now the bot is in the server it needs configuring to get it to work
+1. Give bot Administrator Permissions
+2. Type `!setup` in any text channel
+3. Check to see if new roles are in server settings
 
+### Using the bot
+All Commands should be written in any text channel
+ * `!help` Brings up list of commands
+ * `!role help` Shows embed of all things to do with roles
+ * `!role list` Shows list of Encounters
+ * `!encounter'1-4' time 'startime'` Brings up encounter signup sheet
+* The prefix to trigger the bot is set to ! as default this can be changed in program.cs
+
+## Website
+The website part of the system is 4 html pages with java script and css for styling
+* Part of the website uses webhooks that link with Discord this need some configuring
+
+###
 
 test push
 http://bf118.webhosting.canterbury.ac.uk/
