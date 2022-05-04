@@ -26,17 +26,13 @@
             </div>
         </header>
 
+<h1>Encounter1</h1>
+    
 <div id="outer">
-    <div class="inner"><button onclick="Encounter1()">Encounter1</button></div>
-    <div class="inner"><button onclick="Encounter2()">Encounter2</button></div>
-    <div class="inner"><button onclick="Encounter3()">Encounter3</button></div>
-    <div class="inner"><button onclick="Encounter4()">Encounter4</button></div>
-</div>  
 <label>Username</label>
 <input type="text" name="username" id="username" />
-
-  
-
+    </div>
+    
 <!--Encounter info !-->
 <div id="content">
     <label>Role Information : click icon to view</label>
@@ -58,7 +54,7 @@
     </div>
 <label>Base Tank</label>
 <input type="text" name="baseTank" id="baseTank" readonly="true"/>
-<button onclick="signUpBase(); this.onclick=null;" id="signUpBaseButton"> Click here to sign up</button>
+<button onclick="signUpBase();" id="signUpBaseButton"> Click here to sign up</button>
     </div>
     
 <!--DPS!-->   
@@ -74,7 +70,7 @@
     </div>
 <label>DPS</label>
 <input type="text" name="dps" id="dps" readonly="true">
-<button onclick="signUpDps(); this.onclick=null;" id="signUpDpsButton">Click here to sign up</button>
+<button onclick="signUpDps();" id="signUpDpsButton">Click here to sign up</button>
     </div>
     
 <!--any role!-->
@@ -90,7 +86,7 @@
                             </div> 
 <label>Any Role</label>
 <input  readonly type="text" name="anyrole" id="anyRole">
-<button onclick="signUpAnyRole(); this.onclick=null;" id="signUpAnyRoleButton">Click here to sign up</button>
+<button onclick="signUpAnyRole();;" id="signUpAnyRoleButton">Click here to sign up</button>
     </div>
 
 <!--learner!-->
@@ -106,8 +102,10 @@
                             </div>
 <label>Learner</label>
 <input readonly type="text" name="learner" id="learner" readonly="true"/>
-<button onclick="signUpLearner(); this.onclick=null;" id="signUpLearnerButton">Click here to sign up</button>
+<button onclick="signUpLearner();" id="signUpLearnerButton">Click here to sign up</button>
     </div>
+    
+    
     <div id="time">
 <label>Event Start time</label>   
 <input type="time" id="eventTime" name="eventTime   "
@@ -119,8 +117,12 @@
 
     
     
-<button onclick="Createsheet(); this.onclick=null;">Create Signup</button>
-<button onclick="RemoveSignup(); this.onclick=null;">Lock Sign up</button>
+<button onclick="Createsheet();">Create Signup</button>
+<button onclick="ClearSignup();">Clear Signup</button>
+<button onclick="RemoveSignup();">Lock Sign up</button>
+    
+    
+    
     
 <script src="scripts/scripts.js">
 </script>

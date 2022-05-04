@@ -187,7 +187,17 @@
 <button onclick="signUpLearner(); this.onclick=null;">Click here to sign up</button>
     </div>
     </div>
+    <div id="time">
+<label>Event Start time</label>   
+<input type="time" id="eventTime" name="eventTime   "
+       min="00:00" max="24:00" required>
+    </div>
+    
+    
+    
 <button onclick="Createsheet3(); this.onclick=null;">Create Signup</button>
+<button onclick="ClearSignup();">Clear Signup</button>
+<button onclick="RemoveSignup3();">Lock Sign up</button>
     
 <script src="scripts/scripts.js">
 </script>
