@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="stylesheets/styles.css" />
+    
+
+</head>
+<body>
+    <header>
+            <div class="header-content">
+                <div class="container">
+                    <div class="row no-gutters">
+                        <div class="header-right col-sm-12 col-lg-8">
+                            <a href="/index.html">Encounter1</a>
+                            <a href="/encounter2.html">Encounter2</a>
+                            <a href="/encounter3.html">Encounter3</a>
+                            <a href="/encounter4.html">Encounter4</a>
+                            <a href="https://discord.gg/WCE5P4VNnD" target="_blank">
+                                <img border="0" alt="Discord" src="Images/Discord-Logo.png" width="80" height="50">
+                                </a>
+                                <input type="text" id="searchbox" placeholder="Search...">
+                                <input type="submit" name="search" id="search" onclick="search()" value="Go"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+<div id="outer">
+    <div class="inner"><button onclick="Encounter1()">Encounter1</button></div>
+    <div class="inner"><button onclick="Encounter2()">Encounter2</button></div>
+    <div class="inner"><button onclick="Encounter3()">Encounter3</button></div>
+    <div class="inner"><button onclick="Encounter4()">Encounter4</button></div>
+</div>
+  
+<label>Username</label>
+<input type="text" name="username" id="username" />
+<!--Encounter info !-->
+<div id="content">
+    <label>Role Information : click icon to view</label>
+</div>         
+ <!--encounter 3 signup sheet !-->       
+<div class="signup">
+<!--Base tank !-->
+<div class="grid-item">
+<!--Base tank !-->
+<a class="modalbutton" id="baseModal" href="#modal1"><img border="0" alt="baseTank" src="Images/basetank.png" width="30" height="30"></a>
+    <div class="popup" id="modal1">
+        <a class="popup__overlay" href="#"></a>
+    <div class="popup__wrapper">
+        <a class="popup__close" href="#">Press here to Close</a>
+        <p>I am the base</p>
+    </div>
+    </div>
+<label>Base Tank</label>
+<input type="text" name="baseTank" id="baseTank" readonly="true"/>
+<button onclick="signUpBase(); this.onclick=null;"> Click here to sign up</button>
+</div>
+    
+<!--RainShield !-->
+<div class="grid-item">
+<!--RainShield!-->
+<a class="modalbutton" id="rainShieldModal" href="#modal2"><img border="0" alt="rainShield" src="Images/rainshield.png" width="30" height="30"></a>
+    <div class="popup" id="modal2">
+        <a class="popup__overlay" href="#"></a>
+    <div class="popup__wrapper">
+        <a class="popup__close" href="#">Press here to Close</a>
+        <p>I place the shield</p>
+    </div>
+    </div>
+<label>Rain Shield</label>
+<input type="text" name="rainShield" id="rainShield" readonly="true"/>
+<button onclick="signUprainShield(); this.onclick=null;"> Click here to sign up</button>
+</div>
+    
+<!--Shatter !-->
+<div class="grid-item">
+<!--Shatter!-->
+<a class="modalbutton" id="shatterModal" href="#modal3"><img border="0" alt="shatter" src="Images/shatter.png" width="30" height="30"></a>
+    <div class="popup" id="modal3">
+        <a class="popup__overlay" href="#"></a>
+    <div class="popup__wrapper">
+        <a class="popup__close" href="#">Press here to Close</a>
+        <p>I do the big shatter</p>
+    </div>
+    </div>
+<label>Shatter</label>
+<input type="text" name="shatter" id="shatter" readonly="true"/>
+<button onclick="signUpShatter(); this.onclick=null;"> Click here to sign up</button>
+<img border="0" alt="shatter" src="Images/shatter.png" width="30" height="30">
+</div>
+    
+<!--Cleanse !-->
+<div class="grid-item">
+    <!--Cleanse!-->
+<a class="modalbutton" id="cleanseModal" href="#modal4"><img border="0" alt="cleanse" src="Images/cleanse.png" width="30" height="30"></a>
+    <div class="popup" id="modal4">
+        <a class="popup__overlay" href="#"></a>
+    <div class="popup__wrapper">
+        <a class="popup__close" href="#">Press here to Close</a>
+        <p>I do the big clean</p>
+    </div>
+    </div>
+<label>Cleanse</label>
+<input type="text" name="cleanse" id="cleanse" readonly="true"/>
+<button onclick="signUpCleanse(); this.onclick=null;"> Click here to sign up</button>
+</div>
+    
+<!--Realm 1/3 !-->
+<div class="grid-item">
+    <!--Realm 1/3!-->
+<a class="modalbutton" id="realmOneModal" href="#modal5"><img border="0" alt="realmOne" src="Images/realmone.png" width="30" height="30"></a>
+    <div class="popup" id="modal5">
+        <a class="popup__overlay" href="#"></a>
+    <div class="popup__wrapper">
+        <a class="popup__close" href="#">Press here to Close</a>
+        <p>I go into the realm first</p>
+    </div>
+    </div>
+<label>Realm 1/3</label>
+<input type="text" name="realmOne" id="realmOne" readonly="true"/>
+<button onclick="signUpRealmOne(); this.onclick=null;"> Click here to sign up</button>
+</div>
+    
+<!--Realm 2/4 !-->
+<div class="grid-item">
+<!--Realm 2/4!-->
+<a class="modalbutton" id="realmTwoModal" href="#modal6"><img border="0" alt="realmTwo" src="Images/realmtwo.png" width="30" height="30"></a>
+    <div class="popup" id="modal6">
+        <a class="popup__overlay" href="#"></a>
+    <div class="popup__wrapper">
+        <a class="popup__close" href="#">Press here to Close</a>
+        <p>I go into the realm first</p>
+    </div>
+    </div>
+<label>Realm 2/4</label>
+<input type="text" name="realmTwo" id="realmTwo" readonly="true"/>
+<button onclick="signUpRealmTwo(); this.onclick=null;"> Click here to sign up</button>
+</div>
+    
+<!--DPS!-->  
+<div class="grid-item">
+    <!--DPS!-->
+<a class="modalbutton" id="dpsModal" href="#modal7"><img border="0" alt="dps" src="Images/dps.png" width="30" height="30"></a>
+    <div class="popup" id="modal7">
+        <a class="popup__overlay" href="#"></a>
+    <div class="popup__wrapper">
+        <a class="popup__close" href="#">Press here to Close</a>
+        <p>I am the dps</p>
+    </div>
+    </div>
+<label>DPS</label>
+<input readonly type="text" id="dps">
+<button onclick="signUpDps(); this.onclick=null;">Click here to sign up</button>
+</div>
+    
+<!--any role!-->
+<div class="grid-item">
+    <!--anyrole-->
+<a class="modalbutton" id="anyRoleModal" href="#modal8"><img border="0" alt="healer" src="Images/anyrole.png" width="40" height="30"></a>
+    <div class="popup" id="modal8">
+        <a class="popup__overlay" href="#"></a>
+    <div class="popup__wrapper">
+        <a class="popup__close" href="#">Press here to Close</a>
+        <p>I can do any role</p>
+    </div>
+    </div> 
+<label>Any Role</label>
+<input  readonly type="text" id="anyRole">
+<button onclick="signUpAnyRole(); this.onclick=null;">Click here to sign up</button>
+    </div>
+
+<!--learner!-->  
+<div class="grid-item">
+    <!--learner!-->
+<a class="modalbutton" id="learnerModal" href="#modal9"><img border="0" alt="learner" src="Images/learner.png" width="30" height="30"></a>        
+    <div class="popup" id="modal9">
+        <a class="popup__overlay" href="#"></a>
+    <div class="popup__wrapper">
+        <a class="popup__close" href="#">Press here to Close</a>
+        <p>I am the learner</p>
+    </div>
+    </div>
+<label>Learner</label>
+<input readonly type="text" name="learner" id="learner" readonly="true"/>
+<button onclick="signUpLearner(); this.onclick=null;">Click here to sign up</button>
+    </div>
+    </div>
+    <div id="time">
+<label>Event Start time</label>   
+<input type="time" id="eventTime" name="eventTime   "
+       min="00:00" max="24:00" required>
+    </div>
+    
+    
+    
+<button onclick="Createsheet3(); this.onclick=null;">Create Signup</button>
+<button onclick="ClearSignup();">Clear Signup</button>
+<button onclick="RemoveSignup3();">Lock Sign up</button>
+    
+<script src="scripts/scripts.js">
+</script>
+</body>
+</html> 
