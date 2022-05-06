@@ -77,9 +77,3 @@ For the website webhooks are needed to interact with a discord server
 2. In Integrations go to view webhooks
 3. Create a new webhook and select the channel you want to webhook bot to go in
 4. Copy Webhook URL and in script.js replace WEBHOOK with the URL you've just copied
-
-
-https://pretagteam.com/question/discord-send-messages-from-a-channel-to-my-website-in-real-time
-https://dev.to/oskarcodes/send-automated-discord-messages-through-webhooks-using-javascript-1p01
-https://dev.to/oskarcodes/send-automated-discord-messages-through-webhooks-using-javascript-part-2-embeds-588n
-https://discordnet.dev/guides/concepts/events.html
