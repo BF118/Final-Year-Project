@@ -389,12 +389,6 @@ namespace bot.Modules
                 var sent = await Context.Channel.SendMessageAsync("", false, rolehelp.Build());
             }
 
-            //else
-            //{
-            //    await user.SendMessageAsync("Role not found type !role list for a list of roles or !role help for any further help");
-
-            //}
-
         }
 
         [Command("removerole")]
@@ -506,12 +500,6 @@ namespace bot.Modules
             {
                 await user.RemoveRoleAsync(fminion);
                 await user.SendMessageAsync("Profile updated Fumus Minion role has been given");
-            }
-
-            else
-            {
-                await user.SendMessageAsync("Role couldn't be removed type !role list for a list of roles or !role help for any further help");
-                await user.SendMessageAsync("To remove role type !removerole theuseryouwanttheroleremovedfrom rolename");
             }
 
 
