@@ -41,8 +41,9 @@ namespace bot.Modules
             .WithTitle(" = Command List =")
             .AddField("--------------", "!setup will set the bot up for you and the roles needed for it to work (requires admin permissions)")
             .AddField("--------------", "!website Brings up a button to the website")
-            .AddField("--------------", "!encounter1-4 time 'starttime' This will create a signup sheet for users starttime is in 24hr format")
-            .AddField("--------------", "!role 'rolename' This will assign you the role you want !role help !role list give more information")
+            .AddField("--------------", "!encounter1-4 time 'starttime' This will create a signup sheet for users starttime is in 24hr format (example !encounter1 time 20:00)")
+            .AddField("--------------","To sign up to encounters click the emojis for the roles you want to assign yourself as")
+            .AddField("--------------", "!role 'rolename' This will assign you the role you want in your profile !role help !role list give more information")
             .AddField("--------------", "!removerole 'username' 'role' This will remove roles from users !role help !role list give more information (requires admin permissions)")
             .AddField("--------------", "!welcome shows the welcome message for the server (requires admin permissions)")
             .AddField("--------------", "!purge Will clear all messages in the channel (requires admin permissions)")
@@ -79,12 +80,14 @@ namespace bot.Modules
                 .AddField("--------------", "This can be done by typing !encounterrole plus the encounter number")
                 .AddField("--------------", "The Amount of Encounter can be seen as reactions on this post")
                 .AddField("--------------", "If you need help type !help if you need role help type !role help")
+                .AddField("--------------", "all encounters should be started in #signup-sheets")
+                .AddField("--------------", "For adding roles please you #bot-spam")
                 .WithThumbnailUrl(Context.Client.CurrentUser.GetAvatarUrl() ?? Context.Client.CurrentUser.GetDefaultAvatarUrl())
                 .WithColor(Color.DarkBlue);
 
 
             var welcomemessage = await Context.Channel.SendMessageAsync("", false, welcome.Build());
-
+            
             await welcomemessage.AddReactionAsync(encounter1);
             await welcomemessage.AddReactionAsync(encounter2);
             await welcomemessage.AddReactionAsync(encounter3);
@@ -143,14 +146,14 @@ namespace bot.Modules
             var rainShield = Convert.ToUInt64(lines[9]);
             var shatter = Convert.ToUInt64(lines[10]);
             var cleanse = Convert.ToUInt64(lines[11]);
-            var realm13 = Convert.ToUInt64(lines[12]);
-            var realm24 = Convert.ToUInt64(lines[13]);
-            var chinner = Convert.ToUInt64(lines[14]);
-            var hammer = Convert.ToUInt64(lines[15]);
-            var uminion = Convert.ToUInt64(lines[16]);
-            var gminion = Convert.ToUInt64(lines[17]);
-            var cminion = Convert.ToUInt64(lines[18]);
-            var fminion = Convert.ToUInt64(lines[19]);
+            var realm13 = Convert.ToUInt64(lines[13]);
+            var realm24 = Convert.ToUInt64(lines[14]);
+            var chinner = Convert.ToUInt64(lines[15]);
+            var hammer = Convert.ToUInt64(lines[16]);
+            var uminion = Convert.ToUInt64(lines[17]);
+            var gminion = Convert.ToUInt64(lines[18]);
+            var cminion = Convert.ToUInt64(lines[19]);
+            var fminion = Convert.ToUInt64(lines[20]);
             #endregion
 
             #region Delete Command After Sent
@@ -412,21 +415,21 @@ namespace bot.Modules
             var rainShield = Convert.ToUInt64(lines[9]);
             var shatter = Convert.ToUInt64(lines[10]);
             var cleanse = Convert.ToUInt64(lines[11]);
-            var realm13 = Convert.ToUInt64(lines[12]);
-            var realm24 = Convert.ToUInt64(lines[13]);
-            var chinner = Convert.ToUInt64(lines[14]);
-            var hammer = Convert.ToUInt64(lines[15]);
-            var uminion = Convert.ToUInt64(lines[16]);
-            var gminion = Convert.ToUInt64(lines[17]);
-            var cminion = Convert.ToUInt64(lines[18]);
-            var fminion = Convert.ToUInt64(lines[19]);
+            var realm13 = Convert.ToUInt64(lines[13]);
+            var realm24 = Convert.ToUInt64(lines[14]);
+            var chinner = Convert.ToUInt64(lines[15]);
+            var hammer = Convert.ToUInt64(lines[16]);
+            var uminion = Convert.ToUInt64(lines[17]);
+            var gminion = Convert.ToUInt64(lines[18]);
+            var cminion = Convert.ToUInt64(lines[19]);
+            var fminion = Convert.ToUInt64(lines[20]);
             #endregion
 
 
             if (removerole == "basetank")
             {
                 await user.RemoveRoleAsync(baseTank);
-                await user.SendMessageAsync("Profile updated dps role has been removed");
+                await user.SendMessageAsync("Profile updated basetank role has been removed");
 
             }
             if (removerole == "dps")
@@ -508,11 +511,11 @@ namespace bot.Modules
                 await user.SendMessageAsync("Profile updated Fumus Minion role has been given");
             }
 
-            else
-            {
-                await user.SendMessageAsync("Role couldn't be removed type !role list for a list of roles or !role help for any further help");
-                await user.SendMessageAsync("To remove role type !removerole theuseryouwanttheroleremovedfrom rolename");
-            }
+            //else
+            //{
+            //    await user.SendMessageAsync("Role couldn't be removed type !role list for a list of roles or !role help for any further help");
+            //    await user.SendMessageAsync("To remove role type !removerole theuseryouwanttheroleremovedfrom rolename");
+            //}
 
 
         }
